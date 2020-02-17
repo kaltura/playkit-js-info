@@ -1,0 +1,75 @@
+{
+  "name": "@playkit-js/playkit-js-info-plugin",
+  "version": "0.0.1",
+  "private": false,
+  "bugs": {
+    "url": "https://github.com/kaltura/playkit-js-playkit-js-info/issues"
+  },
+  "homepage": "https://github.com/kaltura/playkit-js-playkit-js-info#readme",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaltura/playkit-js-playkit-js-info.git"
+  },
+  "dependencies": {
+    "@playkit-js-contrib/cli": "1.1.0",
+    "@playkit-js-contrib/common": "3.2.0",
+    "@playkit-js-contrib/plugin": "3.2.0",
+    "@playkit-js-contrib/ui": "3.2.0",
+    "classnames": "2.2.6",
+    "kaltura-typescript-client": "file:libs/kaltura-typescript-client-7.0.0-v20190324-101134.tgz",
+    "null": "^2.0.0",
+    "preact": "^8.5.3"
+  },
+  "devDependencies": {
+    "@commitlint/cli": "8.3.5",
+    "@commitlint/config-conventional": "8.3.4",
+    "@types/classnames": "2.2.9",
+    "@types/node": "13.7.1",
+    "@typescript-eslint/eslint-plugin": "2.19.2",
+    "@typescript-eslint/parser": "2.19.2",
+    "husky": "3.1.0",
+    "tslint": "5.20.1",
+    "typescript": "3.7.5"
+  },
+  "license": "AGPL-3.0",
+  "files": [
+    "dist",
+    "LICENSE",
+    "README.md",
+    "CHANGELOG.md",
+    "src"
+  ],
+  "scripts": {
+    "clean": "rm -rf dist",
+    "reset": "npm run clean && rm -rf node_modules",
+    "build": "kcontrib build",
+    "build:dev": "kcontrib build --dev",
+    "serve": "kcontrib serve",
+    "serve:update-modes": "kcontrib serve --update-modes",
+    "serve:update-player": "kcontrib serve --update-player",
+    "analyze": "npm run build && npx source-map-explorer dist/playkit-js-info.js",
+    "lint": "tsc --noEmit && eslint ./src --ext .ts,.tsx",
+    "lint:fix": "tsc --noEmit && eslint ./src --ext .ts,.tsx --fix",
+    "husky:pre-commit": "lint-staged",
+    "husky:commit-msg": "commitlint -E HUSKY_GIT_PARAMS",
+    "deploy:prepare": "kcontrib deploy --prepare",
+    "deploy:publish-to-npm": "kcontrib deploy --publish",
+    "deploy:next:prepare": "kcontrib deploy --prepare --prerelease next",
+    "infra:latest": "kcontrib infra --type=latest",
+    "infra:next": "kcontrib infra --type=next",
+    "infra:local": "kcontrib infra --type=local",
+    "infra:add": "kcontrib infra --add"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}
