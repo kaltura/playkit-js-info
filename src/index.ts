@@ -1,1 +1,1 @@
-import "./playkit-js-info-plugin";
+import './info-plugin';

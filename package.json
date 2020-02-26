@@ -3,12 +3,12 @@
   "version": "0.0.1",
   "private": false,
   "bugs": {
-    "url": "https://github.com/kaltura/playkit-js-playkit-js-info/issues"
+    "url": "https://github.com/kaltura/playkit-js-info/issues"
   },
-  "homepage": "https://github.com/kaltura/playkit-js-playkit-js-info#readme",
+  "homepage": "https://github.com/kaltura/playkit-js-info#readme",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kaltura/playkit-js-playkit-js-info.git"
+    "url": "git+https://github.com/kaltura/playkit-js-info.git"
   },
   "dependencies": {
     "@playkit-js-contrib/cli": "1.1.0",
