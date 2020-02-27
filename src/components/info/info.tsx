@@ -6,7 +6,9 @@ import {timeSince} from '../../utils';
 
 export interface InfoProps {
   onClick: () => void;
-}
+  entryName: string;
+  description: string;
+};
 
 interface InfoState {}
 
@@ -27,13 +29,13 @@ export class Info extends Component<InfoProps, InfoState> {
   }
 
   render(props: InfoProps) {
-    const {onClick} = props;
+    const {onClick, entryName, description} = props;
     return (
       <div className={styles.root}>
         <CloseButton onClick={onClick} />
-        <div className={styles.creationTime}>{`${timeSince(new Date(Date.now() - 1000))} ago`}</div>
-        <div className={styles.entryName}>Name</div>
-        <div className={styles.entryDescription}>Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere inventore quaerat eaque omnis reiciendis quisquam labore aliquam sunt odit. Quis debitis, dolore ea necessitatibus nisi ipsum unde temporibus aperiam explicabo.</div>
+        <div className={styles.creationTime}>{timeSince(new Date(Date.now() - 1000 * 60 * 60 * 24 * 6))}</div>
+        <div className={styles.entryName}>{entryName}</div>
+        <div className={styles.entryDescription}>{description}</div>
       </div>
     );
   }

@@ -10,7 +10,7 @@ import {
   ContribPluginConfigs,
 } from '@playkit-js-contrib/plugin';
 import {UpperBarItem, OverlayItem, OverlayPositions} from '@playkit-js-contrib/ui';
-import {getContribLogger} from '@playkit-js-contrib/common';
+import {getContribLogger, ObjectUtils} from '@playkit-js-contrib/common';
 import * as styles from './info-plugin.scss';
 import {Info} from './components/info';
 import {PluginButton} from './components/plugin-button';
@@ -21,6 +21,8 @@ const logger = getContribLogger({
   class: 'PlaykitJsInfoPlugin',
   module: 'info-plugin',
 });
+
+const {get} = ObjectUtils;
 
 interface PlaykitJsInfoPluginConfig {}
 
@@ -57,6 +59,8 @@ export class PlaykitJsInfoPlugin
       renderContent: () => (
           <Info
               onClick={this._toggleInfo}
+              entryName={get(this, '_corePlugin.player._config.sources.metadata.name', '')}
+              description={get(this, '_corePlugin.player._config.sources.metadata.description', '')}
           />
       )
     });

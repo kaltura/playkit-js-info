@@ -25,8 +25,8 @@ export const timeSince = (date: any) => {
           if (interval >= 1) {
             intervalType = 'minute';
           } else {
-            interval = seconds;
-            intervalType = 'second';
+            interval = -1;
+            intervalType = 'a moment';
           }
         }
       }
@@ -37,5 +37,5 @@ export const timeSince = (date: any) => {
     intervalType += 's';
   }
 
-  return interval + ' ' + intervalType;
+  return `${interval >=0 ? interval : ''} ${intervalType} ago`;
 };

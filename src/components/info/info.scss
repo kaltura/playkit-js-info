@@ -28,7 +28,6 @@
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   background-color: $root-background;
-  overflow-y: auto;
   .creation-time {
     font-size: 12px;
     font-weight: bold;
@@ -42,7 +41,9 @@
   .entry-description {
     margin-top: 16px;
     opacity: 0.7;
+    max-height: 225px;
     line-height: 1.6;
     font-size: 15px;
+    overflow-y: auto;
   }
 }
