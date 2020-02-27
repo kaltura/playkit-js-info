@@ -4,7 +4,6 @@ import {
   CorePlugin,
   OnMediaLoad,
   OnMediaUnload,
-  OnPluginSetup,
   ContribServices,
   ContribPluginData,
   ContribPluginConfigs,
@@ -28,7 +27,7 @@ const {get} = ObjectUtils;
 interface PlaykitJsInfoPluginConfig {}
 
 export class PlaykitJsInfoPlugin
-  implements OnMediaLoad, OnMediaUnload, OnPluginSetup, OnMediaUnload {
+  implements OnMediaLoad, OnMediaUnload, OnMediaUnload {
   private _upperBarItem: UpperBarItem | null = null;
   private _infoOverlay: OverlayItem | null = null;
 
@@ -38,15 +37,23 @@ export class PlaykitJsInfoPlugin
     private _configs: ContribPluginConfigs<PlaykitJsInfoPluginConfig>
   ) {}
 
-  onPluginSetup(): void {}
-
   onMediaLoad(): void {
+    logger.trace('Info plugin loaded', {
+      method: 'onMediaLoad',
+    });
     this._addPluginIcon();
+    (window as any).___test = this._corePlugin.player
   }
 
-  onMediaUnload(): void {}
-
-  onPluginDestroy(): void {}
+  onMediaUnload(): void {
+    if (this._upperBarItem) {
+      this._contribServices.upperBarManager.remove(this._upperBarItem);
+      this._upperBarItem = null;
+    }
+    if (this._infoOverlay) {
+      this._toggleInfo();
+    }
+  }
 
   private _getBroadcastedDate = (): string => {
     const startTime = get(this, '_corePlugin.player._config.sources.metadata.StartTime', null);

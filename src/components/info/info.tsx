@@ -10,22 +10,16 @@ export interface InfoProps {
   broadcastedDate: string;
 }
 
-interface InfoState {}
-
 const logger = getContribLogger({
   class: 'Info',
   module: 'info-plugin',
 });
 
-export class Info extends Component<InfoProps, InfoState> {
-  private _log = (msg: string, method: string) => {
-    logger.trace(msg, {
-      method: method || 'Method not defined',
-    });
-  };
-
+export class Info extends Component<InfoProps> {
   componentDidMount(): void {
-    this._log('Info plugin mount', 'componentDidMount');
+    logger.trace('Info plugin mount', {
+      method: 'componentDidMount',
+    });
   }
 
   render(props: InfoProps) {
