@@ -14,6 +14,7 @@ import {getContribLogger, ObjectUtils} from '@playkit-js-contrib/common';
 import * as styles from './info-plugin.scss';
 import {Info} from './components/info';
 import {PluginButton} from './components/plugin-button';
+import {timeSince} from './utils';
 
 const pluginName = `playkit-js-info`;
 
@@ -47,6 +48,17 @@ export class PlaykitJsInfoPlugin
 
   onPluginDestroy(): void {}
 
+  private _getBroadcastedDate = (): string => {
+    const startTime = get(this, '_corePlugin.player._config.sources.metadata.StartTime', null);
+    if (startTime === null) {
+      return '';
+    }
+    if (this._corePlugin.player.isLive()) {
+      return 'Live Now';
+    }
+    return timeSince(new Date(Number(startTime) * 1000));
+  }
+
   private _toggleInfo = () => {
     if (this._infoOverlay) {
       this._contribServices.overlayManager.remove(this._infoOverlay);
@@ -61,6 +73,7 @@ export class PlaykitJsInfoPlugin
               onClick={this._toggleInfo}
               entryName={get(this, '_corePlugin.player._config.sources.metadata.name', '')}
               description={get(this, '_corePlugin.player._config.sources.metadata.description', '')}
+              broadcastedDate={this._getBroadcastedDate()}
           />
       )
     });

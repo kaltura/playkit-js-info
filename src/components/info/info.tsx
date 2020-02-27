@@ -2,13 +2,13 @@ import {h, Component} from 'preact';
 import * as styles from './info.scss';
 import {getContribLogger} from '@playkit-js-contrib/common';
 import {CloseButton} from '../close-button';
-import {timeSince} from '../../utils';
 
 export interface InfoProps {
   onClick: () => void;
   entryName: string;
   description: string;
-};
+  broadcastedDate: string;
+}
 
 interface InfoState {}
 
@@ -29,11 +29,13 @@ export class Info extends Component<InfoProps, InfoState> {
   }
 
   render(props: InfoProps) {
-    const {onClick, entryName, description} = props;
+    const {onClick, entryName, description, broadcastedDate} = props;
     return (
       <div className={styles.root}>
         <CloseButton onClick={onClick} />
-        <div className={styles.creationTime}>{timeSince(new Date(Date.now() - 1000 * 60 * 60 * 24 * 6))}</div>
+        {broadcastedDate && (
+          <div className={styles.broadcastedDate}>{broadcastedDate}</div>
+        )}
         <div className={styles.entryName}>{entryName}</div>
         <div className={styles.entryDescription}>{description}</div>
       </div>
