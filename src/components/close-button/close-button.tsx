@@ -7,7 +7,7 @@ interface CloseButtonProps {
 
 export const CloseButton = (props: CloseButtonProps) => (
   <div
-    className={styles.closeButton}
+    className={[styles.closeButton, 'kaltura-info__close-button'].join(' ')}
     role="button"
     tabIndex={1}
     onClick={props.onClick}

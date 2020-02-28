@@ -25,14 +25,25 @@ export class Info extends Component<InfoProps> {
   render(props: InfoProps) {
     const {onClick, entryName, description, broadcastedDate} = props;
     return (
-      <div className={styles.root}>
+      <div className={[styles.root, 'kaltura-info__root'].join(' ')}>
         <CloseButton onClick={onClick} />
-        {broadcastedDate && (
-          <div className={styles.broadcastedDate}>{broadcastedDate}</div>
-        )}
-        <div className={styles.entryName}>{entryName}</div>
         <div
-          className={styles.entryDescription}
+          className={[
+            styles.broadcastDate,
+            'kaltura-info__broadcast-date',
+            broadcastedDate ? '' : 'hidden',
+          ].join(' ')}>
+          {broadcastedDate}
+        </div>
+        <div
+          className={[styles.entryName, 'kaltura-info__entry-name'].join(' ')}>
+          {entryName}
+        </div>
+        <div
+          className={[
+            styles.entryDescription,
+            'kaltura-info__entry-description',
+          ].join(' ')}
           dangerouslySetInnerHTML={{__html: description}}
         />
       </div>
