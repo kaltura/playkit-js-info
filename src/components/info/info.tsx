@@ -31,7 +31,10 @@ export class Info extends Component<InfoProps> {
           <div className={styles.broadcastedDate}>{broadcastedDate}</div>
         )}
         <div className={styles.entryName}>{entryName}</div>
-        <div className={styles.entryDescription}>{description}</div>
+        <div
+          className={styles.entryDescription}
+          dangerouslySetInnerHTML={{__html: description}}
+        />
       </div>
     );
   }
