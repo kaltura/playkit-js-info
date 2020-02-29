@@ -42,7 +42,6 @@ export class PlaykitJsInfoPlugin
       method: 'onMediaLoad',
     });
     this._addPluginIcon();
-    (window as any).___test = this._corePlugin.player
   }
 
   onMediaUnload(): void {
