@@ -27,7 +27,7 @@ const {get} = ObjectUtils;
 interface PlaykitJsInfoPluginConfig {}
 
 export class PlaykitJsInfoPlugin
-  implements OnMediaLoad, OnMediaUnload, OnMediaUnload {
+  implements OnMediaLoad, OnMediaUnload {
   private _upperBarItem: UpperBarItem | null = null;
   private _infoOverlay: OverlayItem | null = null;
 
@@ -55,12 +55,12 @@ export class PlaykitJsInfoPlugin
   }
 
   private _getBroadcastedDate = (): string => {
+    if (this._corePlugin.player.isLive()) {
+      return 'Live Now';
+    }
     const startTime = get(this, '_corePlugin.player._config.sources.metadata.StartTime', null);
     if (startTime === null) {
       return '';
-    }
-    if (this._corePlugin.player.isLive()) {
-      return 'Live Now';
     }
     return timeSince(new Date(Number(startTime) * 1000));
   }
@@ -86,7 +86,6 @@ export class PlaykitJsInfoPlugin
   }
 
   private _addPluginIcon(): void {
-    const {} = this._configs.pluginConfig;
     this._upperBarItem = this._contribServices.upperBarManager.add({
       label: 'Info',
       onClick: this._toggleInfo,
