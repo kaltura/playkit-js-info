@@ -1,0 +1,89 @@
+@import '../../variables.scss';
+
+/* TODO: (1) remove this once 3rd party cross-browser custom scroll bar is Added */
+.body::-webkit-scrollbar {
+  width: 4px;
+}
+
+/* Track TODO: as (1)*/
+.body::-webkit-scrollbar-track {
+  background: rgba(33, 33, 33, 0.9);
+}
+
+/* Handle TODO: as (1) */
+.body::-webkit-scrollbar-thumb {
+  border-radius: 3px;
+  background-color: rgba(255, 255, 255, 0.3);
+}
+
+.root {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 60px 32px 32px 32px;
+  color: $white-color;
+  -webkit-backdrop-filter: blur(16px);
+  backdrop-filter: blur(16px);
+  background-color: $root-background;
+  .broadcast-date {
+    margin-bottom: 8px;
+    font-size: 12px;
+    font-weight: bold;
+    text-transform: uppercase;
+    &.hidden {
+      display: none;
+    }
+  }
+  .entry-name {
+    margin-bottom: 16px;
+    min-height: 29px;
+    font-size: 24px;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .entry-description {
+    opacity: 0.7;
+    max-height: 225px;
+    line-height: 1.6;
+    font-size: 15px;
+    overflow-y: auto;
+  }
+}
+
+:global {
+  .playkit-player.playkit-size-sm,
+  .playkit-player.playkit-size-xs {
+    .kaltura-info__close-button {
+      top: 10px;
+      right: 16px;
+    }
+    .kaltura-info__root {
+      padding: 16px;
+      .kaltura-info__broadcast-date {
+        &.hidden {
+          display: block;
+          height: 0;
+          margin-bottom: 18px;
+        }
+        font-size: 10px;
+      }
+      .kaltura-info__entry-name {
+        margin-bottom: 8px;
+        min-height: 19px;
+        font-size: 16px;
+      }
+      .kaltura-info__entry-description {
+        font-size: 12px;
+      }
+    }
+  }
+  .playkit-player.playkit-size-ty {
+    .kaltura-info__root {
+      display: none;
+    }
+  }
+}
