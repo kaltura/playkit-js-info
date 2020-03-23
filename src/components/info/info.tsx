@@ -1,7 +1,8 @@
 import {h, Component} from 'preact';
 import * as styles from './info.scss';
-import {getContribLogger} from '@playkit-js-contrib/common';
-import {CloseButton} from '../close-button';
+import {KeyboardKeys} from '@playkit-js-contrib/ui';
+import {getContribLogger, ObjectUtils} from '@playkit-js-contrib/common';
+const {get} = ObjectUtils;
 
 export interface InfoProps {
   onClick: () => void;
@@ -16,17 +17,38 @@ const logger = getContribLogger({
 });
 
 export class Info extends Component<InfoProps> {
+  private _closeButtonNode: null | HTMLDivElement = null;
+
   componentDidMount(): void {
     logger.trace('Info plugin mount', {
       method: 'componentDidMount',
     });
+    if (this._closeButtonNode) {
+      this._closeButtonNode.focus();
+    }
+  }
+
+  private _handleClose = (event: MouseEvent | KeyboardEvent) => {
+    if (event.type === "keypress" && get(event, 'keyCode', null) !== KeyboardKeys.Enter) {
+      return;
+    }
+    this.props.onClick();
   }
 
   render(props: InfoProps) {
-    const {onClick, entryName, description, broadcastedDate} = props;
+    const {entryName, description, broadcastedDate} = props;
     return (
       <div className={[styles.root, 'kaltura-info__root'].join(' ')}>
-        <CloseButton onClick={onClick} />
+        <div
+          className={[styles.closeButton, 'kaltura-info__close-button'].join(' ')}
+          role="button"
+          tabIndex={1}
+          onClick={this._handleClose}
+          onKeyPress={this._handleClose}
+          ref={(node: HTMLDivElement) => {
+            this._closeButtonNode = node;
+          }}
+        />
         <div
           className={[
             styles.broadcastDate,
