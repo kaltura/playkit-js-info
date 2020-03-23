@@ -8,12 +8,11 @@ import {
   ContribPluginData,
   ContribPluginConfigs,
 } from '@playkit-js-contrib/plugin';
-import {UpperBarItem, OverlayItem, OverlayPositions} from '@playkit-js-contrib/ui';
+import {UpperBarItem, OverlayItem, OverlayPositions, timeSince} from '@playkit-js-contrib/ui';
 import {getContribLogger, ObjectUtils} from '@playkit-js-contrib/common';
 import * as styles from './info-plugin.scss';
 import {Info} from './components/info';
 import {PluginButton} from './components/plugin-button';
-import {timeSince} from './utils';
 
 const pluginName = `playkit-js-info`;
 
