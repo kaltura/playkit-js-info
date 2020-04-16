@@ -1,6 +1,6 @@
 {
   "name": "@playkit-js/playkit-js-info-plugin",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "bugs": {
     "url": "https://github.com/kaltura/playkit-js-info/issues"
@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@playkit-js-contrib/cli": "1.1.0",
-    "@playkit-js-contrib/common": "3.2.0",
-    "@playkit-js-contrib/plugin": "3.2.0",
-    "@playkit-js-contrib/ui": "3.2.0",
+    "@playkit-js-contrib/common": "^3.2.3",
+    "@playkit-js-contrib/plugin": "^3.2.3",
+    "@playkit-js-contrib/ui": "^3.2.3",
     "classnames": "2.2.6",
     "kaltura-typescript-client": "file:libs/kaltura-typescript-client-7.0.0-v20190324-101134.tgz",
     "null": "^2.0.0",
@@ -55,6 +55,7 @@
     "deploy:prepare": "kcontrib deploy --prepare",
     "deploy:publish-to-npm": "kcontrib deploy --publish",
     "deploy:next:prepare": "kcontrib deploy --prepare --prerelease next",
+    "contrib:latest": "kcontrib infra --type=latest",
     "infra:latest": "kcontrib infra --type=latest",
     "infra:next": "kcontrib infra --type=next",
     "infra:local": "kcontrib infra --type=local",
