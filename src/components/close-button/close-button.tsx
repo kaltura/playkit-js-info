@@ -1,4 +1,4 @@
-const {h} = KalturaPlayer.ui.preact;
+import {h} from 'preact';
 import * as styles from './close-button.scss';
 
 interface CloseButtonProps {

@@ -18,7 +18,7 @@
     "classnames": "2.2.6",
     "kaltura-typescript-client": "file:libs/kaltura-typescript-client-7.0.0-v20190324-101134.tgz",
     "null": "^2.0.0",
-    "preact": "^8.5.3"
+    "preact": "^10.3.4"
   },
   "devDependencies": {
     "@commitlint/cli": "8.3.5",
