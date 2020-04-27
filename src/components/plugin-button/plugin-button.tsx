@@ -1,4 +1,4 @@
-const {h} = KalturaPlayer.ui.preact;
+import {h} from 'preact';
 import * as styles from './plugin-button.scss';
 
 export const PluginButton = () => (
