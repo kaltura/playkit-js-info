@@ -39,7 +39,6 @@
     "CHANGELOG.md",
     "src"
   ],
-
   "scripts": {
     "clean": "rm -rf dist",
     "reset": "npm run clean && rm -rf node_modules",
