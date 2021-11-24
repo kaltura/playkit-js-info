@@ -1,5 +1,5 @@
 {
-  "name": "@playkit-js/info-plugin",
+  "name": "@playkit-js/info",
   "version": "2.0.0",
   "private": false,
   "bugs": {
@@ -39,6 +39,7 @@
     "CHANGELOG.md",
     "src"
   ],
+
   "scripts": {
     "clean": "rm -rf dist",
     "reset": "npm run clean && rm -rf node_modules",
