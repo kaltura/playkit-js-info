@@ -76,8 +76,8 @@ export class PlaykitJsInfoPlugin
       renderContent: () => (
           <Info
               onClick={this._toggleInfo}
-              entryName={get(this, '_corePlugin.player._config.sources.metadata.name', '')}
-              description={get(this, '_corePlugin.player._config.sources.metadata.description', '')}
+              entryName={get(this, '_corePlugin.player.config.sources.metadata.name', '')}
+              description={get(this, '_corePlugin.player.config.sources.metadata.description', '')}
               broadcastedDate={this._getBroadcastedDate()}
           />
       )
