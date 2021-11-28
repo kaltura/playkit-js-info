@@ -12,9 +12,9 @@
   },
   "dependencies": {
     "@playkit-js-contrib/cli": "1.1.0",
-    "@playkit-js-contrib/common": "^4.0.0",
-    "@playkit-js-contrib/plugin": "^4.0.0",
-    "@playkit-js-contrib/ui": "^4.0.0",
+    "@playkit-js-contrib/common": "^4.1.10",
+    "@playkit-js-contrib/plugin": "^4.1.12",
+    "@playkit-js-contrib/ui": "^4.1.12",
     "classnames": "2.2.6",
     "kaltura-typescript-client": "file:libs/kaltura-typescript-client-7.0.0-v20190324-101134.tgz",
     "null": "^2.0.0"
@@ -44,6 +44,7 @@
     "reset": "npm run clean && rm -rf node_modules",
     "build": "kcontrib build",
     "build:dev": "kcontrib build --dev",
+    "bump-canary": "standard-version --prerelease canary --skip.commit=true --skip.tag=true",
     "serve": "kcontrib serve",
     "serve:update-modes": "kcontrib serve --update-modes",
     "serve:update-player": "kcontrib serve --update-player",
