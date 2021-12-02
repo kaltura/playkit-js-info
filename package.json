@@ -60,7 +60,9 @@
     "infra:latest": "kcontrib infra --type=latest",
     "infra:next": "kcontrib infra --type=next",
     "infra:local": "kcontrib infra --type=local",
-    "infra:add": "kcontrib infra --add"
+    "infra:add": "kcontrib infra --add",
+    "release": "standard-version",
+    "pushTaggedRelease": "git push --follow-tags --no-verify origin master"
   },
   "browserslist": {
     "production": [
