@@ -48,7 +48,7 @@
     "serve": "kcontrib serve",
     "serve:update-modes": "kcontrib serve --update-modes",
     "serve:update-player": "kcontrib serve --update-player",
-    "analyze": "npm run build && npx source-map-explorer dist/playkit-js-info.js",
+    "analyze": "npm run build && npx source-map-explorer dist/playkit-info-plugin.js",
     "lint": "tsc --noEmit && eslint ./src --ext .ts,.tsx",
     "lint:fix": "tsc --noEmit && eslint ./src --ext .ts,.tsx --fix",
     "husky:pre-commit": "lint-staged",

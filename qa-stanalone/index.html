@@ -5,7 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>Info - Player V7</title>
         <script src="https://qa-apache-php7.dev.kaltura.com/p/6560/embedPlaykitJs/uiconf_id/15224252/versions/kaltura-ovp-player=0.53.4-vamb.1"></script>
-        <script src="playkit-js-info.js"></script>
+        <script src="playkit-info-plugin.js"></script>
         <script src="../latest.js"></script>
         <link rel="stylesheet" style="text/css" href="assets/styles/bootstrap.css" />
         <style>
@@ -71,7 +71,7 @@
         <div style="position:relative;margin-top:10px">
             <div id="player-div"></div>
         </div>
-        
+
         <div class="change-media-button">
             <input class="btn btn-info " value="Change Media">
         </div>
@@ -260,7 +260,7 @@
                     provider.ks = ks;
                 }
                 config.provider = provider;
-                
+
                 window.onload = function() {
                     var mediaInfo = { entryId: entryId };
                     player = KalturaPlayer.setup(config);
