@@ -1,6 +1,6 @@
 {
-  "name": "@playkit-js/info-plugin",
-  "version": "2.0.7",
+  "name": "@playkit-js/info",
+  "version": "2.0.11",
   "private": false,
   "bugs": {
     "url": "https://github.com/kaltura/playkit-js-info/issues"
@@ -9,6 +9,9 @@
   "repository": {
     "type": "git",
     "url": "git+https://github.com/kaltura/playkit-js-info.git"
+  },
+  "publishConfig": {
+    "access": "public"
   },
   "dependencies": {
     "@playkit-js-contrib/cli": "1.1.0",
@@ -48,7 +51,7 @@
     "serve": "kcontrib serve",
     "serve:update-modes": "kcontrib serve --update-modes",
     "serve:update-player": "kcontrib serve --update-player",
-    "analyze": "npm run build && npx source-map-explorer dist/playkit-info-plugin.js",
+    "analyze": "npm run build && npx source-map-explorer dist/playkit-info.js",
     "lint": "tsc --noEmit && eslint ./src --ext .ts,.tsx",
     "lint:fix": "tsc --noEmit && eslint ./src --ext .ts,.tsx --fix",
     "husky:pre-commit": "lint-staged",
