@@ -1,4 +1,3 @@
-// import './info-plugin';
 import {PlaykitJsInfoPlugin} from "./info-plugin";
 
 declare var __VERSION__: string;

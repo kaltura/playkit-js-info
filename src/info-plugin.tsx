@@ -1,5 +1,4 @@
 import {h} from 'preact';
-import {getContribLogger} from '@playkit-js-contrib/common';
 import {Info} from './components/info';
 import {PluginButton} from './components/plugin-button';
 
@@ -66,11 +65,6 @@ const timeSince = (date: any) => {
   return intervalType;
 }
 
-const logger = getContribLogger({
-  class: 'PlaykitJsInfoPlugin',
-  module: 'info-plugin',
-});
-
 export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   private _infoOverlay = null;
   private _wasPlayed = false; // keep state of the player so we can resume if needed
@@ -84,9 +78,8 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   }
 
   loadMedia(): void {
-    logger.trace('Info plugin loaded', {
-      method: 'loadMedia',
-    });
+    //@ts-ignore
+    this.logger.warn('Info plugin loaded');
     this._addPluginIcon();
   }
 
