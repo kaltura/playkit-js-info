@@ -81,7 +81,6 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     private _player: any,
   ) {
     super(name, _player);
-    console.log(_player)
   }
 
   loadMedia(): void {
@@ -164,7 +163,6 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
 
   private _addPluginIcon(): void {
     const _toggleInfo = this._toggleInfo;
-    console.log(2)
     this._player.ui.addComponent({
       label: 'Info',
       presets: [reservedPresetNames.Playback, reservedPresetNames.Live],
