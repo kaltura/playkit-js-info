@@ -28,6 +28,7 @@
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   background-color: $root-background;
+  z-index: 1;
   .broadcast-date {
     margin-bottom: 8px;
     font-size: 12px;
