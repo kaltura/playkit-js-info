@@ -1,4 +1,4 @@
-import {PlaykitJsInfoPlugin} from "./info-plugin";
+import {PlaykitJsInfoPlugin} from './info-plugin';
 
 declare var __VERSION__: string;
 declare var __NAME__: string;
@@ -10,4 +10,6 @@ export {PlaykitJsInfoPlugin as Plugin};
 export {VERSION, NAME};
 
 const pluginName: string = 'info';
+
+//@ts-ignore
 KalturaPlayer.core.registerPlugin(pluginName, PlaykitJsInfoPlugin);

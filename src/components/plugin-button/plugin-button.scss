@@ -1,11 +1,10 @@
-.info-icon {
-    background-image: url("../../assets/info.svg");
-    width: 32px;
-    height: 32px;
-    opacity: 0.8;
-    cursor: pointer;
-    &:hover,
-    &:focus {
-      opacity: 1;
-    }
+.pluginButton {
+  display: flex;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
 }

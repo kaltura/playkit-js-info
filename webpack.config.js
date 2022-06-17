@@ -63,7 +63,6 @@ module.exports = {
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
     modules: [path.resolve(__dirname, 'src'), 'node_modules'],
-    fallback: { "stream": require.resolve("stream-browserify") }
   },
   externals: {
     preact: 'root KalturaPlayer.ui.preact',
