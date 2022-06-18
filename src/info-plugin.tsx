@@ -10,6 +10,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   private _infoOverlay = null;
   private _wasPlayed = false; // keep state of the player so we can resume if needed
   private _removeActiveOverlay: null | Function = null;
+  private _removePluginIcon: null | Function = null;
 
   constructor(name: string, private _player: any) {
     super(name, _player);
@@ -78,6 +79,9 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
 
   destroy(): void {
     this._removeOverlay();
+    if (this._removePluginIcon) {
+      this._removePluginIcon();
+    }
   }
 
   private _setOverlay = (fn: Function) => {
@@ -93,7 +97,9 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   };
 
   private _addPluginIcon = (): void => {
-    this._player.ui.addComponent({
+    if(this._removePluginIcon) return;
+
+    this._removePluginIcon = this._player.ui.addComponent({
       label: 'Info',
       presets: [ReservedPresetNames.Playback, ReservedPresetNames.Live],
       area: ReservedPresetAreas.TopBarLeftControls,
