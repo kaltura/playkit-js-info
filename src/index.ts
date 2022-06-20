@@ -11,5 +11,4 @@ export {VERSION, NAME};
 
 const pluginName: string = 'info';
 
-//@ts-ignore
 KalturaPlayer.core.registerPlugin(pluginName, PlaykitJsInfoPlugin);

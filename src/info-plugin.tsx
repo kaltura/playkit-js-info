@@ -16,7 +16,6 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   }
 
   loadMedia(): void {
-    //@ts-ignore
     this.logger.debug('Info plugin loaded', {
       method: 'loadMedia'
     });
