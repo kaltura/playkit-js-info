@@ -11,7 +11,6 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   private _wasPlayed = false; // keep state of the player so we can resume if needed
   private _removeActiveOverlay: null | Function = null;
   private _removePluginIcon: null | Function = null;
-
   constructor(name: string, private _player: any) {
     super(name, _player);
   }
@@ -36,6 +35,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   };
 
   private _toggleInfo = () => {
+    console.log(this._player.sources.metadata)
     if (this._removeActiveOverlay !== null) {
       this._removeOverlay();
 
