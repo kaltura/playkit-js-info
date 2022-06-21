@@ -1,6 +1,6 @@
 import {h} from 'preact';
 import * as styles from './close-button.scss';
-import {A11yWrapper, OnClick} from '../../a11y-wrapper/a11y-wrapper';
+import {A11yWrapper} from '../../a11y-wrapper/a11y-wrapper';
 import {icons} from '../icons';
 const {Icon} = KalturaPlayer.ui.components;
 
@@ -10,7 +10,7 @@ interface CloseButtonProps {
 
 export const CloseButton = (props: CloseButtonProps) => (
   <A11yWrapper onClick={props.onClick}>
-    <button className={[styles.closeButton, 'kaltura-info__close-button'].join(' ')} tabIndex={1}>
+    <button className={[styles.closeButton, 'kaltura-info__close-button'].join(' ')} tabIndex={0}>
       <Icon
         id="info-plugin-close-button"
         height={icons.BigSize}
