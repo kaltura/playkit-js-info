@@ -18,16 +18,18 @@
 
 .root {
   position: absolute;
+  top: 0;
   height: 100%;
   width: 100%;
   display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  padding: 60px 32px 32px 32px;
+  align-items: center;
+  justify-content: center;
+  padding: 32px;
   color: $white-color;
   -webkit-backdrop-filter: blur(16px);
   backdrop-filter: blur(16px);
   background-color: $root-background;
+  z-index: 1;
   .broadcast-date {
     margin-bottom: 8px;
     font-size: 12px;
@@ -40,20 +42,29 @@
   .entry-name {
     margin-bottom: 16px;
     min-height: 29px;
-    font-size: 24px;
-    font-weight: bold;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    font-style: normal;
+    font-weight: 700;
+    font-size: 32px;
+    line-height: 32px;
   }
   .entry-description {
     opacity: 0.7;
     line-height: 1.6;
-    font-size: 15px;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 21px;
     overflow-y: auto;
     a {
       color: $main-color;
     }
+  }
+
+  * {
+    font-family: 'Lato';
+    font-style: normal;
   }
 }
 

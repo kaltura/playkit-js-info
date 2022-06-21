@@ -1,108 +1,107 @@
 import {h} from 'preact';
-import {
-  ContribPluginManager,
-  CorePlugin,
-  OnMediaLoad,
-  OnMediaUnload,
-  ContribServices,
-  ContribPluginData,
-  ContribPluginConfigs,
-} from '@playkit-js-contrib/plugin';
-import {UpperBarItem, OverlayItem, OverlayPositions, timeSince} from '@playkit-js-contrib/ui';
-import {getContribLogger, ObjectUtils} from '@playkit-js-contrib/common';
-import * as styles from './info-plugin.scss';
 import {Info} from './components/info';
 import {PluginButton} from './components/plugin-button';
+import {timeSince} from './utils';
+import {ui} from 'kaltura-player-js';
+const {ReservedPresetNames, ReservedPresetAreas} = ui;
 
-const pluginName = `playkit-js-info`;
+export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
+  private _infoOverlay = null;
+  private _wasPlayed = false; // keep state of the player so we can resume if needed
+  private _removeActiveOverlay: null | Function = null;
+  private _removePluginIcon: null | Function = null;
 
-const logger = getContribLogger({
-  class: 'PlaykitJsInfoPlugin',
-  module: 'info-plugin',
-});
+  constructor(name: string, private _player: any) {
+    super(name, _player);
+  }
 
-const {get} = ObjectUtils;
-
-interface PlaykitJsInfoPluginConfig {}
-
-export class PlaykitJsInfoPlugin
-  implements OnMediaLoad, OnMediaUnload {
-  private _upperBarItem: UpperBarItem | null = null;
-  private _infoOverlay: OverlayItem | null = null;
-
-  constructor(
-    private _corePlugin: CorePlugin,
-    private _contribServices: ContribServices,
-    private _configs: ContribPluginConfigs<PlaykitJsInfoPluginConfig>
-  ) {}
-
-  onMediaLoad(): void {
-    logger.trace('Info plugin loaded', {
-      method: 'onMediaLoad',
+  loadMedia(): void {
+    this.logger.debug('Info plugin loaded', {
+      method: 'loadMedia'
     });
     this._addPluginIcon();
   }
 
-  onMediaUnload(): void {
-    if (this._upperBarItem) {
-      this._contribServices.upperBarManager.remove(this._upperBarItem);
-      this._upperBarItem = null;
-    }
-    if (this._infoOverlay) {
-      this._toggleInfo();
-    }
-  }
-
   private _getBroadcastedDate = (): string => {
-    if (this._corePlugin.player.isLive()) {
+    if (this._player.isLive()) {
       return 'Live Now';
     }
-    const startTime = get(this, '_corePlugin.player._config.sources.metadata.StartTime', null);
+    const startTime = this._player?.sources?.metadata?.StartTime || null;
     if (startTime === null) {
       return '';
     }
     return timeSince(new Date(Number(startTime) * 1000));
-  }
+  };
 
   private _toggleInfo = () => {
+    if (this._removeActiveOverlay !== null) {
+      this._removeOverlay();
+
+      if (this._wasPlayed) {
+        this._player.play();
+        this._wasPlayed = false;
+      }
+
+      return;
+    }
+
     if (this._infoOverlay) {
-      this._contribServices.overlayManager.remove(this._infoOverlay);
       this._infoOverlay = null;
       return;
     }
-    this._infoOverlay = this._contribServices.overlayManager.add({
-      label: "info-overlay",
-      position: OverlayPositions.PlayerArea,
-      renderContent: () => (
+
+    this._setOverlay(
+      this._player.ui.addComponent({
+        label: 'info-overlay',
+        area: ReservedPresetAreas.PlayerArea,
+        presets: [ReservedPresetNames.Playback, ReservedPresetNames.Live],
+        get: () => (
           <Info
-              onClick={this._toggleInfo}
-              entryName={get(this, '_corePlugin.player.sources.metadata.name', '')}
-              description={get(this, '_corePlugin.player.sources.metadata.description', '')}
-              broadcastedDate={this._getBroadcastedDate()}
+            onClick={this._toggleInfo}
+            entryName={this._player.sources.metadata.name || ''}
+            description={this._player.sources.metadata.description || ''}
+            broadcastedDate={this._getBroadcastedDate()}
           />
-      )
-    });
-  }
-
-  private _addPluginIcon(): void {
-    this._upperBarItem = this._contribServices.upperBarManager.add({
-      label: 'Info',
-      onClick: this._toggleInfo,
-      renderItem: () => <PluginButton />,
-    });
-  }
-}
-
-ContribPluginManager.registerPlugin(
-  pluginName,
-  (data: ContribPluginData<PlaykitJsInfoPluginConfig>) => {
-    return new PlaykitJsInfoPlugin(
-      data.corePlugin,
-      data.contribServices,
-      data.configs
+        )
+      })
     );
-  },
-  {
-    defaultConfig: {},
+  };
+
+  static isValid(): boolean {
+    return true;
   }
-);
+
+  reset(): void {
+    return;
+  }
+
+  destroy(): void {
+    this._removeOverlay();
+    if (this._removePluginIcon) {
+      this._removePluginIcon();
+    }
+  }
+
+  private _setOverlay = (fn: Function) => {
+    this._removeOverlay();
+    this._removeActiveOverlay = fn;
+  };
+
+  private _removeOverlay = () => {
+    if (this._removeActiveOverlay) {
+      this._removeActiveOverlay();
+      this._removeActiveOverlay = null;
+    }
+  };
+
+  private _addPluginIcon = (): void => {
+    if (this._removePluginIcon) return;
+
+    this._removePluginIcon = this._player.ui.addComponent({
+      label: 'Info',
+      presets: [ReservedPresetNames.Playback, ReservedPresetNames.Live],
+      area: ReservedPresetAreas.TopBarRightControls,
+      get: () => <PluginButton onClick={this._toggleInfo} label="Video info" />
+    });
+  };
+}
