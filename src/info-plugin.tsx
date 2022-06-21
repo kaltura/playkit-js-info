@@ -3,14 +3,14 @@ import {Info} from './components/info';
 import {PluginButton} from './components/plugin-button';
 import {timeSince} from './utils';
 import {ui} from 'kaltura-player-js';
-const { ReservedPresetNames, ReservedPresetAreas} = ui;
+const {ReservedPresetNames, ReservedPresetAreas} = ui;
 
-//@ts-ignore
 export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   private _infoOverlay = null;
   private _wasPlayed = false; // keep state of the player so we can resume if needed
   private _removeActiveOverlay: null | Function = null;
   private _removePluginIcon: null | Function = null;
+
   constructor(name: string, private _player: any) {
     super(name, _player);
   }
@@ -34,7 +34,6 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   };
 
   private _toggleInfo = () => {
-    console.log(this._player.sources.metadata)
     if (this._removeActiveOverlay !== null) {
       this._removeOverlay();
 
@@ -96,13 +95,13 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   };
 
   private _addPluginIcon = (): void => {
-    if(this._removePluginIcon) return;
+    if (this._removePluginIcon) return;
 
     this._removePluginIcon = this._player.ui.addComponent({
       label: 'Info',
       presets: [ReservedPresetNames.Playback, ReservedPresetNames.Live],
-      area: ReservedPresetAreas.TopBarLeftControls,
-      get: () => <PluginButton onClick={this._toggleInfo} />
+      area: ReservedPresetAreas.TopBarRightControls,
+      get: () => <PluginButton onClick={this._toggleInfo} label="Video info" />
     });
-  }
+  };
 }

@@ -45,7 +45,6 @@
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
-    font-family: 'Lato';
     font-style: normal;
     font-weight: 700;
     font-size: 32px;
@@ -56,12 +55,16 @@
     line-height: 1.6;
     font-size: 16px;
     font-weight: 400;
-    font-family: 'Lato';
     line-height: 21px;
     overflow-y: auto;
     a {
       color: $main-color;
     }
+  }
+
+  * {
+    font-family: 'Lato';
+    font-style: normal;
   }
 }
 

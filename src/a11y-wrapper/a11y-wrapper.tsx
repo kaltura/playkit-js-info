@@ -1,4 +1,5 @@
 import {cloneElement, VNode} from 'preact';
+
 const {ENTER, SPACE} = KalturaPlayer.ui.utils.KeyMap;
 
 export type OnClickEvent = KeyboardEvent | MouseEvent;
