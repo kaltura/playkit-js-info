@@ -1,3 +1,16 @@
 $white-color: #ffffff;
 $root-background: rgba(0, 0, 0, 0.7);
 $main-color: #01accd;
+
+@mixin plugin-scrollbar {
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+  &::-webkit-scrollbar-track {
+    background: rgba(33, 33, 33, 0.9);
+  }
+  &::-webkit-scrollbar-thumb {
+    border-radius: 3px;
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}

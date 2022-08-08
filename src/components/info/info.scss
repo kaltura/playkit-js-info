@@ -1,27 +1,12 @@
 @import '../../variables.scss';
 
-/* TODO: (1) remove this once 3rd party cross-browser custom scroll bar is Added */
-.body::-webkit-scrollbar {
-  width: 4px;
-}
-
-/* Track TODO: as (1)*/
-.body::-webkit-scrollbar-track {
-  background: rgba(33, 33, 33, 0.9);
-}
-
-/* Handle TODO: as (1) */
-.body::-webkit-scrollbar-thumb {
-  border-radius: 3px;
-  background-color: rgba(255, 255, 255, 0.3);
-}
-
 .root {
   position: absolute;
   top: 0;
   height: 100%;
   width: 100%;
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 32px;
@@ -30,6 +15,13 @@
   backdrop-filter: blur(16px);
   background-color: $root-background;
   z-index: 1;
+  @include plugin-scrollbar();
+
+  * {
+    font-family: 'Lato';
+    font-style: normal;
+  }
+
   .broadcast-date {
     margin-bottom: 8px;
     font-size: 12px;
@@ -40,6 +32,7 @@
     }
   }
   .entry-name {
+    max-width: 100%;
     margin-bottom: 16px;
     min-height: 29px;
     overflow: hidden;
@@ -60,11 +53,6 @@
     a {
       color: $main-color;
     }
-  }
-
-  * {
-    font-family: 'Lato';
-    font-style: normal;
   }
 }
 
