@@ -60,30 +60,6 @@ Finally, add the bundle as a script tag in your page, and initialize the player
 </div>
 ```
 
-## Documentation
-
-Info plugin configuration can been found here:
-
-- **[Configuration](docs/info.md)**
-
-## Running the tests
-
-Tests can be run locally via [Karma], which will run on Chrome, Firefox and Safari
-
-[karma]: https://karma-runner.github.io/1.0/index.html
-
-```
-yarn run test
-```
-
-You can test individual browsers:
-
-```
-yarn run test:chrome
-yarn run test:firefox
-yarn run test:safari
-```
-
 ### And coding style tests
 
 We use ESLint [recommended set](http://eslint.org/docs/rules/) with some additions for enforcing [Flow] types and other rules.
@@ -91,10 +67,6 @@ We use ESLint [recommended set](http://eslint.org/docs/rules/) with some additio
 See [ESLint config](.eslintrc.json) for full configuration.
 
 We also use [.editorconfig](.editorconfig) to maintain consistent coding styles and settings, please make sure you comply with the styling.
-
-## Compatibility
-
-TBD
 
 ## Contributing
 
