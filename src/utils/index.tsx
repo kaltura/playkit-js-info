@@ -32,5 +32,6 @@ export const timeSince = (date: any) => {
       }
     }
   }
-  return intervalType;
+  const plural = interval > 1 ? 's'  : '';
+  return interval !== -1 ? `${interval} ${intervalType}${plural} ago` : `${intervalType} ago`;
 };
