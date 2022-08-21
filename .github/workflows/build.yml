@@ -37,11 +37,14 @@ jobs:
       - name: build 
         run: npm run build
       - name: push to S3
-        run: echo "deployment path:" "${{ github.event.repository.name }}/$(cat VERSION.txt)"
-      - uses: shallwefootball/s3-upload-action@master
+        run: |
+          echo "deployment path:" "${{ github.event.repository.name }}/$(cat VERSION.txt)"
+          export localFilePath="${{ github.event.repository.name }}/$(cat VERSION.txt)"
+      - uses: hkusu/s3-upload-action@v2
         with:
-          aws_key_id: ${{ secrets.ACCESS }}
-          aws_secret_access_key: ${{ secrets.ACCESS_SECRET}}
-          aws_bucket: ${{ secrets.BUCKET }}
-          source_dir: 'dist'
-          destination_dir: "${{ github.event.repository.name }}/$(cat VERSION.txt)"
+          aws-access-key-id: ${{ secrets.ACCESS }}
+          aws-secret-access-key: ${{ secrets.ACCESS_SECRET }}
+          aws-region: 'us-east-1'
+          aws-bucket: ${{ secrets.BUCKET }}
+          file-path: dist/playkit-info.js
+          destination_dir: $localFilePath
