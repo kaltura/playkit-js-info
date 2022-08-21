@@ -51,5 +51,5 @@ jobs:
           aws-secret-access-key: ${{ secrets.ACCESS_SECRET }}
           aws-region: 'us-east-1'
           aws-bucket: ${{ secrets.BUCKET }}
-          file-path: dist/playkit-info.js
+          file-path: dist/playkit-info.*
           destination-dir: ${{ steps.s3.outputs.filePath }}
