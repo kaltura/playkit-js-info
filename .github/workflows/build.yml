@@ -48,4 +48,4 @@ jobs:
           aws-region: 'us-east-1'
           aws-bucket: ${{ secrets.BUCKET }}
           file-path: dist/playkit-info.js
-          destination-dir: $(cat filePath.txt)
+          destination-dir: "$localFilePath"
