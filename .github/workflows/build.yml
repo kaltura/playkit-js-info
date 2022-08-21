@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
-          node-version: '12'
+          node-version: 'v14.20.0'
       - name: npm run build
         run: |
           npm install
@@ -23,7 +23,7 @@ jobs:
       - name: versioning
         run: |
           echo "Run standard-version"
-          npm run bump-canary
+          yarn run release --prerelease canary --skip.commit=true --skip.tag=true
           sha=$(git rev-parse --verify --short HEAD)
           echo "Current sha ${sha}"
           commitNumberAfterTag=$(git rev-list  `git rev-list --tags --no-walk --max-count=1`..HEAD --count)
@@ -32,6 +32,5 @@ jobs:
           echo "Current version ${currentVersion}"
           newVersion=$(echo $currentVersion | sed -e "s/canary\.[[:digit:]]/canary.${commitNumberAfterTag}-${sha}/g")
           echo "New version ${newVersion}"
-          sed -iE "s/$currentVersion/$newVersion/g" package-lock.json
           sed -iE "s/$currentVersion/$newVersion/g" package.json
           sed -iE "s/$currentVersion/$newVersion/g" CHANGELOG.md
