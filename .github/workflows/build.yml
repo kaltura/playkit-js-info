@@ -41,9 +41,9 @@ jobs:
         run: |
           echo "deployment path:" "${{ github.event.repository.name }}/$(cat VERSION.txt)"
           export filePath="${{ github.event.repository.name }}/$(cat VERSION.txt)"
-          echo "::set-env name=destinationDir::$filePath"
+          echo "$filePath">FileName.txt
       - name: just for test
-        run: echo $destinationDir
+        run: echo $(cat FileName.txt)
       - uses: hkusu/s3-upload-action@v2
         with:
           aws-access-key-id: ${{ secrets.ACCESS }}
@@ -51,4 +51,4 @@ jobs:
           aws-region: 'us-east-1'
           aws-bucket: ${{ secrets.BUCKET }}
           file-path: dist/playkit-info.js
-          destination-dir: $destinationDir
+          destination-dir: $(cat FileName.txt)
