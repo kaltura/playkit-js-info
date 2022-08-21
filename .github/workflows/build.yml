@@ -37,4 +37,11 @@ jobs:
       - name: build 
         run: npm run build
       - name: push to S3
-        run: echo "deployment path:"/"${{ github.event.repository.name }}$(cat VERSION.txt)"
+        run: echo "deployment path:" "${{ github.event.repository.name }}/$(cat VERSION.txt)"
+      - uses: shallwefootball/s3-upload-action@master
+        with:
+          aws_key_id: ${{ secrets.ACCESS }}
+          aws_secret_access_key: ${{ secrets.ACCESS_SECRET}}
+          aws_bucket: ${{ secrets.BUCKET }}
+          source_dir: 'dist'
+          destination_dir: "${{ github.event.repository.name }}/$(cat VERSION.txt)"
