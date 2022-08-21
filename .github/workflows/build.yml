@@ -41,10 +41,10 @@ jobs:
         run: |
           echo "deployment path:" "${{ github.event.repository.name }}/$(cat VERSION.txt)"
           export localFilePath="${{ github.event.repository.name }}/$(cat VERSION.txt)"
-          echo ::set-output name=estination-dir::$localFilePath
-          echo ${{ steps.s3.output.estination-dir }}
+          echo ::set-output name=estinationDir::"$localFilePath"
+          echo ${{ steps.s3.output.estinationDir }}
       - name: just for test
-        run: echo ${{ steps.s3.output.estination-dir }}
+        run: echo ${{ steps.s3.output.estinationDir }}
       - uses: hkusu/s3-upload-action@v2
         with:
           aws-access-key-id: ${{ secrets.ACCESS }}
@@ -52,4 +52,4 @@ jobs:
           aws-region: 'us-east-1'
           aws-bucket: ${{ secrets.BUCKET }}
           file-path: dist/playkit-info.js
-          destination-dir: ${{ steps.s3.output.estination-dir }}
+          destination-dir: ${{ steps.s3.output.estinationDir }}
