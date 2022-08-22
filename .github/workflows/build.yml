@@ -49,11 +49,6 @@ jobs:
           echo "::set-output name=filePath::$filePath"
           echo "::set-output name=jsFilePath::dist/${{ steps.local.outputs.fileNamePrefix }}.js"
           echo "::set-output name=mapFilePath::dist/${{ steps.local.outputs.fileNamePrefix }}.js.map"
-      - name: just for test
-        run: |
-            echo ${{ steps.s3.outputs.filePath }}
-            echo ${{ steps.s3.outputs.jsFilePath }}
-            echo ${{ steps.s3.outputs.mapFilePath }}
       - uses: aws-actions/configure-aws-credentials@v1
         name: Configure AWS credentials
         with:
