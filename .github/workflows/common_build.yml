@@ -9,6 +9,6 @@ jobs:
     uses: kaltura/playkit-js-common/.github/workflows/build.yml@master
     with:
       pluginPath: playkit-info
-      bucket:  ${{ secrets.BUCKET }}
-      access_key:  ${{ secrets.ACCESS }}
-      access_token:  ${{ secrets.ACCESS_SECRET }}
+      bucket: ${{ secrets.BUCKET }}
+      access_key: ${{ secrets.ACCESS }}
+      access_token: ${{ secrets.ACCESS_SECRET }}
