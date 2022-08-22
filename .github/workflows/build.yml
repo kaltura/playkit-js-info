@@ -51,5 +51,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.ACCESS_SECRET }}
           aws-region: 'us-east-1'
           aws-bucket: ${{ secrets.BUCKET }}
-          file-path: dist/playkit-info.*
+          file-path: dist/${{ github.event.repository.name }}.js
+          destination-dir: ${{ steps.s3.outputs.filePath }}
+      - uses: hkusu/s3-upload-action@v2
+        with:
+          aws-access-key-id: ${{ secrets.ACCESS }}
+          aws-secret-access-key: ${{ secrets.ACCESS_SECRET }}
+          aws-region: 'us-east-1'
+          aws-bucket: ${{ secrets.BUCKET }}
+          file-path: dist/${{ github.event.repository.name }}.js.map
           destination-dir: ${{ steps.s3.outputs.filePath }}
