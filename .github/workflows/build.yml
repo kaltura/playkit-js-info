@@ -54,21 +54,13 @@ jobs:
             echo ${{ steps.s3.outputs.filePath }}
             echo ${{ steps.s3.outputs.jsFilePath }}
             echo ${{ steps.s3.outputs.mapFilePath }}
-      - uses: hkusu/s3-upload-action@v2
-        name: Upload file ${{ steps.s3.outputs.jsFilePath }} to ${{ steps.local.outputs.filePath }}
+      - uses: aws-actions/configure-aws-credentials@v1
+        name: Configure AWS credentials
         with:
           aws-access-key-id: ${{ secrets.ACCESS }}
           aws-secret-access-key: ${{ secrets.ACCESS_SECRET }}
           aws-region: 'us-east-1'
-          aws-bucket: ${{ secrets.BUCKET }}
-          file-path: ${{ steps.s3.outputs.jsFilePath }}
-          destination-dir: ${{ steps.local_params.outputs.filePath }}
-      - uses: hkusu/s3-upload-action@v2
-        name: Upload file ${{ steps.s3.outputs.mapFilePath }} to ${{ steps.local.outputs.filePath }}
-        with:
-          aws-access-key-id: ${{ secrets.ACCESS }}
-          aws-secret-access-key: ${{ secrets.ACCESS_SECRET }}
-          aws-region: 'us-east-1'
-          aws-bucket: ${{ secrets.BUCKET }}
-          file-path: ${{ steps.s3.outputs.mapFilePath }}
-          destination-dir: ${{ steps.s3.outputs.filePath }}
+      - name: Deploy
+        run: |
+          export DESTINATION="s3://"${{ secrets.BUCKET }}"/"${{ steps.local_params.outputs.filePath }}
+          aws s3 sync ./dist $DESTINATION
