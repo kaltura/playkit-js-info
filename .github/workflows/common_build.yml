@@ -1,0 +1,11 @@
+name: deploy to QA
+on:
+  create:
+  workflow_dispatch:
+  
+jobs:
+  build-and-push-to-s3:
+    uses: kaltura/playkit-js-common/.github/workflows/build.yml
+
+    with:
+      pluginPath: playkit-info
