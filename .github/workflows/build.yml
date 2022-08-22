@@ -12,6 +12,10 @@ jobs:
     environment: build-plugins
     runs-on: ubuntu-latest
     steps:
+      - name: set local params
+        id: local
+        run: |
+           echo "::set-output name=fileNamePrefix::playkit-info"
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
@@ -51,13 +55,13 @@ jobs:
           aws-secret-access-key: ${{ secrets.ACCESS_SECRET }}
           aws-region: 'us-east-1'
           aws-bucket: ${{ secrets.BUCKET }}
-          file-path: dist/${{ github.event.repository.name }}.js
-          destination-dir: ${{ steps.s3.outputs.filePath }}
+          file-path: dist/${{ steps.local.outputs.fileNamePrefix }}.js
+          destination-dir: ${{ steps.local_params.outputs.filePath }}
       - uses: hkusu/s3-upload-action@v2
         with:
           aws-access-key-id: ${{ secrets.ACCESS }}
           aws-secret-access-key: ${{ secrets.ACCESS_SECRET }}
           aws-region: 'us-east-1'
           aws-bucket: ${{ secrets.BUCKET }}
-          file-path: dist/${{ github.event.repository.name }}.js.map
+          file-path: dist/${{ steps.local.outputs.fileNamePrefix }}.js.map
           destination-dir: ${{ steps.s3.outputs.filePath }}
