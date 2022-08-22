@@ -6,7 +6,6 @@ import {ui} from 'kaltura-player-js';
 const {ReservedPresetNames, ReservedPresetAreas} = ui;
 
 export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
-  private _infoOverlay = null;
   private _wasPlayed = false; // keep state of the player so we can resume if needed
   private _removeActiveOverlay: null | Function = null;
   private _removePluginIcon: null | Function = null;
@@ -33,31 +32,19 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     return timeSince(new Date(Number(startTime) * 1000));
   };
 
-  private _toggleInfo = () => {
-    if (this._removeActiveOverlay !== null) {
-      this._removeOverlay();
-
-      if (this._wasPlayed) {
-        this._player.play();
-        this._wasPlayed = false;
-      }
-
-      return;
+  private _openInfo = () => {
+    if (!this.player.paused) {
+      this._player.pause();
+      this._wasPlayed = true;
     }
-
-    if (this._infoOverlay) {
-      this._infoOverlay = null;
-      return;
-    }
-
     this._setOverlay(
       this._player.ui.addComponent({
         label: 'info-overlay',
-        area: ReservedPresetAreas.PlayerArea,
+        area: 'GuiArea',
         presets: [ReservedPresetNames.Playback, ReservedPresetNames.Live],
         get: () => (
           <Info
-            onClick={this._toggleInfo}
+            onClick={this._closeInfo}
             entryName={this._player.sources.metadata.name || ''}
             description={this._player.sources.metadata.description || ''}
             broadcastedDate={this._getBroadcastedDate()}
@@ -67,19 +54,16 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     );
   };
 
+  private _closeInfo = () => {
+    this._removeOverlay();
+    if (this._wasPlayed) {
+      this._player.play();
+      this._wasPlayed = false;
+    }
+  };
+
   static isValid(): boolean {
     return true;
-  }
-
-  reset(): void {
-    return;
-  }
-
-  destroy(): void {
-    this._removeOverlay();
-    if (this._removePluginIcon) {
-      this._removePluginIcon();
-    }
   }
 
   private _setOverlay = (fn: Function) => {
@@ -95,13 +79,25 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   };
 
   private _addPluginIcon = (): void => {
-    if (this._removePluginIcon) return;
-
+    if (this._removePluginIcon) {
+      return;
+    }
     this._removePluginIcon = this._player.ui.addComponent({
       label: 'Info',
       presets: [ReservedPresetNames.Playback, ReservedPresetNames.Live],
       area: ReservedPresetAreas.TopBarRightControls,
-      get: () => <PluginButton onClick={this._toggleInfo} label="Video info" />
+      get: () => <PluginButton onClick={this._openInfo} label="Video info" />
     });
   };
+
+  reset(): void {
+    this._closeInfo();
+  }
+
+  destroy(): void {
+    this._removeOverlay();
+    if (this._removePluginIcon) {
+      this._removePluginIcon();
+    }
+  }
 }

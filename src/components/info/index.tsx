@@ -1,6 +1,11 @@
 import {h, Component} from 'preact';
 import * as styles from './info.scss';
-import {CloseButton} from '../close-button';
+import * as sanitizeHtml from 'sanitize-html';
+const {
+  components: {PLAYER_SIZE},
+  redux: {connect}
+} = KalturaPlayer.ui;
+const {Overlay} = KalturaPlayer.ui.components;
 
 export interface InfoProps {
   onClick: () => void;
@@ -8,18 +13,30 @@ export interface InfoProps {
   description: string;
   broadcastedDate: string;
 }
+interface ConnectProps {
+  playerSize?: string;
+}
 
-export class Info extends Component<InfoProps> {
-  render(props: InfoProps) {
-    const {onClick, entryName, description, broadcastedDate} = props;
+type MergedProps = InfoProps & ConnectProps;
 
+const mapStateToProps = (state: Record<string, any>) => ({
+  playerSize: state.shell.playerSize
+});
+@connect(mapStateToProps)
+export class Info extends Component<MergedProps> {
+  render(props: MergedProps) {
+    const {onClick, entryName, description, broadcastedDate, playerSize = ''} = props;
+    if (playerSize === PLAYER_SIZE.TINY) {
+      return null;
+    }
     return (
-      <div className={[styles.root, 'kaltura-info__root'].join(' ')}>
-        <CloseButton onClick={onClick} />
-        <div className={[styles.broadcastDate, 'kaltura-info__broadcast-date', broadcastedDate ? '' : 'hidden'].join(' ')}>{broadcastedDate}</div>
-        <div className={[styles.entryName, 'kaltura-info__entry-name'].join(' ')}>{entryName}</div>
-        <div className={[styles.entryDescription, 'kaltura-info__entry-description'].join(' ')} dangerouslySetInnerHTML={{__html: description}} />
-      </div>
+      <Overlay open onClose={onClick}>
+        <div className={[styles.infoRoot, styles[playerSize]].join(' ')}>
+          {broadcastedDate && <div className={styles.broadcastDate}>{broadcastedDate}</div>}
+          <div className={styles.entryName}>{entryName}</div>
+          {description && <div className={styles.entryDescription} dangerouslySetInnerHTML={{__html: sanitizeHtml(description)}} />}
+        </div>
+      </Overlay>
     );
   }
 }
