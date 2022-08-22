@@ -5,7 +5,7 @@ on:
   
 jobs:
   build-and-push-to-s3:
-    uses: kaltura/playkit-js-common/.github/workflows/build.yml
+    uses: kaltura/playkit-js-common/.github/workflows/build.yml@release
 
     with:
       pluginPath: playkit-info
