@@ -47,23 +47,28 @@ jobs:
           export filePath="${{ github.event.repository.name }}/$(cat VERSION.txt)"
           echo "$filePath"
           echo "::set-output name=filePath::$filePath"
+          echo "::set-output name=jsFilePath::dist/${{ steps.local.outputs.fileNamePrefix }}.js"
+          echo "::set-output name=mapFilePath::dist/${{ steps.local.outputs.fileNamePrefix }}.js.map"
       - name: just for test
-        run: echo ${{ steps.s3.outputs.filePath }}
+        run: |
+            echo ${{ steps.s3.outputs.filePath }}
+            echo ${{ steps.s3.outputs.jsFilePath }}
+            echo ${{ steps.s3.outputs.mapFilePath }}
       - uses: hkusu/s3-upload-action@v2
-        name: Upload file ${{ steps.local.outputs.fileNamePrefix }}.js to ${{ steps.local_params.outputs.filePath }}
+        name: Upload file ${{ steps.s3.outputs.jsFilePath }} to ${{ steps.local.outputs.filePath }}
         with:
           aws-access-key-id: ${{ secrets.ACCESS }}
           aws-secret-access-key: ${{ secrets.ACCESS_SECRET }}
           aws-region: 'us-east-1'
           aws-bucket: ${{ secrets.BUCKET }}
-          file-path: dist/${{ steps.local.outputs.fileNamePrefix }}.js
+          file-path: ${{ steps.s3.outputs.jsFilePath }}
           destination-dir: ${{ steps.local_params.outputs.filePath }}
       - uses: hkusu/s3-upload-action@v2
-        name: Upload file ${{ steps.local.outputs.fileNamePrefix }}.js.map to ${{ steps.local_params.outputs.filePath }}
+        name: Upload file ${{ steps.s3.outputs.mapFilePath }} to ${{ steps.local.outputs.filePath }}
         with:
           aws-access-key-id: ${{ secrets.ACCESS }}
           aws-secret-access-key: ${{ secrets.ACCESS_SECRET }}
           aws-region: 'us-east-1'
           aws-bucket: ${{ secrets.BUCKET }}
-          file-path: dist/${{ steps.local.outputs.fileNamePrefix }}.js.map
+          file-path: ${{ steps.s3.outputs.mapFilePath }}
           destination-dir: ${{ steps.s3.outputs.filePath }}
