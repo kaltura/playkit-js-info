@@ -45,11 +45,12 @@ jobs:
         run: |
           echo "deployment path:" "${{ github.event.repository.name }}/$(cat VERSION.txt)"
           export filePath="${{ github.event.repository.name }}/$(cat VERSION.txt)"
-          echo "$filePath">FileName.txt
+          echo "$filePath"
           echo "::set-output name=filePath::$filePath"
       - name: just for test
         run: echo ${{ steps.s3.outputs.filePath }}
       - uses: hkusu/s3-upload-action@v2
+        name: Upload file ${{ steps.local.outputs.fileNamePrefix }}.js to ${{ steps.local_params.outputs.filePath }}
         with:
           aws-access-key-id: ${{ secrets.ACCESS }}
           aws-secret-access-key: ${{ secrets.ACCESS_SECRET }}
@@ -58,6 +59,7 @@ jobs:
           file-path: dist/${{ steps.local.outputs.fileNamePrefix }}.js
           destination-dir: ${{ steps.local_params.outputs.filePath }}
       - uses: hkusu/s3-upload-action@v2
+        name: Upload file ${{ steps.local.outputs.fileNamePrefix }}.js.map to ${{ steps.local_params.outputs.filePath }}
         with:
           aws-access-key-id: ${{ secrets.ACCESS }}
           aws-secret-access-key: ${{ secrets.ACCESS_SECRET }}
