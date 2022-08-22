@@ -62,5 +62,6 @@ jobs:
           aws-region: 'us-east-1'
       - name: Deploy
         run: |
-          export DESTINATION="s3://"${{ secrets.BUCKET }}"/"${{ steps.local.outputs.filePath }}
+          export DESTINATION="s3://player-plugin-deployment/"${{ steps.local.outputs.filePath }}
+          echo $DESTINATION
           aws s3 sync ./dist $DESTINATION
