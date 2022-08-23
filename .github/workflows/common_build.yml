@@ -1,6 +1,8 @@
 name: deploy to QA
+
 on:
   create:
+  
   workflow_dispatch:
   
 jobs:
@@ -8,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
         - name: build and push to s3
-          uses: kaltura/playkit-js-common/.github/workflows/build.yml@master
+        - uses: kaltura/playkit-js-common/.github/workflows/build.yml@master
           with:
             pluginPath: playkit-info
             bucket: ${{ secrets.BUCKET }}
