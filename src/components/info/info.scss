@@ -1,91 +1,64 @@
 @import '../../variables.scss';
 
-.root {
-  position: absolute;
-  top: 0;
+.infoRoot {
+  position: relative;
   height: 100%;
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  padding: 32px;
+  padding: 0 42px 0 12px;
   color: $white-color;
-  -webkit-backdrop-filter: blur(16px);
-  backdrop-filter: blur(16px);
-  background-color: $root-background;
-  z-index: 1;
-  @include plugin-scrollbar();
+
+  &.tiny {
+    display: none;
+  }
+  &.extrasmall,
+  &.small {
+    .entryName {
+      font-size: 18px;
+    }
+  }
+  &.medium,
+  &.large,
+  &.extralarge {
+    display: flex;
+  }
 
   * {
     font-family: 'Lato';
     font-style: normal;
   }
 
-  .broadcast-date {
+  .broadcastDate {
     margin-bottom: 8px;
     font-size: 12px;
-    font-weight: bold;
+    font-weight: 700;
     text-transform: uppercase;
     &.hidden {
       display: none;
     }
   }
-  .entry-name {
-    max-width: 100%;
-    margin-bottom: 16px;
-    min-height: 29px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
+  .entryName {
+    width: 100%;
     font-style: normal;
     font-weight: 700;
     font-size: 32px;
-    line-height: 32px;
+    text-align: left;
+    word-break: break-word;
   }
   .entry-description {
-    opacity: 0.7;
-    line-height: 1.6;
+    width: 100%;
+    margin-top: 16px;
     font-size: 16px;
     font-weight: 400;
-    line-height: 21px;
     overflow-y: auto;
+    text-align: left;
+    word-break: break-word;
+    @include plugin-scrollbar();
     a {
       color: $main-color;
-    }
-  }
-}
-
-:global {
-  .playkit-player.playkit-size-sm,
-  .playkit-player.playkit-size-xs {
-    .kaltura-info__close-button {
-      top: 10px;
-      right: 16px;
-    }
-    .kaltura-info__root {
-      padding: 16px;
-      .kaltura-info__broadcast-date {
-        &.hidden {
-          display: block;
-          height: 0;
-          margin-bottom: 18px;
-        }
-        font-size: 10px;
-      }
-      .kaltura-info__entry-name {
-        margin-bottom: 8px;
-        min-height: 19px;
-        font-size: 16px;
-      }
-      .kaltura-info__entry-description {
-        font-size: 12px;
-      }
-    }
-  }
-  .playkit-player.playkit-size-ty {
-    .kaltura-info__root {
-      display: none;
     }
   }
 }
