@@ -7,7 +7,7 @@ on:
   
 jobs:
   test_build_with_params:
-     uses: kaltura/playkit-js-common/.github/workflows/test1.yml@master
+     uses: kaltura/playkit-js-common/.github/workflows/build.yml@master
      with:
       pluginPath: playkit-info
      secrets: inherit
