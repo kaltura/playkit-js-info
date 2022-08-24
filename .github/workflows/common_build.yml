@@ -10,3 +10,4 @@ jobs:
      uses: kaltura/playkit-js-common/.github/workflows/test1.yml@master
      with:
       pluginPath: playkit-info
+     secrets: inherit
