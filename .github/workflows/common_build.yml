@@ -7,13 +7,6 @@ on:
   
 jobs:
   test_build_with_params:
-    runs-on: ubuntu-latest
-    steps: 
-     - uses: actions/checkout@v3
-     - uses: kaltura/playkit-js-common/.github/workflows/test1.yml@master
-       name: build and push to s3
-       with:
-          pluginPath: playkit-info
-          bucket: ${{ secrets.BUCKET }}
-          access_key: ${{ secrets.ACCESS }}
-          access_token: ${{ secrets.ACCESS_SECRET }}
+     uses: kaltura/playkit-js-common/.github/workflows/test1.yml@master
+     with:
+      pluginPath: playkit-info
