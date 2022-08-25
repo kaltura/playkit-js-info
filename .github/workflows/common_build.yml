@@ -2,7 +2,7 @@ name: deploy to QA
 
 on:
   create:
-  
+  push:
   workflow_dispatch:
   
 jobs:
