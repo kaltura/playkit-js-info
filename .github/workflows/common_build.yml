@@ -1,9 +1,12 @@
 name: deploy to QA
 
 on:
-  create:
+  pull_request:
+    branches:    
+      - master
   push:
-  workflow_dispatch:
+    tags:
+      - '*'
   
 jobs:
   test_build_with_params:
