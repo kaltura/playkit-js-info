@@ -25,13 +25,17 @@
   &.extralarge {
     display: flex;
   }
-
+  div {
+    margin: 0px;
+  }
   * {
-    font-family: 'Lato';
+    font-family: Lato, Helvetica Neue, Helvetica, Arial, sans-serif;
     font-style: normal;
   }
 
   .broadcastDate {
+    text-align: left;
+    width: 100%;
     margin-bottom: 8px;
     font-size: 12px;
     font-weight: 700;
@@ -47,6 +51,7 @@
     font-size: 32px;
     text-align: left;
     word-break: break-word;
+    line-height: initial;
   }
   .entry-description {
     width: 100%;
@@ -61,4 +66,8 @@
       color: $main-color;
     }
   }
+}
+:global(.playkit-overlay.playkit-active) {
+  top: 0px;
+  right: 0px;
 }
