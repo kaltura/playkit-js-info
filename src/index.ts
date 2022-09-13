@@ -10,5 +10,4 @@ export {PlaykitJsInfoPlugin as Plugin};
 export {VERSION, NAME};
 
 const pluginName: string = 'playkit-js-info';
-
 KalturaPlayer.core.registerPlugin(pluginName, PlaykitJsInfoPlugin);
