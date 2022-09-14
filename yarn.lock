@@ -656,6 +656,11 @@
     js-logger "^1.6.0"
     ua-parser-js "1.0.2"
 
+"@playkit-js/ui-managers@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@playkit-js/ui-managers/-/ui-managers-1.2.2.tgz#ea77ed880ee6c1f7a2e14d94a2c77e8a2aa62f28"
+  integrity sha512-+TKsinkELDCSnPJfQLfPXkvQb58Ll6FD5gN5/OnG0bFBscm/aOKfdNzWyTN208bhTT5IfqR++8Y0ehY95dtOCQ==
+
 "@sinclair/typebox@^0.23.3":
   version "0.23.5"
   resolved "https://registry.yarnpkg.com/@sinclair/typebox/-/typebox-0.23.5.tgz#93f7b9f4e3285a7a9ade7557d9a8d36809cbc47d"
