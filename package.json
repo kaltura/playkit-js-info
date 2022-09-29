@@ -6,6 +6,10 @@
   "bugs": {
     "url": "https://github.com/kaltura/playkit-js-info/issues"
   },
+  "kalturaName": "playkit-js-info",
+  "kalturaDependencies": [
+    "uiManagers"
+  ],
   "homepage": "https://github.com/kaltura/playkit-js-info#readme",
   "repository": {
     "type": "git",
