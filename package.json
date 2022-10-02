@@ -73,5 +73,11 @@
   ],
   "dependencies": {
     "sanitize-html": "^2.7.1"
+  },
+  "kaltura": {
+    "name": "playkit-js-info",
+    "dependencies": {
+      "playkit-ui-managers": "1.2.2"
+    }
   }
 }
