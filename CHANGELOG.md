@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com/kaltura/playkit-js-info/compare/v2.0.12...v3.1.0) (2022-10-26)
+
+
+### Features
+
+* **FEV-1152:** added role for button ([#34](https://github.com/kaltura/playkit-js-info/issues/34)) ([c284265](https://github.com/kaltura/playkit-js-info/commit/c28426554705810236b95f16885a4258583caaa4))
+
+
+### Bug Fixes
+
+* **FEV-1321:** info style fixes ([#31](https://github.com/kaltura/playkit-js-info/issues/31)) ([f21ed35](https://github.com/kaltura/playkit-js-info/commit/f21ed35f19d05b3804882c80771a5aec86a6049b))
+* **FEV-1321:** style fixes ([#22](https://github.com/kaltura/playkit-js-info/issues/22)) ([e395d7c](https://github.com/kaltura/playkit-js-info/commit/e395d7c1007e05f2e263c811a5ab8a0dc1544912))
+* **FEV-1321:** use player Overlay component to render Info ([#27](https://github.com/kaltura/playkit-js-info/issues/27)) ([eb637c8](https://github.com/kaltura/playkit-js-info/commit/eb637c871dde81dfcad4514ff0898191f4aefd27))
+* **FEV-1354:** return correct string from timeSince function ([#23](https://github.com/kaltura/playkit-js-info/issues/23)) ([e80b8cb](https://github.com/kaltura/playkit-js-info/commit/e80b8cb02ef47485b2dd7e302ea8e0a9e471d38e))
+* revert plugin name to playkit-js-info ([#32](https://github.com/kaltura/playkit-js-info/issues/32)) ([1bff04e](https://github.com/kaltura/playkit-js-info/commit/1bff04e9d4d3e6a23723c924f49db518e4bdd366))
+
 ### [2.0.12](https://github.com/kaltura/playkit-js-info/compare/v2.0.11...v2.0.12) (2022-01-19)
 
 ### [2.0.11](https://github.com/kaltura/playkit-js-info/compare/v2.0.7...v2.0.11) (2021-12-06)
