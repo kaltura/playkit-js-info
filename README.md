@@ -3,7 +3,7 @@
 [![Build Status](https://travis-ci.com/kaltura/playkit-js-avplay.svg?branch=master)](https://travis-ci.org/kaltura/playkit-js-info)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
 [![](https://img.shields.io/npm/v/@playkit-js/info/latest.svg)](https://www.npmjs.com/package/@playkit-js/info)
-[![](https://img.shields.io/npm/v/@playkit-js/share/canary.svg)](https://www.npmjs.com/package/@playkit-js/info/v/canary)
+[![](https://img.shields.io/npm/v/@playkit-js/info/canary.svg)](https://www.npmjs.com/package/@playkit-js/info/v/canary)
 
 PlayKit JS Info is written in [ECMAScript6], statically analysed using [Typescript] and transpiled in ECMAScript5 using [Babel].
 
