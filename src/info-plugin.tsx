@@ -5,22 +5,26 @@ import {timeSince} from './utils';
 import {ui} from 'kaltura-player-js';
 import {icons} from './components/icons';
 import {UpperBarManager} from '@playkit-js/ui-managers';
-import {BasePlugin} from 'kaltura-player-js';
-const {ReservedPresetNames, ReservedPresetAreas} = ui;
+const {ReservedPresetNames} = ui;
 
-export class PlaykitJsInfoPlugin extends BasePlugin<any> {
+export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   private _wasPlayed = false; // keep state of the player so we can resume if needed
   private _removeActiveOverlay: null | Function = null;
-  private _iconId: number | undefined;
+  private _iconId = -1;
 
   constructor(name: string, private _player: any) {
     super(name, _player);
   }
 
+  get upperBarManager() {
+    return this.player.getService('upperBarManager') as UpperBarManager | undefined;
+  }
+
   loadMedia(): void {
-    this.logger.debug('Info plugin loaded', {
-      method: 'loadMedia'
-    });
+    if (!this.upperBarManager) {
+      this.logger.warn('upperBarManager service not registered');
+      return;
+    }
     this._addPluginIcon();
   }
 
@@ -82,16 +86,16 @@ export class PlaykitJsInfoPlugin extends BasePlugin<any> {
   };
 
   private _addPluginIcon = (): void => {
-    if (this._iconId) {
+    if (this._iconId > 0) {
       return;
     }
     this.player.ready().then(() => {
-      this._iconId = this.player.getService<UpperBarManager>('upperBarManager').add({
+      this._iconId = this.upperBarManager!.add({
         label: 'Info',
         component: () => <PluginButton onClick={this._openInfo} label="Video info" />,
-        svgIcon: {path: icons.PLUGIN_ICON, viewBox: '0 0 32 32'},
-        onClick: () => {}
-      });
+        svgIcon: {path: icons.PLUGIN_ICON, viewBox: `0 0 ${icons.BigSize} ${icons.BigSize}`},
+        onClick: this._openInfo
+      }) as number;
     });
   };
 
@@ -101,6 +105,9 @@ export class PlaykitJsInfoPlugin extends BasePlugin<any> {
 
   destroy(): void {
     this._removeOverlay();
-    this.player.getService<UpperBarManager>('upperBarManager').remove(this._iconId!);
+    if (this._iconId > 0) {
+      this.upperBarManager!.remove(this._iconId);
+      this._iconId = -1;
+    }
   }
 }

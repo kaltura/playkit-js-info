@@ -1,7 +1,7 @@
 import {h} from 'preact';
 import {icons} from '../icons';
 import {ui} from 'kaltura-player-js';
-import {A11yWrapper, OnClick} from '../../a11y-wrapper/a11y-wrapper';
+import {A11yWrapper, OnClick} from '@playkit-js/common';
 
 const {Tooltip, Icon} = KalturaPlayer.ui.components;
 
@@ -14,7 +14,7 @@ export const PluginButton = ({onClick, label}: PluginButtonProps) => {
   return (
     <Tooltip label={label} type="bottom">
       <A11yWrapper onClick={onClick}>
-        <button aria-label={label} className={ui.style.upperBarIcon} tabIndex={0}>
+        <button aria-label={label} className={ui.style.upperBarIcon}>
           <Icon
             id="info-plugin-button"
             height={icons.BigSize}
