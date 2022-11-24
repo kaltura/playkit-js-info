@@ -9,6 +9,7 @@
   align-items: flex-start;
   justify-content: center;
   padding: 0 42px 0 12px;
+  color: white;
 
   &.tiny {
     display: none;
@@ -64,7 +65,7 @@
     word-break: break-word;
     @include plugin-scrollbar();
     a {
-      color: $main-color;
+      color: white;
     }
   }
 }
