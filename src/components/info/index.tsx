@@ -31,7 +31,7 @@ export class Info extends Component<MergedProps> {
     }
     return (
       <Overlay open onClose={onClick}>
-        <div className={[styles.infoRoot, styles[playerSize]].join(' ')}>
+        <div className={[styles.infoRoot, styles[playerSize]].join(' ')} aria-live={'polite'}>
           {broadcastedDate && <div className={styles.broadcastDate}>{broadcastedDate}</div>}
           <div className={styles.entryName}>{entryName}</div>
           {description && <div className={styles.entryDescription} dangerouslySetInnerHTML={{__html: sanitizeHtml(description)}} />}
