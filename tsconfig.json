@@ -10,10 +10,10 @@
     "sourceMap": true,
     "strict": true,
     "moduleResolution": "Node",
-    "baseUrl": "./src",
+    "baseUrl": "..",
     "preserveSymlinks": true,
     "paths": {
-      "*": ["../node_modules/*"]
+      "*": ["../node_modules/*", "./src", "cypress.config.ts"]
     },
     "types": ["node"],
     "lib": ["es2015", "dom"]
