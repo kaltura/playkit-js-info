@@ -16,8 +16,8 @@ describe('Info plugin', () => {
   });
 
   it('should open and close Info plugin', () => {
-    cy.intercept('POST', 'http://mock-api/service/multirequest', {fixture: 'without-description.json'});
-    cy.visit('./index.html');
+    cy.intercept('POST', 'http://mock-api/service/multirequest', {fixture: 'vod-without-description.json'});
+    cy.visit('index.html');
     cy.get('.playkit-pre-playback-play-button').click({force: true});
     cy.get('[data-testid="infoPluginButton"]').click({force: true});
     cy.get('[data-testid="infoRoot"]').should('exist');
@@ -25,26 +25,37 @@ describe('Info plugin', () => {
     cy.get('[data-testid="infoRoot"]').should('not.exist');
   });
 
-  it('should render entry name without description', () => {
-    cy.intercept('POST', 'http://mock-api/service/multirequest', {fixture: 'without-description.json'});
-    cy.visit('./index.html');
+  it('should render entry name without description and broadcast date', () => {
+    cy.intercept('POST', 'http://mock-api/service/multirequest', {fixture: 'vod-without-description.json'});
+    cy.visit('index.html');
     cy.get('.playkit-pre-playback-play-button').click({force: true});
     cy.get('[data-testid="infoPluginButton"]').click({force: true});
     cy.get('[data-testid="entryDescription"]').should('not.exist');
+    cy.get('[data-testid="broadcastedDate"]').should('not.exist');
     cy.get('[data-testid="entryName"]').should($div => {
       expect($div.text()).to.eq('MPEG Dash with MultiAudio New Transcoding');
     });
   });
 
   it('should render entry description', () => {
-    cy.intercept('POST', 'http://mock-api/service/multirequest', {fixture: 'with-description.json'});
-    cy.visit('./index.html');
+    cy.intercept('POST', 'http://mock-api/service/multirequest', {fixture: 'vod-with-description.json'});
+    cy.visit('index.html');
     cy.get('.playkit-pre-playback-play-button').click({force: true});
     cy.get('[data-testid="infoPluginButton"]').click({force: true});
     cy.get('[data-testid="entryDescription"]').should($div => {
       expect($div.text()).to.eq(
         'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.'
       );
+    });
+  });
+
+  it('should render entry broadcast date', () => {
+    cy.intercept('POST', 'http://mock-api/service/multirequest', {fixture: 'live.json'});
+    cy.visit('index.html');
+    cy.get('.playkit-pre-playback-play-button').click({force: true});
+    cy.get('[data-testid="infoPluginButton"]').click({force: true});
+    cy.get('[data-testid="broadcastedDate"]').should($div => {
+      expect($div.text()).to.eq('Live Now');
     });
   });
 });
