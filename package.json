@@ -49,7 +49,7 @@
     "dev": "webpack-dev-server --mode development",
     "watch": "webpack --progress --color --watch --mode development",
     "cypress:open": "cypress open",
-    "test:watch": "yarn run build && cp ./dist/playkit-info.js ./cypress/test-files && yarn run cypress:open",
+    "test:watch": "yarn run build && cp ./dist/playkit-info.js ./cypress/public && yarn run cypress:open",
     "test": "cypress run",
     "release": "standard-version",
     "pushTaggedRelease": "git push --follow-tags --no-verify origin master",

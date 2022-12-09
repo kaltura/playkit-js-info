@@ -33,17 +33,17 @@ export class Info extends Component<MergedProps> {
     return (
       <OverlayPortal>
         <Overlay open onClose={onClick}>
-          <div className={[styles.infoRoot, styles[playerSize]].join(' ')}>
+          <div className={[styles.infoRoot, styles[playerSize]].join(' ')} data-testid="infoRoot">
             {broadcastedDate && (
-              <div className={styles.broadcastDate} data-cy="broadcastedDate">
+              <div className={styles.broadcastDate} data-testid="broadcastedDate">
                 {broadcastedDate}
               </div>
             )}
-            <div className={styles.entryName} data-cy="entryName">
+            <div className={styles.entryName} data-testid="entryName">
               {entryName}
             </div>
             {description && (
-              <div data-cy="entryDescription" className={styles.entryDescription} dangerouslySetInnerHTML={{__html: sanitizeHtml(description)}} />
+              <div data-testid="entryDescription" className={styles.entryDescription} dangerouslySetInnerHTML={{__html: sanitizeHtml(description)}} />
             )}
           </div>
         </Overlay>
