@@ -20,7 +20,6 @@
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.1",
     "cypress": "^12.0.1",
-    "husky": "^8.0.2",
     "kaltura-player-js": "https://github.com/kaltura/kaltura-player-js.git#master",
     "prettier": "^2.6.2",
     "sass": "^1.52.3",
