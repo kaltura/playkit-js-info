@@ -9,7 +9,7 @@ const {ReservedPresetNames} = ui;
 
 export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   private _wasPlayed = false; // keep state of the player so we can resume if needed
-  private _removeActiveOverlay: null | Function = null;
+  private _removeActiveOverlay: null | (() => void) = null;
   private _iconId = -1;
 
   constructor(name: string, private _player: any) {
@@ -73,7 +73,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     return true;
   }
 
-  private _setOverlay = (fn: Function) => {
+  private _setOverlay = (fn: () => void) => {
     this._removeOverlay();
     this._removeActiveOverlay = fn;
   };
