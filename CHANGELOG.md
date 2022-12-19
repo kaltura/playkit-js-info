@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.1.2](https://github.com/kaltura/playkit-js-info/compare/v3.1.1...v3.1.2) (2022-12-12)
+
+### [3.1.1](https://github.com/kaltura/playkit-js-info/compare/v3.1.0...v3.1.1) (2022-12-12)
+
+
+### Bug Fixes
+
+* **FEC-12561:** Info plugin - integration with the new Upper Bar Manager service API ([#33](https://github.com/kaltura/playkit-js-info/issues/33)) ([6f17430](https://github.com/kaltura/playkit-js-info/commit/6f174305c3db66e1bc70b1dea9490f40bde2ba6e))
+* **FEV-1591:** screen reader doesn't read content inside info overlay ([#38](https://github.com/kaltura/playkit-js-info/issues/38)) ([f6cd6e1](https://github.com/kaltura/playkit-js-info/commit/f6cd6e14e13a9048314eaa30a8df1ea1f399ebe1))
+* **FEV-1591:** screen reader doesn't read content inside info overlay ([#39](https://github.com/kaltura/playkit-js-info/issues/39)) ([2092b30](https://github.com/kaltura/playkit-js-info/commit/2092b308fe1b1c19c40ef227722a78343cd24a35))
+
 ## [3.1.0](https://github.com/kaltura/playkit-js-info/compare/v2.0.12...v3.1.0) (2022-10-26)
 
 

@@ -28,11 +28,22 @@ yarn install
 
 ### Building
 
-Then, build the player
+Then, build the plugin
 
 ```javascript
 yarn run build
 ```
+
+### Testing
+
+The plugin uses `cypress` tool for e2e tests
+
+```javascript
+yarn run test
+```
+
+UI conf file (`cypress/public/ui-conf.js`) contains Kaltura player and plugin dependencies.
+Keep Kaltura player and dependency versinos aligned to currently released versions.
 
 ### Embed the library in your test page
 
@@ -50,7 +61,7 @@ Finally, add the bundle as a script tag in your page, and initialize the player
      ...
      targetId: 'player-placeholder',
      plugins: {
-       info: { ... }
+       'playkit-js-info': { ... }
      }
      ...
     };
@@ -59,14 +70,6 @@ Finally, add the bundle as a script tag in your page, and initialize the player
   </script>
 </div>
 ```
-
-### And coding style tests
-
-We use ESLint [recommended set](http://eslint.org/docs/rules/) with some additions for enforcing [Flow] types and other rules.
-
-See [ESLint config](.eslintrc.json) for full configuration.
-
-We also use [.editorconfig](.editorconfig) to maintain consistent coding styles and settings, please make sure you comply with the styling.
 
 ## Contributing
 

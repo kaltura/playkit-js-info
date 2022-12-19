@@ -1,6 +1,7 @@
 import {h, Component} from 'preact';
 import * as styles from './info.scss';
 import * as sanitizeHtml from 'sanitize-html';
+import {OverlayPortal} from '@playkit-js/common';
 const {
   components: {PLAYER_SIZE},
   redux: {connect}
@@ -30,13 +31,23 @@ export class Info extends Component<MergedProps> {
       return null;
     }
     return (
-      <Overlay open onClose={onClick}>
-        <div className={[styles.infoRoot, styles[playerSize]].join(' ')}>
-          {broadcastedDate && <div className={styles.broadcastDate}>{broadcastedDate}</div>}
-          <div className={styles.entryName}>{entryName}</div>
-          {description && <div className={styles.entryDescription} dangerouslySetInnerHTML={{__html: sanitizeHtml(description)}} />}
-        </div>
-      </Overlay>
+      <OverlayPortal>
+        <Overlay open onClose={onClick}>
+          <div className={[styles.infoRoot, styles[playerSize]].join(' ')} data-testid="infoRoot">
+            {broadcastedDate && (
+              <div className={styles.broadcastDate} data-testid="broadcastedDate">
+                {broadcastedDate}
+              </div>
+            )}
+            <div className={styles.entryName} data-testid="entryName">
+              {entryName}
+            </div>
+            {description && (
+              <div data-testid="entryDescription" className={styles.entryDescription} dangerouslySetInnerHTML={{__html: sanitizeHtml(description)}} />
+            )}
+          </div>
+        </Overlay>
+      </OverlayPortal>
     );
   }
 }
