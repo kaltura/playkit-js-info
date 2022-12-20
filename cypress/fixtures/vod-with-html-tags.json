@@ -1,0 +1,94 @@
+[
+  {
+    "partnerId": 1091,
+    "ks": "",
+    "userId": 0,
+    "objectType": "KalturaStartWidgetSessionResponse"
+  },
+  {
+    "objects": [
+      {
+        "mediaType": 1,
+        "dataUrl": "https://cdnapisec.kaltura.com/p/27017/sp/2701700/playManifest/entryId/1_vqro0wdl/format/url/protocol/https",
+        "flavorParamsIds": "0,295181,487041,487051,487061,487071,487081,487091,487111,2076221,2215371",
+        "duration": 6,
+        "msDuration": 5805,
+        "id": "1_vqro0wdl",
+        "name": "5s media (Lorem ipsum dolor sit amet, consectetur adipiscing elit)",
+        "description": "<script>alert('JS injection here');</script>line one<br>line two<br>line three<br>Praesent sapien massa, convallis a <u>pellentesque nec, egest</u>as non nisi. Mauris blandit aliquet elit, eget <a target=\"_blank\" rel=\"nofollow noopener noreferrer\" href=\"http://google.com\">tincidunt</a> nibh pulvinar a. <b>Curabitur arcu erat, accumsan </b>id imperdiet et, <span class=\"wysiwyg-color-red\">porttitor</span> at sem.<i> Vestibulum ante ipsum prim</i>is in faucibus;<br><blockquote><ul><li>one</li><li>two</li></ul></blockquote>Last line<br><br>",
+        "tags": "",
+        "status": 2,
+        "type": 1,
+        "thumbnailUrl": "https://cfvod.kaltura.com/p/27017/sp/2701700/thumbnail/entry_id/1_vqro0wdl/version/100061",
+        "objectType": "KalturaMediaEntry"
+      }
+    ],
+    "totalCount": 1,
+    "objectType": "KalturaBaseEntryListResponse"
+  },
+  {
+    "sources": [
+      {
+        "deliveryProfileId": 13942,
+        "format": "applehttp",
+        "protocols": "http,https",
+        "flavorIds": "1_368omyxs,1_dy98xhm3,1_qcxzdxp1,1_kg3sufsr,1_l7h8et8q,1_yz9u6e92,1_lkmz0o1c,1_hawnrb91",
+        "url": "https://cdnapisec.kaltura.com/p/27017/sp/27017/playManifest/entryId/1_vqro0wdl/flavorIds/1_368omyxs,1_dy98xhm3,1_qcxzdxp1,1_kg3sufsr,1_l7h8et8q,1_yz9u6e92,1_lkmz0o1c,1_hawnrb91/deliveryProfileId/13942/protocol/https/format/applehttp/a.m3u8",
+        "drm": [],
+        "objectType": "KalturaPlaybackSource"
+      }
+    ],
+    "playbackCaptions": [],
+    "flavorAssets": [
+      {
+        "flavorParamsId": 2076221,
+        "width": 0,
+        "height": 0,
+        "bitrate": 67,
+        "frameRate": 0,
+        "isOriginal": false,
+        "isWeb": true,
+        "containerFormat": "isom",
+        "status": 2,
+        "language": "English",
+        "isDefault": false,
+        "id": "1_368omyxs",
+        "entryId": "1_vqro0wdl",
+        "partnerId": 27017,
+        "version": "1",
+        "size": 47,
+        "tags": "mobile,web,iphone,iphonenew,audio_only,alt_audio",
+        "fileExt": "mp4",
+        "createdAt": 1670494566,
+        "updatedAt": 1670494579,
+        "description": "audio warnings: 2113#Missing media stream.\n",
+        "sizeInBytes": "48236",
+        "objectType": "KalturaFlavorAsset"
+      }
+    ],
+    "actions": [],
+    "messages": [],
+    "bumperData": [],
+    "objectType": "KalturaPlaybackContext"
+  },
+  {
+    "objects": [
+      {
+        "id": 1970691472,
+        "partnerId": 27017,
+        "metadataProfileId": 7680121,
+        "metadataProfileVersion": 1,
+        "metadataObjectType": 1,
+        "objectId": "1_vqro0wdl",
+        "version": 1,
+        "createdAt": 1670496716,
+        "updatedAt": 1670496716,
+        "status": 1,
+        "xml": "<?xml version=\"1.0\"?>\n<metadata><Key/><Value/><Detail><Key>widgetId</Key><Value>\"1_ygbomfr7\"</Value></Detail></metadata>\n",
+        "objectType": "KalturaMetadata"
+      }
+    ],
+    "totalCount": 1,
+    "objectType": "KalturaMetadataListResponse"
+  }
+]
