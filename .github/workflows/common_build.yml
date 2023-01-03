@@ -2,8 +2,7 @@ name: deploy to QA
 
 on:
   pull_request:
-    types: 
-      - closed,opened
+
   pull_request_review:
     types: 
       - submitted
