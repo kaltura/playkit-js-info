@@ -3,7 +3,7 @@ name: deploy to QA
 on:
   pull_request:
     types: 
-      - closed
+      - closed,opened
   pull_request_review:
     types: 
       - submitted
@@ -23,3 +23,8 @@ jobs:
       pluginPath: playkit-info
       prefix: dev
     secrets: inherit
+   test:
+    if: github.event_name == 'pull_request' && github.event.action == 'opened'
+    uses: kaltura/playkit-js-common/.github/workflows/test.yml@master
+  
+  
