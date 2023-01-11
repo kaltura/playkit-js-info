@@ -33,11 +33,22 @@ yarn install
 
 ### Building
 
-Then, build the player
+Then, build the plugin
 
 ```javascript
 yarn run build
 ```
+
+### Testing
+
+The plugin uses `cypress` tool for e2e tests
+
+```javascript
+yarn run test
+```
+
+UI conf file (`cypress/public/ui-conf.js`) contains Kaltura player and plugin dependencies.
+Keep Kaltura player and dependency versinos aligned to currently released versions.
 
 ### Embed the library in your test page
 

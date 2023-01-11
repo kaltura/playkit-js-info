@@ -3,21 +3,28 @@ import {Info} from './components/info';
 import {PluginButton} from './components/plugin-button';
 import {timeSince} from './utils';
 import {ui} from 'kaltura-player-js';
-const {ReservedPresetNames, ReservedPresetAreas} = ui;
+import {icons} from './components/icons';
+import {UpperBarManager} from '@playkit-js/ui-managers';
+const {ReservedPresetNames} = ui;
 
 export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   private _wasPlayed = false; // keep state of the player so we can resume if needed
   private _removeActiveOverlay: null | Function = null;
-  private _removePluginIcon: null | Function = null;
+  private _iconId = -1;
 
   constructor(name: string, private _player: any) {
     super(name, _player);
   }
 
+  get upperBarManager() {
+    return this.player.getService('upperBarManager') as UpperBarManager | undefined;
+  }
+
   loadMedia(): void {
-    this.logger.debug('Info plugin loaded', {
-      method: 'loadMedia'
-    });
+    if (!this.upperBarManager) {
+      this.logger.warn('upperBarManager service not registered');
+      return;
+    }
     this._addPluginIcon();
   }
 
@@ -79,14 +86,16 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   };
 
   private _addPluginIcon = (): void => {
-    if (this._removePluginIcon) {
+    if (this._iconId > 0) {
       return;
     }
-    this._removePluginIcon = this._player.ui.addComponent({
-      label: 'Info',
-      presets: [ReservedPresetNames.Playback, ReservedPresetNames.Live],
-      area: ReservedPresetAreas.TopBarRightControls,
-      get: () => <PluginButton onClick={this._openInfo} label="Video info" />
+    this.player.ready().then(() => {
+      this._iconId = this.upperBarManager!.add({
+        label: 'Info',
+        component: () => <PluginButton onClick={this._openInfo} label="Video info" />,
+        svgIcon: {path: icons.PLUGIN_ICON, viewBox: `0 0 ${icons.BigSize} ${icons.BigSize}`},
+        onClick: this._openInfo
+      }) as number;
     });
   };
 
@@ -96,8 +105,9 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
 
   destroy(): void {
     this._removeOverlay();
-    if (this._removePluginIcon) {
-      this._removePluginIcon();
+    if (this._iconId > 0) {
+      this.upperBarManager!.remove(this._iconId);
+      this._iconId = -1;
     }
   }
 }
