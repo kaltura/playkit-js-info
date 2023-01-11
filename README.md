@@ -1,5 +1,10 @@
 # PlayKit JS Info - plugin for the [PlayKit JS Player]
 
+[![Build Status](https://travis-ci.com/kaltura/playkit-js-avplay.svg?branch=master)](https://travis-ci.org/kaltura/playkit-js-info)
+[![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?style=flat-square)](https://github.com/prettier/prettier)
+[![](https://img.shields.io/npm/v/@playkit-js/info/latest.svg)](https://www.npmjs.com/package/@playkit-js/info)
+[![](https://img.shields.io/npm/v/@playkit-js/info/canary.svg)](https://www.npmjs.com/package/@playkit-js/info/v/canary)
+
 PlayKit JS Info is written in [ECMAScript6], statically analysed using [Typescript] and transpiled in ECMAScript5 using [Babel].
 
 [typescript]: https://www.typescriptlang.org/
@@ -61,7 +66,7 @@ Finally, add the bundle as a script tag in your page, and initialize the player
      ...
      targetId: 'player-placeholder',
      plugins: {
-       'playkit-js-info': { ... }
+       "playkit-js-info": {}
      }
      ...
     };
@@ -70,6 +75,50 @@ Finally, add the bundle as a script tag in your page, and initialize the player
   </script>
 </div>
 ```
+
+## Documentation
+
+The info plugin purpose is to expose visual view of the entry information which is currently used by the player instead of digginf in the logs.
+
+When the plugin is included on the player an info icon will be displayed and if user clicks on an overlay will be opened with the following data 
+ 
+ * Entry Name
+ * Entry Description          
+ * Broadcasted Date - For webcast entries
+
+
+### Configuration
+
+
+In order to enable the plugin it should be mentioned in the plugins section on the uiconf or on player setup code. no special config required exept this.
+
+#### Config Example
+
+```
+plugins: {
+       "playkit-js-info": {}
+}
+```
+
+#### UI Examples
+
+![example](./images/infoIcon.png)
+
+![example](./images/infoScreen.png)
+
+
+### Example:
+
+**[Info Plugin Example](https://codepen.io/giladna/pen/wvXBwwP)**
+
+
+### Coding style tests
+
+We use ESLint [recommended set](http://eslint.org/docs/rules/) with some additions for enforcing [Flow] types and other rules.
+
+See [ESLint config](.eslintrc.json) for full configuration.
+
+We also use [.editorconfig](.editorconfig) to maintain consistent coding styles and settings, please make sure you comply with the styling.
 
 ## Contributing
 
@@ -81,4 +130,4 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## License
 
-This project is licensed under the AGPL-3.0 License - see the [LICENSE.md](LICENSE.md) file for details
+This project is licensed under the AGPL-3.0 License - see the [LICENSE](LICENSE) file for details
