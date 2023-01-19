@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com/kaltura/playkit-js-info/compare/v3.1.2...v3.2.0) (2023-01-19)
+
+
+### Features
+
+* **FEV-1567:** migrate style of plugin info ([#37](https://github.com/kaltura/playkit-js-info/issues/37)) ([d38b71f](https://github.com/kaltura/playkit-js-info/commit/d38b71fdef032c8ef683e82e68febb03155efef9))
+
+
+### Bug Fixes
+
+* **FEV-604:** no rows separation when using the Enter key in the description ([#41](https://github.com/kaltura/playkit-js-info/issues/41)) ([2e1cb6d](https://github.com/kaltura/playkit-js-info/commit/2e1cb6dc95c3fd1af112efbceb89ba5b5e16e4ff))
+
 ### [3.1.2](https://github.com/kaltura/playkit-js-info/compare/v3.1.1...v3.1.2) (2022-12-12)
 
 ### [3.1.1](https://github.com/kaltura/playkit-js-info/compare/v3.1.0...v3.1.1) (2022-12-12)
