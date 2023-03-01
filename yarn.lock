@@ -130,10 +130,10 @@
   resolved "https://registry.yarnpkg.com/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz#b2ac626d6cb9c8718ab459166d4bb405b8ffa78b"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@playkit-js/common@^1.1.1":
-  version "1.1.1"
-  resolved "https://registry.yarnpkg.com/@playkit-js/common/-/common-1.1.1.tgz#b0c21e96794dd66622c1bbcfdf0373aad2b9f5dc"
-  integrity sha512-75l2CogQtpLggXp/FxjNsPbV+FKZ1MxhhLJolBwJYsKV/tyd61aKcbU81EzcyyVefkxYEcLdt2YrkFW64isTKw==
+"@playkit-js/common@^1.1.2":
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/@playkit-js/common/-/common-1.1.2.tgz#35e86126d87f9006795033bce7e3d9a1b885b61f"
+  integrity sha512-N/mcYl9sKpdRs56lUwNxdRZZtljQE35+K8XeY15d7Vcalnh5tWgcY4zqTYAqT3mz4wL1hY15fHe5rYuDF0WH1A==
   dependencies:
     "@playkit-js/playkit-js-ui" "^0.74.0"
     linkify-it "^4.0.1"
@@ -1561,10 +1561,10 @@ cyclist@^1.0.1:
   resolved "https://registry.yarnpkg.com/cyclist/-/cyclist-1.0.1.tgz#596e9698fd0c80e12038c2b82d6eb1b35b6224d9"
   integrity sha512-NJGVKPS81XejHcLhaLJS7plab0fK3slPh11mESeeDq2W4ZI5kUKK/LRRdVDvjJseojbPB7ZwjnyOybg3Igea/A==
 
-cypress@^12.0.1:
-  version "12.0.1"
-  resolved "https://registry.yarnpkg.com/cypress/-/cypress-12.0.1.tgz#3a51a38b2f162256c7226e68e902cfe1750e3d92"
-  integrity sha512-I1Ag5RsPEINfUlQtV6xwkd6ktJuu5QGiKZ3pFa/IXjcyCY6I7CH3gOz0juLOhg/LXOPrQtZH35ulcWDQohyyEA==
+cypress@^12.7.0:
+  version "12.7.0"
+  resolved "https://registry.yarnpkg.com/cypress/-/cypress-12.7.0.tgz#69900f82af76cf3ba0ddb9b59ec3b0d38222ab22"
+  integrity sha512-7rq+nmhzz0u6yabCFyPtADU2OOrYt6pvUau9qV7xyifJ/hnsaw/vkr0tnLlcuuQKUAOC1v1M1e4Z0zG7S0IAvA==
   dependencies:
     "@cypress/request" "^2.88.10"
     "@cypress/xvfb" "^1.2.4"
@@ -1583,7 +1583,7 @@ cypress@^12.0.1:
     commander "^5.1.0"
     common-tags "^1.8.0"
     dayjs "^1.10.4"
-    debug "^4.3.2"
+    debug "^4.3.4"
     enquirer "^2.3.6"
     eventemitter2 "6.4.7"
     execa "4.1.0"
@@ -1652,7 +1652,7 @@ debug@^3.1.0:
   dependencies:
     ms "^2.1.1"
 
-debug@^4.1.0, debug@^4.1.1, debug@^4.3.2:
+debug@^4.1.0, debug@^4.1.1, debug@^4.3.4:
   version "4.3.4"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.4.tgz#1319f6579357f2338d3337d2cdd4914bb5dcc865"
   integrity sha512-PRWFHuSU3eDtQJPvnNY7Jcket1j0t5OuOsFzPPzsekD52Zl8qUfFIPEiswXqIvHWGVHOgX+7G/vCNNhehwxfkQ==
@@ -3887,6 +3887,18 @@ pkg-dir@^4.2.0:
 "playkit-js-providers@https://github.com/kaltura/playkit-js-providers.git#v2.35.1":
   version "2.35.1"
   resolved "https://github.com/kaltura/playkit-js-providers.git#6e6d586c5c4695cdaab8f2b9fe16c9a36477e1f3"
+
+playwright-core@1.31.1:
+  version "1.31.1"
+  resolved "https://registry.yarnpkg.com/playwright-core/-/playwright-core-1.31.1.tgz#4deeebbb8fb73b512593fe24bea206d8fd85ff7f"
+  integrity sha512-JTyX4kV3/LXsvpHkLzL2I36aCdml4zeE35x+G5aPc4bkLsiRiQshU5lWeVpHFAuC8xAcbI6FDcw/8z3q2xtJSQ==
+
+playwright-webkit@^1.31.1:
+  version "1.31.1"
+  resolved "https://registry.yarnpkg.com/playwright-webkit/-/playwright-webkit-1.31.1.tgz#7d9b50862976e5d751bc82b3046deb276bb3de9e"
+  integrity sha512-0ptdrYwIzZNk+7rNc38tYz2CEeniSnyW7JOzKYj5Qrpo/MTLMviVzubmwKHUXu071p+1oo1ihb5VDH7KssDEuA==
+  dependencies:
+    playwright-core "1.31.1"
 
 postcss-modules-extract-imports@^3.0.0:
   version "3.0.0"
