@@ -1,7 +1,7 @@
 import {h, Component} from 'preact';
 import * as styles from './info.scss';
 import * as sanitizeHtml from 'sanitize-html';
-import {OverlayPortal} from '@playkit-js/common';
+import {OverlayPortal} from '@playkit-js/common/dist/hoc/overlay-portal';
 const {
   components: {PLAYER_SIZE},
   redux: {connect}
