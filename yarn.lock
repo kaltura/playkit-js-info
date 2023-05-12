@@ -148,7 +148,7 @@
     classnames "^2.3.2"
     linkify-it "^4.0.1"
 
-"@playkit-js/kaltura-player-js@^3.14.3-canary.0-4128316":
+"@playkit-js/kaltura-player-js@canary":
   version "3.14.3-canary.0-4128316"
   resolved "https://registry.yarnpkg.com/@playkit-js/kaltura-player-js/-/kaltura-player-js-3.14.3-canary.0-4128316.tgz#0b0d07e9f06e92391afd84d5ac7219d476278299"
   integrity sha512-QV4v6cOKsc+qUEIdTV4zJGHGRgkL9kr9YIhNJgWLCZvhEq5pw09kZ6gktp+QV7dEQ3YfknatTJOsMeVW3tmVpQ==
