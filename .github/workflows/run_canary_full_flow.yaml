@@ -25,4 +25,8 @@ jobs:
       stage: "canary"
       schema-type: "playerV3OvpVersions"
       node-version: "18.x"
-      tests-yarn-run-to-execute: 'test'
+      tests-yarn-run-to-execute: ''
+
+  test:
+    uses: kaltura/playkit-js-common/.github/workflows/cypress.yml@master
+    secrets: inherit  
