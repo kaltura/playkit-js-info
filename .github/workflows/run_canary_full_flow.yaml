@@ -8,6 +8,10 @@ on:
       - devops-deployment
 
 jobs:
+   test:
+    uses: kaltura/playkit-js-common/.github/workflows/cypress.yml@master
+    secrets: inherit    
+
   canary-full-flow:
     if: ${{ github.actor != 'PlaykitJs-Bot' }}
     uses: kaltura/ovp-pipelines-pub/.github/workflows/player_cicd.yaml@master
@@ -25,8 +29,5 @@ jobs:
       stage: "canary"
       schema-type: "playerV3OvpVersions"
       node-version: "18.x"
-      tests-yarn-run-to-execute: ''
+      tests-yarn-run-to-execute: 'build'
 
-  test:
-    uses: kaltura/playkit-js-common/.github/workflows/cypress.yml@master
-    secrets: inherit  
