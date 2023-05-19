@@ -8,7 +8,7 @@ on:
       - devops-deployment
 
 jobs:
-   test:
+  test:
     uses: kaltura/playkit-js-common/.github/workflows/cypress.yml@master
     secrets: inherit    
 
