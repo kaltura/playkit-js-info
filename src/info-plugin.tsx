@@ -2,11 +2,12 @@ import {h} from 'preact';
 import {Info} from './components/info';
 import {PluginButton} from './components/plugin-button';
 import {timeSince} from './utils';
-import {ui} from 'kaltura-player-js';
+import {ui} from '@playkit-js/kaltura-player-js';
 import {icons} from './components/icons';
 import {UpperBarManager} from '@playkit-js/ui-managers';
 const {ReservedPresetNames} = ui;
 
+// @ts-ignore
 export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   private _wasPlayed = false; // keep state of the player so we can resume if needed
   private _removeActiveOverlay: null | Function = null;
