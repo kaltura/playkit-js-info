@@ -93,7 +93,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     this.player.ready().then(() => {
       this._iconId = this.upperBarManager!.add({
         label: 'Info',
-        component: () => <PluginButton onClick={this._openInfo} label="Video info" />,
+        component: () => <PluginButton label="Video info" />,
         svgIcon: {path: icons.PLUGIN_ICON, viewBox: `0 0 ${icons.BigSize} ${icons.BigSize}`},
         onClick: this._openInfo
       }) as number;
