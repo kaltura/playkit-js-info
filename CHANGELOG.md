@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 3.2.6 (2023-06-27)
+
+
+### Bug Fixes
+
+* **FEC-13214:** Top Bar Dropdown menu are not auto closed when display bar icons clicked ([#55](https://github.com/kaltura/playkit-js-info/issues/55)) ([38901fb](https://github.com/kaltura/playkit-js-info/commit/38901fb8e53b96da6c94fefb11be66a19d15da4e)), closes [kaltura/playkit-js-ui-managers#40](https://github.com/kaltura/playkit-js-ui-managers/issues/40)
+
 ### 3.2.5 (2023-06-07)
 
 
