@@ -6,6 +6,7 @@ import {ui} from '@playkit-js/kaltura-player-js';
 import {icons} from './components/icons';
 import {UpperBarManager} from '@playkit-js/ui-managers';
 const {ReservedPresetNames} = ui;
+const {Text} = ui.preacti18n;
 
 // @ts-ignore
 export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
@@ -92,7 +93,8 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     }
     this.player.ready().then(() => {
       this._iconId = this.upperBarManager!.add({
-        label: 'Info',
+        //@ts-ignore
+        label: <Text id="info.info">Info</Text>,
         component: () => <PluginButton label="Video info" />,
         svgIcon: {path: icons.PLUGIN_ICON, viewBox: `0 0 ${icons.BigSize} ${icons.BigSize}`},
         onClick: this._openInfo
