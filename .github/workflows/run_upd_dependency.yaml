@@ -20,14 +20,12 @@ jobs:
 
       - name: Check updates Kaltura dependencies
         run: |
-          # Read the current package.json content
-          CURRENT_CONTENT=$(cat package.json)
-
           # Check and update a dependency
           checkAndUpdateDependency() {
             local dependencyName="$1"
             local packageName="$2"
-            local currentVersion=$(echo "$CURRENT_CONTENT" | jq -r ".kaltura.dependencies.\"$dependencyName\"")
+            local currentContent=$(cat package.json)
+            local currentVersion=$(echo "$currentContent" | jq -r ".kaltura.dependencies.\"$dependencyName\"")
 
             # Check if the dependency exists in package.json
             if [[ -n "$currentVersion" ]]; then
@@ -37,7 +35,7 @@ jobs:
               # Update the package.json file only if the version has changed
               if [[ "$currentVersion" != "$latestVersion" ]]; then
                 echo ">> update $dependencyName to version $latestVersion"
-                UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq ".kaltura.dependencies.\"$dependencyName\" = \"$latestVersion\"")
+                UPDATED_CONTENT=$(echo "$currentContent" | jq ".kaltura.dependencies.\"$dependencyName\" = \"$latestVersion\"")
                 echo "$UPDATED_CONTENT" > package.json
                 echo "COMMIT_REQUIRED=true" >> $GITHUB_ENV
               fi
@@ -55,8 +53,10 @@ jobs:
           # Check and update playkit-ui-managers dependency
           checkAndUpdateDependency "playkit-ui-managers" "@playkit-js/ui-managers"
 
-          # Print the updated package.json content
-          cat package.json
+          if [[ env.COMMIT_REQUIRED == 'true' ]]; then
+            # Print the updated package.json content
+            echo $(cat package.json) | jq -r ".kaltura.dependencies"
+          fi
 
       - name: Commit changes
         if: env.COMMIT_REQUIRED == 'true'
