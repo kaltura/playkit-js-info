@@ -20,7 +20,7 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: Get latest version
+      - name: Update Kaltura dependencies
         run: |
           # Install jq for JSON processing
           sudo apt-get -y install jq
@@ -28,18 +28,26 @@ jobs:
           # Get the latest version of the package using npm
           LATEST_VERSION=$(npm view @playkit-js/ui-managers version)
 
-          # Update the package.json file with the latest version
-          jq --arg latestVersion "$LATEST_VERSION" '.kaltura.dependencies."playkit-ui-managers" = $latestVersion' package.json > package.json.tmp
-          mv package.json.tmp package.json
+          # Read the current package.json content
+          CURRENT_CONTENT=$(cat package.json)
+          
+          # Update the package.json file only if the version has changed
+          UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq --arg latestVersion "$LATEST_VERSION" 'if .kaltura.dependencies."playkit-ui-managers" != $latestVersion then .kaltura.dependencies."playkit-ui-managers" = $latestVersion else . end')
+          
+          # Write the updated content to package.json.tmp
+          echo "$UPDATED_CONTENT" > package.json.tmp
+          
+          # Compare the updated content with the current content
+          cmp -s package.json package.json.tmp || mv package.json.tmp package.json
 
           # Print the updated package.json content
           cat package.json
 
-      - name: Commit and create PR
-        # if: ${{ steps.vars.outputs.outdated != '' }}
-        uses: peter-evans/create-pull-request@v3
-        with:
-          title: 'build(deps): Upgrade NPM packages (automated)'
-          delete-branch: true
-          branch: 'upgrade-npm-packages-automated'
-          commit-message: 'build(deps): upgrade NPM packages (automated)'
+      # - name: Commit and create PR
+      #   # if: ${{ steps.vars.outputs.outdated != '' }}
+      #   uses: peter-evans/create-pull-request@v3
+      #   with:
+      #     title: 'build(deps): Upgrade NPM packages (automated)'
+      #     delete-branch: true
+      #     branch: 'upgrade-npm-packages-automated'
+      #     commit-message: 'build(deps): upgrade NPM packages (automated)'
