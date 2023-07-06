@@ -27,8 +27,6 @@ jobs:
             local currentContent=$(cat package.json)
             local currentVersion=$(echo "$currentContent" | jq -r ".kaltura.dependencies.\"$dependencyName\"")
 
-            echo ">> $dependencyName current version: $currentVersion"
-
             # Check if the dependency exists in package.json
             if [[ "$currentVersion" != "null" ]]; then
               # Get the latest version of the package using npm
@@ -57,13 +55,11 @@ jobs:
           # Check and update playkit-ui-managers dependency
           checkAndUpdateDependency "playkit-ui-managers" "@playkit-js/ui-managers"
 
-          cat package.json
-
-      # - name: Commit changes
-      #   if: env.COMMIT_REQUIRED == 'true'
-      #   uses: peter-evans/create-pull-request@v5
-      #   with:
-      #     title: 'build(deps): Upgrade Kaltura dependencies (automated)'
-      #     delete-branch: true
-      #     branch: 'upgrade-npm-packages-automated'
-      #     commit-message: 'build(deps): Upgrade Kaltura dependencies (automated)'
+      - name: Commit changes
+        if: env.COMMIT_REQUIRED == 'true'
+        uses: peter-evans/create-pull-request@v5
+        with:
+          title: 'build(deps): Upgrade Kaltura dependencies (automated)'
+          delete-branch: true
+          branch: 'upgrade-npm-packages-automated'
+          commit-message: 'build(deps): Upgrade Kaltura dependencies (automated)'
