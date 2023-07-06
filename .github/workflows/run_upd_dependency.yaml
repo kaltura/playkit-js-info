@@ -15,25 +15,14 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v2
-        with:
-          node-version: '16.x'
-
       - name: Install jq for JSON processing
-        run: |
-          # Install jq for JSON processing
-          sudo apt-get -y install jq
+        run: sudo apt-get -y install jq
 
-      - name: Get latest version of dependencies
-        id: get-latest-version
+      - name: Check updates for playkit-ui-managers
         run: |
           # Get the latest version of the package using npm
-          echo "LATEST_VERSION=$(npm view @playkit-js/ui-managers version)" >> $GITHUB_ENV
+          LATEST_VERSION=$(npm view @playkit-js/ui-managers version)
 
-      - name: Update package.json
-        id: update-package-json
-        run: |
           # Read the current package.json content
           CURRENT_CONTENT=$(cat package.json)
 
