@@ -1,7 +1,11 @@
 name: Upgrade NPM packages
 
+# on:
+#   workflow_dispatch:
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - "FEC-13041-upd-dependency-script"
 
 jobs:
   upgrade-packages:
@@ -19,7 +23,7 @@ jobs:
           node-version: '16.x'
 
       - name: Upgrade packages 🔀
-        run: npm update
+        run: yarn add @playkit-js/common
 
       - name: Commit and create PR 🔀
         uses: peter-evans/create-pull-request@v3
