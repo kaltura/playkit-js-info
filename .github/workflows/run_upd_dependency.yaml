@@ -55,12 +55,6 @@ jobs:
           # Check and update playkit-ui-managers dependency
           checkAndUpdateDependency "playkit-ui-managers" "@playkit-js/ui-managers"
 
-          if [[ env.COMMIT_REQUIRED == 'true' ]]; then
-            echo ">>> "
-            json=$(cat package.json)
-            echo "$json" | jq -r ".kaltura.dependencies"
-          fi
-
       - name: Commit changes
         if: env.COMMIT_REQUIRED == 'true'
         uses: peter-evans/create-pull-request@v5
