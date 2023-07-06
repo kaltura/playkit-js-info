@@ -29,7 +29,7 @@ jobs:
         id: get-latest-version
         run: |
           # Get the latest version of the package using npm
-          echo "::set-output name=latestVersion::$(npm view @playkit-js/ui-managers version)"
+          echo "LATEST_VERSION=$(npm view @playkit-js/ui-managers version)" >> $GITHUB_ENV
 
       - name: Update package.json
         id: update-package-json
@@ -38,7 +38,7 @@ jobs:
           CURRENT_CONTENT=$(cat package.json)
 
           # Update the package.json file only if the version has changed
-          UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq --arg latestVersion "${{ steps.get-latest-version.outputs.latestVersion }}" 'if .kaltura.dependencies."playkit-ui-managers" != $latestVersion then .kaltura.dependencies."playkit-ui-managers" = $latestVersion else . end')
+          UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq --arg latestVersion "$LATEST_VERSION" 'if .kaltura.dependencies."playkit-ui-managers" != $latestVersion then .kaltura.dependencies."playkit-ui-managers" 
 
           # Write the updated content to package.json.tmp
           echo "$UPDATED_CONTENT" > package.json.tmp
@@ -46,17 +46,17 @@ jobs:
           # Compare the updated content with the current content
           if ! cmp -s package.json package.json.tmp; then
             mv package.json.tmp package.json
-            echo "::set-output name=commitRequired::true"
+            echo "COMMIT_REQUIRED=true" >> $GITHUB_ENV
           else
             rm package.json.tmp
-            echo "::set-output name=commitRequired::false"
+            echo "COMMIT_REQUIRED=false" >> $GITHUB_ENV
           fi
 
           # Print the updated package.json content
           cat package.json
 
       - name: Commit changes
-        if: steps.update-package-json.outputs.commitRequired == 'true'
+        if: env.COMMIT_REQUIRED == 'true'
         uses: peter-evans/create-pull-request@v3
         with:
           title: 'build(deps): Upgrade NPM packages (automated)'
