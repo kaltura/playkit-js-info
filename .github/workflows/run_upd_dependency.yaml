@@ -28,14 +28,18 @@ jobs:
             local dependencyName="$1"
             local packageName="$2"
             local currentVersion=$(echo "$CURRENT_CONTENT" | jq -r ".kaltura.dependencies.\"$dependencyName\"")
-            
+            echo ">>> $dependencyName, $packageName"
+            echo ">>> $currentVersion"
+
             # Check if the dependency exists in package.json
             if [[ -n "$currentVersion" ]]; then
               # Get the latest version of the package using npm
-              local latestVersion=$(npm show "$packageName" version)
+              local latestVersion=$(npm view "$packageName" version)
+              echo ">>> $latestVersion"
               
               # Update the package.json file only if the version has changed
               if [[ "$currentVersion" != "$latestVersion" ]]; then
+                echo ">> update"
                 UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq ".kaltura.dependencies.\"$dependencyName\" = \"$latestVersion\"")
                 echo "$UPDATED_CONTENT" > package.json.tmp
                 mv package.json.tmp package.json
@@ -60,7 +64,7 @@ jobs:
 
       - name: Commit changes
         if: env.COMMIT_REQUIRED == 'true'
-        uses: peter-evans/create-pull-request@v3
+        uses: peter-evans/create-pull-request@v5
         with:
           title: 'build(deps): Upgrade NPM packages (automated)'
           delete-branch: true
