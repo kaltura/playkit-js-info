@@ -20,34 +20,46 @@ jobs:
         with:
           node-version: '16.x'
 
-      - name: Update Kaltura dependencies
+      - name: Install jq for JSON processing
         run: |
           # Install jq for JSON processing
           sudo apt-get -y install jq
 
+      - name: Get latest version of dependencies
+        id: get-latest-version
+        run: |
           # Get the latest version of the package using npm
-          LATEST_VERSION=$(npm view @playkit-js/ui-managers version)
+          echo "::set-output name=latestVersion::$(npm view @playkit-js/ui-managers version)"
 
+      - name: Update package.json
+        id: update-package-json
+        run: |
           # Read the current package.json content
           CURRENT_CONTENT=$(cat package.json)
-          
+
           # Update the package.json file only if the version has changed
-          UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq --arg latestVersion "$LATEST_VERSION" 'if .kaltura.dependencies."playkit-ui-managers" != $latestVersion then .kaltura.dependencies."playkit-ui-managers" = $latestVersion else . end')
-          
+          UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq --arg latestVersion "${{ steps.get-latest-version.outputs.latestVersion }}" 'if .kaltura.dependencies."playkit-ui-managers" != $latestVersion then .kaltura.dependencies."playkit-ui-managers" = $latestVersion else . end')
+
           # Write the updated content to package.json.tmp
           echo "$UPDATED_CONTENT" > package.json.tmp
-          
+
           # Compare the updated content with the current content
-          cmp -s package.json package.json.tmp || mv package.json.tmp package.json
+          if ! cmp -s package.json package.json.tmp; then
+            mv package.json.tmp package.json
+            echo "::set-output name=commitRequired::true"
+          else
+            rm package.json.tmp
+            echo "::set-output name=commitRequired::false"
+          fi
 
           # Print the updated package.json content
           cat package.json
 
-      # - name: Commit and create PR
-      #   # if: ${{ steps.vars.outputs.outdated != '' }}
-      #   uses: peter-evans/create-pull-request@v3
-      #   with:
-      #     title: 'build(deps): Upgrade NPM packages (automated)'
-      #     delete-branch: true
-      #     branch: 'upgrade-npm-packages-automated'
-      #     commit-message: 'build(deps): upgrade NPM packages (automated)'
+      - name: Commit changes
+        if: steps.update-package-json.outputs.commitRequired == 'true'
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: 'build(deps): Upgrade NPM packages (automated)'
+          delete-branch: true
+          branch: 'upgrade-npm-packages-automated'
+          commit-message: 'build(deps): upgrade NPM packages (automated)'
