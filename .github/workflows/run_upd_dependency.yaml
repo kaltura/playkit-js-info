@@ -38,7 +38,7 @@ jobs:
           CURRENT_CONTENT=$(cat package.json)
 
           # Update the package.json file only if the version has changed
-          UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq --arg latestVersion "$LATEST_VERSION" 'if .kaltura.dependencies."playkit-ui-managers" != $latestVersion then .kaltura.dependencies."playkit-ui-managers" 
+          UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq --arg latestVersion "$LATEST_VERSION" 'if .kaltura.dependencies."playkit-ui-managers" != $latestVersion then .kaltura.dependencies."playkit-ui-managers" = $latestVersion else . end')
 
           # Write the updated content to package.json.tmp
           echo "$UPDATED_CONTENT" > package.json.tmp
