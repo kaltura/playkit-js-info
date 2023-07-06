@@ -34,10 +34,12 @@ jobs:
               
               # Update the package.json file only if the version has changed
               if [[ "$currentVersion" != "$latestVersion" ]]; then
-                echo ">> update $dependencyName to version $latestVersion"
+                echo "update $dependencyName to version $latestVersion"
                 UPDATED_CONTENT=$(echo "$currentContent" | jq ".kaltura.dependencies.\"$dependencyName\" = \"$latestVersion\"")
                 echo "$UPDATED_CONTENT" > package.json
                 echo "COMMIT_REQUIRED=true" >> $GITHUB_ENV
+              else
+                echo "Dependency $dependencyName already has latest version: $latestVersion"
               fi
             else
               echo "No $dependencyName dependency found in package.json"
@@ -54,8 +56,9 @@ jobs:
           checkAndUpdateDependency "playkit-ui-managers" "@playkit-js/ui-managers"
 
           if [[ env.COMMIT_REQUIRED == 'true' ]]; then
-            # Print the updated package.json content
-            echo $(cat package.json) | jq -r ".kaltura.dependencies"
+            echo ">>> "
+            json=$(cat package.json)
+            echo "$json" | jq -r ".kaltura.dependencies"
           fi
 
       - name: Commit changes
