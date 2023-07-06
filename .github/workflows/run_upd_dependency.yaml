@@ -1,29 +1,45 @@
 name: Upgrade NPM packages
 
+# on:
+#   workflow_dispatch:
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - 'FEC-13041-upd-dependency-script'
 
 jobs:
-  upgrade-packages:
-    name: Upgrade packages
-
+  update_package_json:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js ⚙️
+      - name: Set up Node.js
         uses: actions/setup-node@v2
         with:
           node-version: '16.x'
 
-      - name: Upgrade packages 🔀
-        run: npm update
+      - name: Get latest version
+        run: |
+          # Install jq for JSON processing
+          sudo apt-get -y install jq
 
-      - name: Commit and create PR 🔀
+          # Get the latest version of the package using npm
+          LATEST_VERSION=$(npm view @playkit-js/ui-managers version)
+
+          # Update the package.json file with the latest version
+          jq --arg latestVersion "$LATEST_VERSION" '.kaltura.dependencies."playkit-ui-managers" = $latestVersion' package.json > package.json.tmp
+          mv package.json.tmp package.json
+
+          # Print the updated package.json content
+          cat package.json
+
+      - name: Commit and create PR
+        # if: ${{ steps.vars.outputs.outdated != '' }}
         uses: peter-evans/create-pull-request@v3
         with:
           title: 'build(deps): Upgrade NPM packages (automated)'
-          branch: 'build-deps-upgrade-npm-packages-automated'
+          delete-branch: true
+          branch: 'upgrade-npm-packages-automated'
           commit-message: 'build(deps): upgrade NPM packages (automated)'
