@@ -20,6 +20,12 @@ jobs:
 
       - name: Check updates for playkit-ui-managers
         run: |
+          # Check if package.json has playkit-ui-managers dependency
+          if ! jq -e '.kaltura.dependencies."playkit-ui-managers"' package.json >/dev/null 2>&1; then
+            echo "No playkit-ui-managers dependency found in package.json"
+            exit 0
+          fi
+
           # Get the latest version of the package using npm
           LATEST_VERSION=$(npm view @playkit-js/ui-managers version)
 
