@@ -1,11 +1,7 @@
 name: Upgrade NPM packages
 
-# on:
-#   workflow_dispatch:
 on:
-  push:
-    branches:
-      - 'FEC-13041-upd-dependency-script'
+  workflow_dispatch:
 
 jobs:
   update_package_json:
