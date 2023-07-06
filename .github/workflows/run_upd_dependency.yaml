@@ -28,21 +28,17 @@ jobs:
             local dependencyName="$1"
             local packageName="$2"
             local currentVersion=$(echo "$CURRENT_CONTENT" | jq -r ".kaltura.dependencies.\"$dependencyName\"")
-            echo ">>> $dependencyName, $packageName"
-            echo ">>> $currentVersion"
 
             # Check if the dependency exists in package.json
             if [[ -n "$currentVersion" ]]; then
               # Get the latest version of the package using npm
               local latestVersion=$(npm view "$packageName" version)
-              echo ">>> $latestVersion"
               
               # Update the package.json file only if the version has changed
               if [[ "$currentVersion" != "$latestVersion" ]]; then
-                echo ">> update"
+                echo ">> update $dependencyName to version $latestVersion"
                 UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq ".kaltura.dependencies.\"$dependencyName\" = \"$latestVersion\"")
-                echo "$UPDATED_CONTENT" > package.json.tmp
-                mv package.json.tmp package.json
+                echo "$UPDATED_CONTENT" > package.json
                 echo "COMMIT_REQUIRED=true" >> $GITHUB_ENV
               fi
             else
