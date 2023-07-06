@@ -30,7 +30,7 @@ jobs:
             echo ">> $dependencyName current version: $currentVersion"
 
             # Check if the dependency exists in package.json
-            if [[ -n "$currentVersion" ]]; then
+            if [[ "$currentVersion" != "null" ]]; then
               # Get the latest version of the package using npm
               local latestVersion=$(npm view "$packageName" version)
               
