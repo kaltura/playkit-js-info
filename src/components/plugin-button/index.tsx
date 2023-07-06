@@ -3,14 +3,15 @@ import {icons} from '../icons';
 import {ui} from '@playkit-js/kaltura-player-js';
 
 const {Tooltip, Icon} = KalturaPlayer.ui.components;
-
+const {Text} = ui.preacti18n;
 interface PluginButtonProps {
   label?: string;
 }
 
 export const PluginButton = ({label}: PluginButtonProps) => {
-  return (
-    <Tooltip label={label} type="bottom">
+    const infoTxt =  <Text id="controls.info">Video info</Text>;
+    return (
+    <Tooltip label={infoTxt} type="bottom">
         <button aria-label={label} className={ui.style.upperBarIcon} data-testid="infoPluginButton">
           <Icon
             id="info-plugin-button"
@@ -21,5 +22,5 @@ export const PluginButton = ({label}: PluginButtonProps) => {
           />
         </button>
     </Tooltip>
-  );
+    );
 };
