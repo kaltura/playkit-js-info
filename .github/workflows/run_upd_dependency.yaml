@@ -18,33 +18,51 @@ jobs:
       - name: Install jq for JSON processing
         run: sudo apt-get -y install jq
 
-      - name: Check updates for playkit-ui-managers
+      - name: Check updates Kaltura dependencies
         run: |
-          # Check if package.json has playkit-ui-managers dependency
-          if ! jq -e '.kaltura.dependencies."playkit-ui-managers"' package.json >/dev/null 2>&1; then
-            echo "No playkit-ui-managers dependency found in package.json"
-            exit 0
-          fi
-
-          # Get the latest version of the package using npm
-          LATEST_VERSION=$(npm view @playkit-js/ui-managers version)
-
           # Read the current package.json content
           CURRENT_CONTENT=$(cat package.json)
 
-          # Update the package.json file only if the version has changed
-          UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq --arg latestVersion "$LATEST_VERSION" 'if .kaltura.dependencies."playkit-ui-managers" != $latestVersion then .kaltura.dependencies."playkit-ui-managers" = $latestVersion else . end')
+          # Check if package.json has playkit-kaltura-cuepoints dependency
+          if echo "$CURRENT_CONTENT" | jq -e '.kaltura.dependencies."playkit-kaltura-cuepoints"' >/dev/null 2>&1; then
+            # Get the latest version of the package using npm
+            PLAYKIT_KALTURA_CUEPOINTS_VERSION=$(npm view @playkit-js/playkit-js-kaltura-cuepoints version)
 
-          # Write the updated content to package.json.tmp
-          echo "$UPDATED_CONTENT" > package.json.tmp
+            # Update the package.json file only if the version has changed
+            if [[ $(echo "$CURRENT_CONTENT" | jq -r '.kaltura.dependencies."playkit-kaltura-cuepoints"') != "$PLAYKIT_KALTURA_CUEPOINTS_VERSION" ]]; then
+              UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq '.kaltura.dependencies."playkit-kaltura-cuepoints" = "'"$PLAYKIT_KALTURA_CUEPOINTS_VERSION"'"')
+              echo "$UPDATED_CONTENT" > package.json.tmp
+              mv package.json.tmp package.json
+              echo "COMMIT_REQUIRED=true" >> $GITHUB_ENV
+            fi
+          fi
 
-          # Compare the updated content with the current content
-          if ! cmp -s package.json package.json.tmp; then
-            mv package.json.tmp package.json
-            echo "COMMIT_REQUIRED=true" >> $GITHUB_ENV
-          else
-            rm package.json.tmp
-            echo "COMMIT_REQUIRED=false" >> $GITHUB_ENV
+          # Check if package.json has playkit-timeline dependency
+          if echo "$CURRENT_CONTENT" | jq -e '.kaltura.dependencies."playkit-timeline"' >/dev/null 2>&1; then
+            # Get the latest version of the package using npm
+            PLAYKIT_TIMELINE_VERSION=$(npm view @playkit-js/playkit-js-timeline version)
+
+            # Update the package.json file only if the version has changed
+            if [[ $(echo "$CURRENT_CONTENT" | jq -r '.kaltura.dependencies."playkit-timeline"') != "$PLAYKIT_TIMELINE_VERSION" ]]; then
+              UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq '.kaltura.dependencies."playkit-timeline" = "'"$PLAYKIT_TIMELINE_VERSION"'"')
+              echo "$UPDATED_CONTENT" > package.json.tmp
+              mv package.json.tmp package.json
+              echo "COMMIT_REQUIRED=true" >> $GITHUB_ENV
+            fi
+          fi
+
+          # Check if package.json has playkit-ui-managers dependency
+          if echo "$CURRENT_CONTENT" | jq -e '.kaltura.dependencies."playkit-ui-managers"' >/dev/null 2>&1; then
+            # Get the latest version of the package using npm
+            PLAYKIT_UI_MANAGERS_VERSION=$(npm view @playkit-js/ui-managers version)
+
+            # Update the package.json file only if the version has changed
+            if [[ $(echo "$CURRENT_CONTENT" | jq -r '.kaltura.dependencies."playkit-ui-managers"') != "$PLAYKIT_UI_MANAGERS_VERSION" ]]; then
+              UPDATED_CONTENT=$(echo "$CURRENT_CONTENT" | jq '.kaltura.dependencies."playkit-ui-managers" = "'"$PLAYKIT_UI_MANAGERS_VERSION"'"')
+              echo "$UPDATED_CONTENT" > package.json.tmp
+              mv package.json.tmp package.json
+              echo "COMMIT_REQUIRED=true" >> $GITHUB_ENV
+            fi
           fi
 
           # Print the updated package.json content
