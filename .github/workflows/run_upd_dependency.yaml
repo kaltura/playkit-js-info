@@ -1,9 +1,13 @@
 name: Upgrade Kaltura Dependencies
 
+# on:
+#   workflow_dispatch:
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - 'FEC-13041-upd-dependency-script'
 
 jobs:
   update_dependencies:
-    uses: kaltura/playkit-js-common/.github/workflows/run_upd_dependency.yaml@master
+    uses: kaltura/playkit-js-common/.github/workflows/run_upd_dependency.yaml@FEC-13041-upd-dependency-script
     secrets: inherit
