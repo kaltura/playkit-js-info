@@ -1,61 +1,14 @@
-name: Upgrade NPM packages
+name: Upgrade Kaltura Dependencies
 
+# on:
+#   workflow_dispatch:
 on:
-  workflow_dispatch:
+  push:
+    branches:
+      - 'FEC-13041-upd-dependency-script'
 
 jobs:
-  update_package_json:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
-      - name: Install jq for JSON processing
-        run: sudo apt-get -y install jq
-
-      - name: Check updates Kaltura dependencies
-        run: |
-          # Check and update a dependency
-          checkAndUpdateDependency() {
-            local dependencyName="$1"
-            local packageName="$2"
-            local currentContent=$(cat package.json)
-            local currentVersion=$(echo "$currentContent" | jq -r ".kaltura.dependencies.\"$dependencyName\"")
-
-            # Check if the dependency exists in package.json
-            if [[ "$currentVersion" != "null" ]]; then
-              # Get the latest version of the package using npm
-              local latestVersion=$(npm view "$packageName" version)
-              
-              # Update the package.json file only if the version has changed
-              if [[ "$currentVersion" != "$latestVersion" ]]; then
-                echo "Update $dependencyName to version $latestVersion"
-                UPDATED_CONTENT=$(echo "$currentContent" | jq ".kaltura.dependencies.\"$dependencyName\" = \"$latestVersion\"")
-                echo "$UPDATED_CONTENT" > package.json
-                echo "COMMIT_REQUIRED=true" >> $GITHUB_ENV
-              else
-                echo "Dependency $dependencyName already has latest version: $latestVersion"
-              fi
-            else
-              echo "No $dependencyName dependency found in package.json"
-            fi
-          }
-
-          # Check and update playkit-kaltura-cuepoints dependency
-          checkAndUpdateDependency "playkit-kaltura-cuepoints" "@playkit-js/playkit-js-kaltura-cuepoints"
-
-          # Check and update playkit-timeline dependency
-          checkAndUpdateDependency "playkit-timeline" "@playkit-js/playkit-js-timeline"
-
-          # Check and update playkit-ui-managers dependency
-          checkAndUpdateDependency "playkit-ui-managers" "@playkit-js/ui-managers"
-
-      - name: Commit changes
-        if: env.COMMIT_REQUIRED == 'true'
-        uses: peter-evans/create-pull-request@v5
-        with:
-          title: 'build(deps): Upgrade Kaltura dependencies (automated)'
-          delete-branch: true
-          branch: 'upgrade-npm-packages-automated'
-          commit-message: 'build(deps): Upgrade Kaltura dependencies (automated)'
+  update_dependencies:
+    # uses: kaltura/playkit-js-common/.github/workflows/run_upd_dependency.yaml@master
+    uses: kaltura/playkit-js-common/.github/workflows/run_upd_dependency.yaml@FEC-13041-upd-dependency-script
+    secrets: inherit
