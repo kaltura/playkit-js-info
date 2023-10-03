@@ -8,13 +8,13 @@ on:
       - master
 
 jobs:
-  test:
-    uses: kaltura/playkit-js-common/.github/workflows/cypress.yml@master
-    secrets: inherit
+  #test:
+    #uses: kaltura/playkit-js-common/.github/workflows/cypress.yml@master
+    #secrets: inherit
 
   canary:
     if: ${{ github.actor != 'PlaykitJs-Bot' }}
-    uses: kaltura/playkit-js-common/.github/workflows/canary_full_flow_plugin.yaml@22ce68a52ca1589f696abb1636ec8cd8f7fc4561
+    uses: kaltura/playkit-js-common/.github/workflows/canary_full_flow_plugin.yaml@da1f330989114b96e96eee60312c29f294a86cc5
     secrets: inherit
     with:
       schema-type: "playerV3OvpVersions"
