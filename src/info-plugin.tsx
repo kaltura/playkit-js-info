@@ -27,7 +27,18 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
       this.logger.warn('upperBarManager service not registered');
       return;
     }
-    this._addPluginIcon();
+  }
+
+  private _getRelevantPresets(): string[] {
+    return [ReservedPresetNames.Playback, ReservedPresetNames.Live];
+  }
+
+  onPresetChange(oldPreset: string, newPreset: string): void {
+    if (this._getRelevantPresets().includes(newPreset)) {
+      this._addPluginIcon();
+    } else if (this._iconId > 0) {
+      this.destroy();
+    }
   }
 
   private _getBroadcastedDate = (): string => {
@@ -50,7 +61,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
       this._player.ui.addComponent({
         label: 'info-overlay',
         area: 'GuiArea',
-        presets: [ReservedPresetNames.Playback, ReservedPresetNames.Live],
+        presets: this._getRelevantPresets(),
         get: () => (
           <Info
             onClick={this._closeInfo}
