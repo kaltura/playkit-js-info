@@ -42,7 +42,8 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
 
     if (daysSince <= 1) {
       return <Text id="info.today">Today</Text>;
-    } else if (daysSince <= 30) {
+    }
+    if (daysSince <= 30) {
       return (
         <Text
           id="info.daysAgo"
@@ -50,7 +51,8 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
             daysSince
           }}>{`${daysSince} days ago`}</Text>
       );
-    } else if (daysSince <= 360) {
+    }
+    if (daysSince <= 360) {
       const monthsSince = Math.floor(daysSince / 30);
       return (
         <Text
@@ -60,14 +62,13 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
             monthsSince
           }}>{`${monthsSince} Month${monthsSince > 1 ? 's' : ''} ago`}</Text>
       );
-    } else {
-      return <Text id="info.yearAgo">More than a year ago</Text>;
     }
+    return <Text id="info.yearAgo">More than a year ago</Text>;
   };
 
   private _getViews = (): string => {
     const views = this._player.sources.metadata.views;
-    if (Number.isNaN(views)) {
+    if (!Number.isInteger(views)) {
       return '';
     }
     if (views >= 1e3) {

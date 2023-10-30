@@ -31,7 +31,7 @@ export class Info extends Component<MergedProps> {
   renderMediaInfo = () => {
     const {creator, updatedAt, views} = this.props;
     const mediaInfo = [creator, views, updatedAt];
-    if (!mediaInfo.every(v => v)) {
+    if (!mediaInfo.some(v => v)) {
       return null;
     }
     const dataTestIds = ['creator', 'views', 'updatedAt'];
