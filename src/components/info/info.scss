@@ -29,18 +29,6 @@
     margin: 0px;
   }
 
-  .broadcastDate {
-    text-align: left;
-    width: 100%;
-    margin-bottom: 8px;
-    font-size: 12px;
-    font-weight: 700;
-    line-height: 18px;
-    text-transform: uppercase;
-    &.hidden {
-      display: none;
-    }
-  }
   .entryName {
     width: 100%;
     font-style: normal;
@@ -49,6 +37,22 @@
     text-align: left;
     word-break: break-word;
     line-height: 32px;
+  }
+  .mediaInfo {
+    width: 100%;
+    margin: 8px 0 0 0;
+    display: flex;
+    font-size: 14px;
+    text-align: left;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 18px;
+    .mediaInfoBlock:not(:last-child) {
+      &::after {
+        content: '|';
+        margin: 0 10px;
+      }
+    }
   }
   .entry-description {
     width: 100%;

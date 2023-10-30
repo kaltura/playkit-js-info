@@ -4,7 +4,17 @@
       "info": "Video info"
     },
     "info": {
-      "info": "Info"
+      "info": "Info",
+      "creator": "By ",
+      "views": " views",
+      "live": "Live now",
+      "today": "Today",
+      "daysAgo": "{{daysSince}} days ago",
+      "monthsAgo": {
+        "one": "1 Month ago",
+        "many": "{{monthsSince}} Months ago"
+      },
+      "yearAgo": "More than a year ago"
     }
   }
 }
