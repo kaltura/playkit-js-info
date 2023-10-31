@@ -70,7 +70,7 @@ describe('Info plugin', () => {
       });
     });
     it('should test entry created more than year ago', () => {
-      cy.clock(new Date(2020, 6, 24), ['Date']);
+      cy.clock(new Date(2025, 6, 24), ['Date']);
       mockKalturaBe();
       loadPlayer().then(() => {
         cy.get('[data-testid="infoPluginButton"]').click({force: true});
@@ -79,8 +79,7 @@ describe('Info plugin', () => {
         });
       });
     });
-    it.skip('should test entry created few month ago', () => {
-      // TODO: enable once UI-conf got updated
+    it('should test entry created few month ago', () => {
       cy.clock(new Date(2023, 10, 10), ['Date']);
       mockKalturaBe();
       loadPlayer().then(() => {
@@ -90,9 +89,8 @@ describe('Info plugin', () => {
         });
       });
     });
-    it.skip('should test entry created few days ago', () => {
-      // TODO: enable once UI-conf got updated
-      cy.clock(new Date(2023, 8, 20), ['Date']);
+    it('should test entry created few days ago', () => {
+      cy.clock(new Date(2023, 7, 20), ['Date']);
       mockKalturaBe();
       loadPlayer().then(() => {
         cy.get('[data-testid="infoPluginButton"]').click({force: true});
@@ -101,9 +99,8 @@ describe('Info plugin', () => {
         });
       });
     });
-    it.skip('should test entry created today', () => {
-      // TODO: enable once UI-conf got updated
-      cy.clock(new Date(2023, 8, 16), ['Date']);
+    it('should test entry created today', () => {
+      cy.clock(new Date(2023, 7, 16), ['Date']);
       mockKalturaBe();
       loadPlayer().then(() => {
         cy.get('[data-testid="infoPluginButton"]').click({force: true});
@@ -114,19 +111,17 @@ describe('Info plugin', () => {
     });
   });
 
-  it.skip('should render entry author', () => {
-    // TODO: enable once UI-conf got updated
+  it('should render entry author', () => {
     mockKalturaBe();
     loadPlayer().then(() => {
       cy.get('[data-testid="infoPluginButton"]').click({force: true});
       cy.get('[data-testid="creator"]').should($div => {
-        expect($div.text()).to.eq('Test User');
+        expect($div.text()).to.eq('By Test User');
       });
     });
   });
 
-  it.skip('should render entry views', () => {
-    // TODO: enable once UI-conf got updated
+  it('should render entry views', () => {
     mockKalturaBe();
     loadPlayer().then(() => {
       cy.get('[data-testid="infoPluginButton"]').click({force: true});
