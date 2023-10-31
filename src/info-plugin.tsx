@@ -1,7 +1,6 @@
-import {h} from 'preact';
+import {h, VNode} from 'preact';
 import {Info} from './components/info';
 import {PluginButton} from './components/plugin-button';
-import {timeSince} from './utils';
 import {ui} from '@playkit-js/kaltura-player-js';
 import {icons} from './components/icons';
 import {UpperBarManager} from '@playkit-js/ui-managers';
@@ -30,15 +29,52 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     this._addPluginIcon();
   }
 
-  private _getBroadcastedDate = (): string => {
+  private _getUpdatedDate = (): VNode => {
     if (this._player.isLive()) {
-      return 'Live Now';
+      return <Text id="info.live">Live now</Text>;
     }
-    const startTime = this._player?.sources?.metadata?.StartTime || null;
-    if (startTime === null) {
+    const updatedAt: any = new Date((this._player.sources.metadata.updatedAt || 0) * 1000);
+    const now: any = new Date();
+    const millisecondsPerDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
+
+    // Calculate the difference in days
+    const daysSince = Math.floor((now - updatedAt) / millisecondsPerDay);
+
+    if (daysSince <= 1) {
+      return <Text id="info.today">Today</Text>;
+    }
+    if (daysSince <= 30) {
+      return (
+        <Text
+          id="info.daysAgo"
+          fields={{
+            daysSince
+          }}>{`${daysSince} days ago`}</Text>
+      );
+    }
+    if (daysSince <= 360) {
+      const monthsSince = Math.floor(daysSince / 30);
+      return (
+        <Text
+          id="info.monthsAgo"
+          plural={monthsSince}
+          fields={{
+            monthsSince
+          }}>{`${monthsSince} Month${monthsSince > 1 ? 's' : ''} ago`}</Text>
+      );
+    }
+    return <Text id="info.yearAgo">More than a year ago</Text>;
+  };
+
+  private _getViews = (): string => {
+    const views = this._player.sources.metadata.views;
+    if (!Number.isInteger(views)) {
       return '';
     }
-    return timeSince(new Date(Number(startTime) * 1000));
+    if (views >= 1e3) {
+      return +(views / 1e3).toFixed(0) + 'K';
+    }
+    return String(views);
   };
 
   private _openInfo = () => {
@@ -56,7 +92,9 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
             onClick={this._closeInfo}
             entryName={this._player.sources.metadata.name || ''}
             description={this._player.sources.metadata.description || ''}
-            broadcastedDate={this._getBroadcastedDate()}
+            creator={this._player.sources.metadata.creatorId || ''}
+            updatedAt={this._getUpdatedDate()}
+            views={this._getViews()}
           />
         )
       })
