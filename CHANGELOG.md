@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## 3.3.0 (2023-11-12)
+
+
+### Features
+
+* **FEC-13143:** Add last update and number of plays to info plugin ([#84](https://github.com/kaltura/playkit-js-info/issues/84)) ([cd332a7](https://github.com/kaltura/playkit-js-info/commit/cd332a7b6d2c63e0f0be04b96fa331ec37b3f099))
+
 ### 3.2.8 (2023-09-11)
 
 ### 3.2.7 (2023-07-26)

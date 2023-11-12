@@ -1,6 +1,6 @@
 {
   "name": "@playkit-js/info",
-  "version": "3.2.8",
+  "version": "3.3.0",
   "main": "dist/playkit-info.js",
   "private": false,
   "bugs": {
