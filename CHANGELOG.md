@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 3.3.2 (2023-11-28)
+
+
+### Bug Fixes
+
+* **SUP-40127:** Correcting and adding spanish translation ([#85](https://github.com/kaltura/playkit-js-info/issues/85)) ([9cc2995](https://github.com/kaltura/playkit-js-info/commit/9cc2995565f537329b3e9998ebeb18d6b2266f4f))
+
 ### 3.3.1 (2023-11-12)
 
 ## 3.3.0 (2023-11-12)
