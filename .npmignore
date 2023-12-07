@@ -37,7 +37,6 @@ jspm_packages
 .travis.yml
  docs/
 scripts/
-src/
 test/
 .babelrc
 .editorconfig
