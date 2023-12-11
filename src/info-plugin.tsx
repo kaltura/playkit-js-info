@@ -4,6 +4,7 @@ import {PluginButton} from './components/plugin-button';
 import {ui} from '@playkit-js/kaltura-player-js';
 import {icons} from './components/icons';
 import {UpperBarManager} from '@playkit-js/ui-managers';
+import {InfoEvent} from './event';
 const {ReservedPresetNames} = ui;
 const {Text} = ui.preacti18n;
 
@@ -99,6 +100,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
         )
       })
     );
+    this.dispatchEvent(InfoEvent.INFO_SCREEN_OPEN);
   };
 
   private _closeInfo = () => {
