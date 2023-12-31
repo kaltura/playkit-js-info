@@ -3,6 +3,7 @@ import {Info} from './components/info';
 import {PluginButton} from './components/plugin-button';
 import {ui} from '@playkit-js/kaltura-player-js';
 import {icons} from './components/icons';
+import {OnClickEvent} from '@playkit-js/common/dist/hoc/a11y-wrapper';
 import {UpperBarManager} from '@playkit-js/ui-managers';
 import {InfoEvent} from './event';
 const {ReservedPresetNames} = ui;
@@ -13,6 +14,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   private _wasPlayed = false; // keep state of the player so we can resume if needed
   private _removeActiveOverlay: null | Function = null;
   private _iconId = -1;
+  private _pluginButtonRef: HTMLButtonElement | null = null;
 
   constructor(name: string, private _player: any) {
     super(name, _player);
@@ -103,11 +105,16 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     this.dispatchEvent(InfoEvent.INFO_SCREEN_OPEN);
   };
 
-  private _closeInfo = () => {
+  private _closeInfo = (event?: OnClickEvent, byKeyboard?: boolean) => {
     this._removeOverlay();
     if (this._wasPlayed) {
       this._player.play();
       this._wasPlayed = false;
+    }
+    if(byKeyboard){
+      // TODO: add focusElement to ts-typed
+      // @ts-ignore
+      KalturaPlayer.ui.utils.focusElement(this._pluginButtonRef, 100)
     }
   };
 
@@ -127,6 +134,10 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     }
   };
 
+  private _setPluginButtonRef = (ref: HTMLButtonElement | null) => {
+    this._pluginButtonRef = ref;
+  };
+
   private _addPluginIcon = (): void => {
     if (this._iconId > 0) {
       return;
@@ -135,7 +146,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
       this._iconId = this.upperBarManager!.add({
         //@ts-ignore
         label: <Text id="info.info">Info</Text>,
-        component: () => <PluginButton label="Video info" />,
+        component: () => <PluginButton label="Video info" setRef={this._setPluginButtonRef}/>,
         svgIcon: {path: icons.PLUGIN_ICON, viewBox: `0 0 ${icons.BigSize} ${icons.BigSize}`},
         onClick: this._openInfo
       }) as number;
