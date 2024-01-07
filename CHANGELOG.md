@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 3.4.2 (2024-01-07)
+
+
+### Bug Fixes
+
+* **ADA-132:** Info - focus should return to plugin button ([#88](https://github.com/kaltura/playkit-js-info/issues/88)) ([55f9fc7](https://github.com/kaltura/playkit-js-info/commit/55f9fc7993cd8606d5badc364c8dc194d11f4886))
+
 ### 3.4.1 (2023-12-21)
 
 ## 3.4.0 (2023-12-21)
