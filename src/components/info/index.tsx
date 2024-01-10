@@ -14,8 +14,8 @@ export interface InfoProps {
   entryName: string;
   description: string;
   creator: string;
-  updatedAt: VNode;
-  views: string;
+  createdAt: VNode;
+  plays: string;
 }
 interface ConnectProps {
   playerSize?: string;
@@ -29,12 +29,12 @@ const mapStateToProps = (state: Record<string, any>) => ({
 @connect(mapStateToProps)
 export class Info extends Component<MergedProps> {
   renderMediaInfo = () => {
-    const {creator, updatedAt, views} = this.props;
-    const mediaInfo = [creator, views, updatedAt];
+    const {creator, createdAt, plays} = this.props;
+    const mediaInfo = [creator, plays, createdAt];
     if (!mediaInfo.some(v => v)) {
       return null;
     }
-    const dataTestIds = ['creator', 'views', 'updatedAt'];
+    const dataTestIds = ['creator', 'plays', 'createdAt'];
     return (
       <div className={styles.mediaInfo} data-testid="mediaInfo">
         {mediaInfo.map((val, index) => {
@@ -45,7 +45,7 @@ export class Info extends Component<MergedProps> {
             <div key={index} className={styles.mediaInfoBlock} data-testid={dataTestIds[index]}>
               {index === 0 ? <Text id="info.creator">By </Text> : null}
               {val}
-              {index === 1 ? <Text id="info.views"> views</Text> : null}
+              {index === 1 ? <Text id="info.plays"> plays</Text> : null}
             </div>
           );
         })}
