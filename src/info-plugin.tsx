@@ -32,16 +32,16 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     this._addPluginIcon();
   }
 
-  private _getUpdatedDate = (): VNode => {
+  private _getCreationDate = (): VNode => {
     if (this._player.isLive()) {
       return <Text id="info.live">Live now</Text>;
     }
-    const updatedAt: any = new Date((this._player.sources.metadata.updatedAt || 0) * 1000);
+    const createdAt: any = new Date((this._player.sources.metadata.createdAt || 0) * 1000);
     const now: any = new Date();
     const millisecondsPerDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
 
     // Calculate the difference in days
-    const daysSince = Math.floor((now - updatedAt) / millisecondsPerDay);
+    const daysSince = Math.floor((now - createdAt) / millisecondsPerDay);
 
     if (daysSince <= 1) {
       return <Text id="info.today">Today</Text>;
@@ -69,15 +69,15 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     return <Text id="info.yearAgo">More than a year ago</Text>;
   };
 
-  private _getViews = (): string => {
-    const views = this._player.sources.metadata.views;
-    if (!Number.isInteger(views)) {
+  private _getPlays = (): string => {
+    const plays = this._player.sources.metadata.plays;
+    if (!Number.isInteger(plays)) {
       return '';
     }
-    if (views >= 1e3) {
-      return +(views / 1e3).toFixed(0) + 'K';
+    if (plays >= 1e3) {
+      return +(plays / 1e3).toFixed(0) + 'K';
     }
-    return String(views);
+    return String(plays);
   };
 
   private _openInfo = () => {
@@ -96,8 +96,8 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
             entryName={this._player.sources.metadata.name || ''}
             description={this._player.sources.metadata.description || ''}
             creator={this._player.sources.metadata.creatorId || ''}
-            updatedAt={this._getUpdatedDate()}
-            views={this._getViews()}
+            createdAt={this._getCreationDate()}
+            plays={this._getPlays()}
           />
         )
       })

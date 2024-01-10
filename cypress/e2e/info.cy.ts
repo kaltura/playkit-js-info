@@ -59,12 +59,12 @@ describe('Info plugin', () => {
     });
   });
 
-  describe('should test entry broadcast and update date', () => {
+  describe('should test entry broadcast and creation date', () => {
     it('should test live entry', () => {
       mockKalturaBe('live.json');
       loadPlayer().then(() => {
         cy.get('[data-testid="infoPluginButton"]').click({force: true});
-        cy.get('[data-testid="updatedAt"]').should($div => {
+        cy.get('[data-testid="createdAt"]').should($div => {
           expect($div.text()).to.eq('Live now');
         });
       });
@@ -74,37 +74,37 @@ describe('Info plugin', () => {
       mockKalturaBe();
       loadPlayer().then(() => {
         cy.get('[data-testid="infoPluginButton"]').click({force: true});
-        cy.get('[data-testid="updatedAt"]').should($div => {
+        cy.get('[data-testid="createdAt"]').should($div => {
           expect($div.text()).to.eq('More than a year ago');
         });
       });
     });
-    it('should test entry created few month ago', () => {
-      cy.clock(new Date(2023, 10, 10), ['Date']);
+    it('should test entry created few months ago', () => {
+      cy.clock(new Date(2022, 8, 10), ['Date']);
       mockKalturaBe();
       loadPlayer().then(() => {
         cy.get('[data-testid="infoPluginButton"]').click({force: true});
-        cy.get('[data-testid="updatedAt"]').should($div => {
+        cy.get('[data-testid="createdAt"]').should($div => {
           expect($div.text()).to.eq('2 Months ago');
         });
       });
     });
     it('should test entry created few days ago', () => {
-      cy.clock(new Date(2023, 7, 20), ['Date']);
+      cy.clock(new Date(2022, 6, 9), ['Date']);
       mockKalturaBe();
       loadPlayer().then(() => {
         cy.get('[data-testid="infoPluginButton"]').click({force: true});
-        cy.get('[data-testid="updatedAt"]').should($div => {
+        cy.get('[data-testid="createdAt"]').should($div => {
           expect($div.text()).to.eq('3 days ago');
         });
       });
     });
     it('should test entry created today', () => {
-      cy.clock(new Date(2023, 7, 16), ['Date']);
+      cy.clock(new Date(2022, 6, 5), ['Date']);
       mockKalturaBe();
       loadPlayer().then(() => {
         cy.get('[data-testid="infoPluginButton"]').click({force: true});
-        cy.get('[data-testid="updatedAt"]').should($div => {
+        cy.get('[data-testid="createdAt"]').should($div => {
           expect($div.text()).to.eq('Today');
         });
       });
@@ -121,17 +121,17 @@ describe('Info plugin', () => {
     });
   });
 
-  it('should render entry views', () => {
+  it('should render entry plays', () => {
     mockKalturaBe();
     loadPlayer().then(() => {
       cy.get('[data-testid="infoPluginButton"]').click({force: true});
-      cy.get('[data-testid="views"]').should($div => {
-        expect($div.text()).to.eq('101 views');
+      cy.get('[data-testid="plays"]').should($div => {
+        expect($div.text()).to.eq('19 plays');
       });
     });
   });
 
-  it('should sanitize and render discription with html tags inside', () => {
+  it('should sanitize and render description with html tags inside', () => {
     const result = `line one<br>line two<br>line three<br>Praesent sapien massa, convallis a <u>pellentesque nec, egest</u>as non nisi. Mauris blandit aliquet elit, eget <a target="_blank" href="http://google.com">tincidunt</a> nibh pulvinar a. <b>Curabitur arcu erat, accumsan </b>id imperdiet et, <span>porttitor</span> at sem.<i> Vestibulum ante ipsum prim</i>is in faucibus;<br><blockquote><ul><li>one</li><li>two</li></ul></blockquote>Last line<br><br>`;
     mockKalturaBe('vod-with-html-tags.json');
     loadPlayer().then(() => {

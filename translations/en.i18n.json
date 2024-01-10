@@ -6,7 +6,7 @@
     "info": {
       "info": "Info",
       "creator": "By ",
-      "views": " views",
+      "plays": " plays",
       "live": "Live now",
       "today": "Today",
       "daysAgo": "{{daysSince}} days ago",
