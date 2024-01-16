@@ -1,6 +1,7 @@
 import {h} from 'preact';
 import {icons} from '../icons';
 import {ui} from '@playkit-js/kaltura-player-js';
+import { pluginName } from "../../index";
 
 const {Tooltip, Icon} = KalturaPlayer.ui.components;
 const {Text} = ui.preacti18n;
@@ -15,7 +16,7 @@ export const PluginButton = ({label, setRef}: PluginButtonProps) => {
     <Tooltip label={infoTxt} type="bottom">
         <button type="button" aria-label={label} className={ui.style.upperBarIcon} data-testid="infoPluginButton" ref={setRef}>
           <Icon
-            id="info-plugin-button"
+            id={pluginName}
             height={icons.BigSize}
             width={icons.BigSize}
             viewBox={`0 0 ${icons.BigSize} ${icons.BigSize}`}
