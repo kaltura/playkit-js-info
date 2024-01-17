@@ -150,6 +150,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
         // @ts-ignore
         ariaLabel: <Text id="info.info">Info</Text>,
         displayName: 'Info',
+        order: 80,
         component: () => <PluginButton label="Video info" setRef={this._setPluginButtonRef}/>,
         svgIcon: {path: icons.PLUGIN_ICON, viewBox: `0 0 ${icons.BigSize} ${icons.BigSize}`},
         onClick: this._openInfo
