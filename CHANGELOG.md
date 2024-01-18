@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 3.4.3 (2024-01-18)
+
+
+### Bug Fixes
+
+* **FEC-13557:** change last update to created at and views to plays ([#89](https://github.com/kaltura/playkit-js-info/issues/89)) ([450f076](https://github.com/kaltura/playkit-js-info/commit/450f076ff05e9e418f5b744be4f4c2ea3238078a))
+
 ### 3.4.2 (2024-01-07)
 
 
