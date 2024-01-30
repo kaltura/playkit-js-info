@@ -8,6 +8,8 @@ const {
 } = KalturaPlayer.ui;
 const {Overlay} = KalturaPlayer.ui.components;
 const {Text} = KalturaPlayer.ui.preacti18n;
+// @ts-ignore
+const {withKeyboardA11y} = KalturaPlayer.ui.utils;
 
 export interface InfoProps {
   onClick: () => void;
@@ -20,13 +22,19 @@ export interface InfoProps {
 interface ConnectProps {
   playerSize?: string;
 }
+interface KeyboardA11yProps {
+  handleKeyDown?: () => void;
+  setIsModal?: (isModel: boolean) => void;
+  addAccessibleChild?: (element: HTMLElement) => void;
+}
 
-type MergedProps = InfoProps & ConnectProps;
+type MergedProps = InfoProps & ConnectProps & KeyboardA11yProps;
 
 const mapStateToProps = (state: Record<string, any>) => ({
   playerSize: state.shell.playerSize
 });
 @connect(mapStateToProps)
+@withKeyboardA11y
 export class Info extends Component<MergedProps> {
   renderMediaInfo = () => {
     const {creator, createdAt, plays} = this.props;
@@ -53,14 +61,18 @@ export class Info extends Component<MergedProps> {
     );
   };
 
+  componentDidMount(): void {
+    this.props.setIsModal && this.props.setIsModal(true);
+  }
+
   render(props: MergedProps) {
-    const {onClick, entryName, description, playerSize = ''} = props;
+    const {onClick, entryName, description, playerSize = '',handleKeyDown, addAccessibleChild} = props;
     if (playerSize === PLAYER_SIZE.TINY) {
       return null;
     }
     return (
       <OverlayPortal>
-        <Overlay open onClose={onClick}>
+        <Overlay open onClose={onClick} addAccessibleChild={addAccessibleChild} handleKeyDown={handleKeyDown}>
           <div className={[styles.infoRoot, styles[playerSize]].join(' ')} data-testid="infoRoot">
             <div className={styles.entryName} data-testid="entryName">
               {entryName}
