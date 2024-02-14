@@ -143,15 +143,13 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
       return;
     }
     this.player.ready().then(() => {
-      // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-      // @ts-ignore
       this._iconId = this.upperBarManager!.add({
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
         ariaLabel: <Text id="info.info">Info</Text>,
         displayName: 'Info',
         order: 80,
-        component: () => <PluginButton label="Video info" setRef={this._setPluginButtonRef}/>,
+        component: () => <PluginButton label="Video info" setRef={this._setPluginButtonRef}/> as any,
         svgIcon: {path: icons.PLUGIN_ICON, viewBox: `0 0 ${icons.BigSize} ${icons.BigSize}`},
         onClick: this._openInfo
       }) as number;
