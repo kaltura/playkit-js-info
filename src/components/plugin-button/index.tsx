@@ -21,6 +21,7 @@ export const PluginButton = ({label, setRef}: PluginButtonProps) => {
             width={icons.BigSize}
             viewBox={`0 0 ${icons.BigSize} ${icons.BigSize}`}
             path={icons.PLUGIN_ICON}
+            hidden="true"
           />
         </button>
     </Tooltip>
