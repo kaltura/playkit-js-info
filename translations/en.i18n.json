@@ -5,8 +5,8 @@
     },
     "info": {
       "info": "Info",
-      "creator": "By ",
-      "plays": " plays",
+      "creator": "By {{creator}}",
+      "plays": "{{plays}} plays",
       "live": "Live now",
       "today": "Today",
       "daysAgo": "{{daysSince}} days ago",

@@ -7,7 +7,7 @@ const {
   redux: {connect}
 } = KalturaPlayer.ui;
 const {Overlay} = KalturaPlayer.ui.components;
-const {Text} = KalturaPlayer.ui.preacti18n;
+const {Text, withText} = KalturaPlayer.ui.preacti18n;
 // @ts-ignore
 const {withKeyboardA11y} = KalturaPlayer.ui.utils;
 
@@ -18,6 +18,8 @@ export interface InfoProps {
   creator: string;
   createdAt: VNode;
   plays: string;
+  creatorText?: string;
+  playsText?: string;
 }
 interface ConnectProps {
   playerSize?: string;
@@ -33,16 +35,29 @@ type MergedProps = InfoProps & ConnectProps & KeyboardA11yProps;
 const mapStateToProps = (state: Record<string, any>) => ({
   playerSize: state.shell.playerSize
 });
+
+const translates = ({plays, creator}: InfoProps) => {
+  return {
+    creatorText: <Text id="info.creator" fields={{creator}}>{`By ${creator}`}</Text>,
+    playsText: <Text id="info.plays" fields={{plays}}>{`${plays} plays`}</Text>
+  };
+};
+
 @connect(mapStateToProps)
 @withKeyboardA11y
+@withText(translates)
 export class Info extends Component<MergedProps> {
   renderMediaInfo = () => {
-    const {creator, createdAt, plays} = this.props;
-    const mediaInfo = [creator, plays, createdAt];
+    const {creator, createdAt, plays, creatorText, playsText} = this.props;
+
+    const creatorObj: any = creator ? {value: creatorText!, dataTestId: 'creator', title: creatorText} : null;
+    const playsObj: any = plays ? {value: playsText!, dataTestId: 'plays', title: playsText} : null;
+    const createdAtObj: any = createdAt ? {value: createdAt, dataTestId: 'createdAt', title: createdAt.props.children as string} : null;
+
+    const mediaInfo: any[] = [creatorObj, playsObj, createdAtObj];
     if (!mediaInfo.some(v => v)) {
       return null;
     }
-    const dataTestIds = ['creator', 'plays', 'createdAt'];
     return (
       <div className={styles.mediaInfo} data-testid="mediaInfo">
         {mediaInfo.map((val, index) => {
@@ -50,10 +65,8 @@ export class Info extends Component<MergedProps> {
             return null;
           }
           return (
-            <div key={index} className={styles.mediaInfoBlock} data-testid={dataTestIds[index]}>
-              {index === 0 ? <Text id="info.creator">By </Text> : null}
-              {val}
-              {index === 1 ? <Text id="info.plays"> plays</Text> : null}
+            <div key={index} className={styles.mediaInfoBlock} data-testid={val.dataTestId} title={val.title}>
+              {val.value}
             </div>
           );
         })}
