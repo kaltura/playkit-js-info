@@ -18,8 +18,14 @@
   }
   &.extrasmall,
   &.small {
+    padding: 0;
     .entryName {
       font-size: 18px;
+    }
+    .mediaInfoBlock:first-child {
+      text-overflow: ellipsis;
+      overflow: hidden;
+      min-width: 24px;
     }
   }
   &.medium,
@@ -49,10 +55,13 @@
     font-style: normal;
     font-weight: 400;
     line-height: 18px;
-    .mediaInfoBlock:not(:last-child) {
-      &::after {
+    .mediaInfoBlock {
+      white-space: nowrap;
+    }
+    .mediaInfoBlock:not(:first-child) {
+      &::before {
         content: '|';
-        margin: 0 10px;
+        margin: 0 8px;
       }
     }
   }
