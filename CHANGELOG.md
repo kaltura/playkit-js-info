@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 3.4.5 (2024-02-25)
+
+
+### Bug Fixes
+
+* **FEC-13659:** handle media info responsiveness ([#97](https://github.com/kaltura/playkit-js-info/issues/97)) ([05425a7](https://github.com/kaltura/playkit-js-info/commit/05425a70cad19cd6ac41577756b0a959065c4a1e))
+
 ### 3.4.4 (2024-02-04)
 
 ### 3.4.3 (2024-01-18)
