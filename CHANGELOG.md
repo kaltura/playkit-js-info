@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 3.4.6 (2024-03-14)
+
+
+### Bug Fixes
+
+* **FEC-13699:** remove preact, upd dependencies ([#95](https://github.com/kaltura/playkit-js-info/issues/95)) ([89d5f98](https://github.com/kaltura/playkit-js-info/commit/89d5f9884cd7cfef407399cba566378a8b28ce11))
+
 ### 3.4.5 (2024-02-25)
 
 
