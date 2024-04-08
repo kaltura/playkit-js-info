@@ -1,0 +1,20 @@
+{
+  "de": {
+    "controls": {
+      "info": "Video Info"
+    },
+    "info": {
+      "info": "Info",
+      "creator": "Von {{creator}}",
+      "plays": "{{plays}} Wiedergaben",
+      "live": "Live now",
+      "today": "Heute",
+      "daysAgo": "Vor {{daysSince}} Tagen",
+      "monthsAgo": {
+        "one": "Vor 1 Monat",
+        "many": "Vor {{monthsSince}} Monaten"
+      },
+      "yearAgo": "Vor mehr als einem Jahr"
+    }
+  }
+}
