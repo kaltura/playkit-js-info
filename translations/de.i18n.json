@@ -14,7 +14,7 @@
         "one": "Vor 1 Monat",
         "many": "Vor {{monthsSince}} Monaten"
       },
-      "yearAgo": "More than a year ago"
+      "yearAgo": "Vor mehr als einem Jahr"
     }
   }
 }
