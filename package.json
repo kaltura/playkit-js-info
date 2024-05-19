@@ -71,7 +71,7 @@
   "kaltura": {
     "name": "playkit-js-info",
     "dependencies": {
-      "playkit-ui-managers": "1.5.2"
+      "playkit-ui-managers": "1.5.3"
     }
   }
 }
