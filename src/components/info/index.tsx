@@ -27,7 +27,7 @@ interface ConnectProps {
 interface KeyboardA11yProps {
   handleKeyDown?: () => void;
   setIsModal?: (isModel: boolean) => void;
-  addAccessibleChild?: (element: HTMLElement) => void;
+  addAccessibleChild?: (element: HTMLElement, pushToBeginning?: boolean) => void;
 }
 
 type MergedProps = InfoProps & ConnectProps & KeyboardA11yProps;
@@ -47,6 +47,7 @@ const translates = ({plays, creator}: InfoProps) => {
 @withKeyboardA11y
 @withText(translates)
 export class Info extends Component<MergedProps> {
+  private _descriptionDivRed: HTMLDivElement | null = null;
   renderMediaInfo = () => {
     const {creator, createdAt, plays, creatorText, playsText} = this.props;
 
@@ -76,6 +77,18 @@ export class Info extends Component<MergedProps> {
 
   componentDidMount(): void {
     this.props.setIsModal && this.props.setIsModal(true);
+    this._addElementsToAccessibleList();
+  }
+
+  private _addElementsToAccessibleList(): void {
+    if (this._descriptionDivRed) {
+      const linkElements = Array.from(this._descriptionDivRed.querySelectorAll('a')).reverse();
+      linkElements.forEach(element => {
+        if (element.hasAttribute('href')) {
+          this.props.addAccessibleChild && this.props.addAccessibleChild(element! as HTMLElement, true);
+        }
+      });
+    }
   }
 
   render(props: MergedProps) {
@@ -92,7 +105,12 @@ export class Info extends Component<MergedProps> {
             </div>
             {this.renderMediaInfo()}
             {description && (
-              <div data-testid="entryDescription" className={styles.entryDescription} dangerouslySetInnerHTML={{__html: sanitizeHtml(description)}} />
+              <div
+                data-testid="entryDescription"
+                className={styles.entryDescription}
+                dangerouslySetInnerHTML={{__html: sanitizeHtml(description)}}
+                ref={node => (this._descriptionDivRed = node)}
+              />
             )}
           </div>
         </Overlay>
