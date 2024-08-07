@@ -19,7 +19,7 @@
   &.extrasmall,
   &.small {
     padding: 0;
-    .entryName {
+    .entryName h2 {
       font-size: 18px;
     }
     .mediaInfoBlock:first-child {
@@ -37,7 +37,7 @@
     margin: 0px;
   }
 
-  .entryName {
+  .entryName h2 {
     width: 100%;
     font-style: normal;
     font-weight: 700;
