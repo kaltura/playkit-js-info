@@ -7,7 +7,7 @@ import {OnClickEvent} from '@playkit-js/common/dist/hoc/a11y-wrapper';
 import {UpperBarManager} from '@playkit-js/ui-managers';
 import {InfoEvent} from './event';
 const {ReservedPresetNames} = ui;
-const {Text} = ui.preacti18n;
+const {Text, Localizer} = ui.preacti18n;
 
 // @ts-ignore
 export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
@@ -146,7 +146,14 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
       this._iconId = this.upperBarManager!.add({
         // eslint-disable-next-line @typescript-eslint/ban-ts-comment
         // @ts-ignore
-        ariaLabel: <Text id="info.info">Info</Text>,
+        ariaLabel: () => {
+          const textJSX = (
+            <Localizer>
+              <Text id="info.info">Info</Text>
+            </Localizer>
+          );
+          return textJSX
+        },
         displayName: 'Info',
         order: 80,
         component: () => <PluginButton label="Video info" setRef={this._setPluginButtonRef}/> as any,
