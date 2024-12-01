@@ -98,6 +98,8 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
             creator={this._player.sources.metadata.creatorId || ''}
             createdAt={this._getCreationDate()}
             plays={this._getPlays()}
+            //@ts-ignore
+            morePluginButton={this.upperBarManager!.getMorePluginButton()}
           />
         )
       })
