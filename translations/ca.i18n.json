@@ -1,0 +1,20 @@
+{
+  "ca": {
+    "controls": {
+      "info": "Informació del vídeo"
+    },
+    "info": {
+      "info": "Informació",
+      "creator": "Per {{creator}}",
+      "plays": "{{plays}} reproduccions",
+      "live": "En directe ara",
+      "today": "Avui",
+      "daysAgo": "Fa {{daysSince}} dies",
+      "monthsAgo": {
+        "one": "Fa 1 mes",
+        "many": "Fa {{monthsSince}} mesos"
+      },
+      "yearAgo": "Fa més d'un any"
+    }
+  }
+}
