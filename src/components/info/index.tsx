@@ -20,6 +20,7 @@ export interface InfoProps {
   plays: string;
   creatorText?: string;
   playsText?: string;
+  morePluginButton: HTMLButtonElement | null;
 }
 interface ConnectProps {
   playerSize?: string;
@@ -28,6 +29,7 @@ interface KeyboardA11yProps {
   handleKeyDown?: () => void;
   setIsModal?: (isModel: boolean) => void;
   addAccessibleChild?: (element: HTMLElement, pushToBeginning?: boolean) => void;
+  setMoreButton?: (element: HTMLButtonElement | null) => void;
 }
 
 type MergedProps = InfoProps & ConnectProps & KeyboardA11yProps;
@@ -77,6 +79,7 @@ export class Info extends Component<MergedProps> {
 
   componentDidMount(): void {
     this.props.setIsModal && this.props.setIsModal(true);
+    this.props.setMoreButton && this.props.setMoreButton(this.props.morePluginButton);
     this._addElementsToAccessibleList();
   }
 
