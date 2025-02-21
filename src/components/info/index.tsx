@@ -101,7 +101,7 @@ export class Info extends Component<MergedProps> {
     }
     return (
       <OverlayPortal>
-        <Overlay open onClose={onClick} addAccessibleChild={addAccessibleChild} handleKeyDown={handleKeyDown}>
+        <Overlay open onClose={onClick} closeAriaLabel="Close Video Info" addAccessibleChild={addAccessibleChild} handleKeyDown={handleKeyDown}>
           <div className={[styles.infoRoot, styles[playerSize]].join(' ')} data-testid="infoRoot">
             <div className={styles.entryName} data-testid="entryName">
               <h2>{entryName}</h2>
