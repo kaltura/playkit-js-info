@@ -99,9 +99,10 @@ export class Info extends Component<MergedProps> {
     if (playerSize === PLAYER_SIZE.TINY) {
       return null;
     }
+    const closeTxt =  <Text id="controls.close">Close Video Info</Text>;
     return (
       <OverlayPortal>
-        <Overlay open onClose={onClick} closeAriaLabel="Close Video Info" addAccessibleChild={addAccessibleChild} handleKeyDown={handleKeyDown}>
+        <Overlay open onClose={onClick} closeAriaLabel={closeTxt} addAccessibleChild={addAccessibleChild} handleKeyDown={handleKeyDown}>
           <div className={[styles.infoRoot, styles[playerSize]].join(' ')} data-testid="infoRoot">
             <div className={styles.entryName} data-testid="entryName">
               <h2>{entryName}</h2>
