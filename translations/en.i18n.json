@@ -1,7 +1,8 @@
 {
   "en": {
     "controls": {
-      "info": "Video info"
+      "info": "Video info",
+      "close": "Close Video Info"
     },
     "info": {
       "info": "Info",
