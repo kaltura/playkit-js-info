@@ -13,7 +13,7 @@ interface PluginButtonProps {
 export const PluginButton = ({label, setRef}: PluginButtonProps) => {
     const infoTxt =  <Text id="controls.info">Video info</Text>;
     return (
-    <Tooltip label={infoTxt} type="bottom">
+    <Tooltip label={infoTxt} type="bottom-left" strictPosition={true}>
         <button type="button" aria-label={label} className={ui.style.upperBarIcon} data-testid="infoPluginButton" ref={setRef}>
           <Icon
             id={pluginName}
