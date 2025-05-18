@@ -6,6 +6,7 @@ on:
   push:
     branches:
       - master
+      - QVA-3676-test-new-autoamtion-wf # need to remove before merge to master
 
 jobs:
   test:
