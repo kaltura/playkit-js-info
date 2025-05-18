@@ -14,7 +14,7 @@ jobs:
 
   canary:
     if: ${{ github.actor != 'PlaykitJs-Bot' }}
-    uses: kaltura/playkit-js-common/.github/workflows/canary_plugin.yaml@master
+    uses: kaltura/playkit-js-common/.github/workflows/canary_plugin.yaml@QVA-3676-trigger-automation-after-canary
     secrets: inherit
     with:
       schema-type: "playerV3OvpVersions"
