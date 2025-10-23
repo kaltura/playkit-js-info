@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### 3.5.4 (2025-10-23)
+
+
+### Bug Fixes
+
+* **FEC-14604:** Translation for i18n (info, Video Info) ([#120](https://github.com/kaltura/playkit-js-info/issues/120)) ([1cc122b](https://github.com/kaltura/playkit-js-info/commit/1cc122be65a964210695c00e1904828b6eed2c49))
+
 ### 3.5.3 (2025-05-22)
 
 ### 3.5.2 (2025-04-24)
