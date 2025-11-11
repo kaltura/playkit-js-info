@@ -64,8 +64,7 @@ module.exports = {
     ]
   },
   devServer: {
-    static: __dirname + '/src'
-    // host: '192.168.68.107'
+    static: __dirname + '/demo'
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],
