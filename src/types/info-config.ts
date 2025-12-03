@@ -1,5 +1,5 @@
 export interface InfoConfig {
-  showCreator: boolean;
+  showUser: boolean;
   showCreatedAt: boolean;
   showPlays: boolean;
 }

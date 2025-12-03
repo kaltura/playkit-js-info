@@ -18,7 +18,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   private _pluginButtonRef: HTMLButtonElement | null = null;
 
   public static defaultConfig: InfoConfig = {
-    showCreator: true,
+    showUser: true,
     showCreatedAt: true,
     showPlays: true
   };
@@ -102,7 +102,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
             onClick={this._closeInfo}
             entryName={this._player.sources.metadata.name || ''}
             description={this._player.sources.metadata.description || ''}
-            creator={this.config.showCreator ? this._player.sources.metadata.userId || '' : ''}
+            creator={this.config.showUser ? this._player.sources.metadata.userId || '' : ''}
             createdAt={this.config.showCreatedAt ? this._getCreationDate() : (null as any)}
             plays={this.config.showPlays ? this._getPlays() : ''}
             //@ts-ignore
