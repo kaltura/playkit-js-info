@@ -13,7 +13,8 @@ export const preparePage = (pluginConf: Object, playbackConf: Object) => {
           }
         },
         plugins: {
-          'playkit-js-info': pluginConf
+          'playkit-js-info': pluginConf,
+          uiManagers: {}
         },
         playback: {muted: true, autoplay: true, ...playbackConf}
       });
