@@ -66,7 +66,12 @@ Finally, add the bundle as a script tag in your page, and initialize the player
      ...
      targetId: 'player-placeholder',
      plugins: {
-       "playkit-js-info": {}
+      "playkit-js-info": {
+        useCreatorId: true, // whether to use creatorId or userId value from entry metadata
+        showUser: true, // show / hide user data
+        showCreatedAt: true, // show / hide creation data
+        showPlays: true // show / hide plays data
+      }
      }
      ...
     };
@@ -80,15 +85,13 @@ Finally, add the bundle as a script tag in your page, and initialize the player
 
 The info plugin purpose is to expose visual view of the entry information which is currently used by the player instead of digginf in the logs.
 
-When the plugin is included on the player an info icon will be displayed and if user clicks on an overlay will be opened with the following data 
- 
- * Entry Name
- * Entry Description          
- * Broadcasted Date - For webcast entries
+When the plugin is included on the player an info icon will be displayed and if user clicks on an overlay will be opened with the following data
 
+- Entry Name
+- Entry Description
+- Broadcasted Date - For webcast entries
 
 ### Configuration
-
 
 In order to enable the plugin it should be mentioned in the plugins section on the uiconf or on player setup code. no special config required exept this.
 
@@ -106,11 +109,9 @@ plugins: {
 
 ![example](./images/infoScreen.png)
 
-
 ### Example:
 
 **[Info Plugin Example](https://codepen.io/giladna/pen/wvXBwwP)**
-
 
 ### Coding style tests
 
@@ -131,4 +132,3 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## License
 
 This project is licensed under the AGPL-3.0 License - see the [LICENSE](LICENSE) file for details
-
