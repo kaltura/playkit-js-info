@@ -133,13 +133,23 @@ describe('Info plugin', () => {
     });
   });
 
-  describe('entry author', () => {
-    it('should render entry owner', () => {
+  describe('entry creator / owner', () => {
+    it('should render entry creator by default', () => {
       mockKalturaBe();
       loadPlayer().then(() => {
         cy.get('[data-testid="infoPluginButton"]').click({force: true});
         cy.get('[data-testid="creator"]').should($div => {
-          expect($div.text()).to.eq('By Test User');
+          expect($div.text()).to.eq('By Test Creator');
+        });
+      });
+    });
+
+    it('should render entry owner if creator id is false', () => {
+      mockKalturaBe();
+      loadPlayer({useCreatorId: false}).then(() => {
+        cy.get('[data-testid="infoPluginButton"]').click({force: true});
+        cy.get('[data-testid="creator"]').should($div => {
+          expect($div.text()).to.eq('By Test Owner');
         });
       });
     });
