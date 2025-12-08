@@ -64,7 +64,9 @@ module.exports = {
     ]
   },
   devServer: {
-    static: __dirname + '/demo'
+    static: {
+      directory: path.join(__dirname, 'demo')
+    }
   },
   resolve: {
     extensions: ['.tsx', '.ts', '.js'],

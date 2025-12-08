@@ -6,6 +6,7 @@ import {icons} from './components/icons';
 import {OnClickEvent} from '@playkit-js/common/dist/hoc/a11y-wrapper';
 import {UpperBarManager} from '@playkit-js/ui-managers';
 import {InfoEvent} from './event';
+import {InfoConfig} from './types/info-config';
 const {ReservedPresetNames} = ui;
 const {Text} = ui.preacti18n;
 
@@ -16,8 +17,15 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   private _iconId = -1;
   private _pluginButtonRef: HTMLButtonElement | null = null;
 
-  constructor(name: string, private _player: any) {
-    super(name, _player);
+  public static defaultConfig: InfoConfig = {
+    useCreatorId: true,
+    showUser: true,
+    showCreatedAt: true,
+    showPlays: true
+  };
+
+  constructor(name: string, private _player: any, config: InfoConfig) {
+    super(name, _player, config);
   }
 
   get upperBarManager() {
@@ -36,7 +44,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     if (this._player.isLive()) {
       return <Text id="info.live">Live now</Text>;
     }
-    const createdAt: any = new Date((this._player.sources.metadata.createdAt || 0) * 1000);
+    const createdAt: any = new Date((this._player.sources.metadata?.createdAt || 0) * 1000);
     const now: any = new Date();
     const millisecondsPerDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
 
@@ -70,7 +78,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   };
 
   private _getPlays = (): string => {
-    const plays = this._player.sources.metadata.plays;
+    const plays = this._player.sources.metadata?.plays;
     if (!Number.isInteger(plays)) {
       return '';
     }
@@ -85,6 +93,9 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
       this._player.pause();
       this._wasPlayed = true;
     }
+
+    const userData = this.config.useCreatorId ? this._player.sources.metadata?.creatorId : this._player.sources.metadata?.userId;
+
     this._setOverlay(
       this._player.ui.addComponent({
         label: 'info-overlay',
@@ -93,11 +104,11 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
         get: () => (
           <Info
             onClick={this._closeInfo}
-            entryName={this._player.sources.metadata.name || ''}
-            description={this._player.sources.metadata.description || ''}
-            creator={this._player.sources.metadata.creatorId || ''}
-            createdAt={this._getCreationDate()}
-            plays={this._getPlays()}
+            entryName={this._player.sources.metadata?.name || ''}
+            description={this._player.sources.metadata?.description || ''}
+            creator={this.config.showUser ? userData : ''}
+            createdAt={this.config.showCreatedAt ? this._getCreationDate() : (null as any)}
+            plays={this.config.showPlays ? this._getPlays() : ''}
             //@ts-ignore
             morePluginButton={this.upperBarManager!.getMorePluginButton()}
           />
@@ -113,10 +124,10 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
       this._player.play();
       this._wasPlayed = false;
     }
-    if(byKeyboard){
+    if (byKeyboard) {
       // TODO: add focusElement to ts-typed
       // @ts-ignore
-      KalturaPlayer.ui.utils.focusElement(this._pluginButtonRef, 100)
+      KalturaPlayer.ui.utils.focusElement(this._pluginButtonRef, 100);
     }
   };
 
@@ -151,7 +162,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
         ariaLabel: <Text id="info.info">Info</Text>,
         displayName: 'Info',
         order: 80,
-        component: () => <PluginButton label="Video info" setRef={this._setPluginButtonRef}/> as any,
+        component: () => (<PluginButton label="Video info" setRef={this._setPluginButtonRef} />) as any,
         svgIcon: {path: icons.PLUGIN_ICON, viewBox: `0 0 ${icons.BigSize} ${icons.BigSize}`},
         onClick: this._openInfo
       }) as number;

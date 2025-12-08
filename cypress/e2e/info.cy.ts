@@ -35,31 +35,46 @@ describe('Info plugin', () => {
     });
   });
 
-  it('should render entry name without description and broadcast date', () => {
-    mockKalturaBe();
-    loadPlayer().then(() => {
-      cy.get('[data-testid="infoPluginButton"]').click({force: true});
-      cy.get('[data-testid="entryDescription"]').should('not.exist');
-      cy.get('[data-testid="broadcastedDate"]').should('not.exist');
-      cy.get('[data-testid="entryName"]').should($div => {
-        expect($div.text()).to.eq('MPEG Dash with MultiAudio New Transcoding');
+  describe('entry name', () => {
+    it('should render entry name without description and broadcast date', () => {
+      mockKalturaBe();
+      loadPlayer().then(() => {
+        cy.get('[data-testid="infoPluginButton"]').click({force: true});
+        cy.get('[data-testid="entryDescription"]').should('not.exist');
+        cy.get('[data-testid="broadcastedDate"]').should('not.exist');
+        cy.get('[data-testid="entryName"]').should($div => {
+          expect($div.text()).to.eq('MPEG Dash with MultiAudio New Transcoding');
+        });
       });
     });
   });
 
-  it('should render entry description', () => {
-    mockKalturaBe('vod-with-description.json');
-    loadPlayer().then(() => {
-      cy.get('[data-testid="infoPluginButton"]').click({force: true});
-      cy.get('[data-testid="entryDescription"]').should($div => {
-        expect($div.text()).to.eq(
-          'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.'
-        );
+  describe('entry description', () => {
+    it('should render entry description', () => {
+      mockKalturaBe('vod-with-description.json');
+      loadPlayer().then(() => {
+        cy.get('[data-testid="infoPluginButton"]').click({force: true});
+        cy.get('[data-testid="entryDescription"]').should($div => {
+          expect($div.text()).to.eq(
+            'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a.'
+          );
+        });
+      });
+    });
+
+    it('should sanitize and render description with html tags inside', () => {
+      const result = `line one<br>line two<br>line three<br>Praesent sapien massa, convallis a <u>pellentesque nec, egest</u>as non nisi. Mauris blandit aliquet elit, eget <a target="_blank" href="http://google.com">tincidunt</a> nibh pulvinar a. <b>Curabitur arcu erat, accumsan </b>id imperdiet et, <span>porttitor</span> at sem.<i> Vestibulum ante ipsum prim</i>is in faucibus;<br><blockquote><ul><li>one</li><li>two</li></ul></blockquote>Last line<br><br>`;
+      mockKalturaBe('vod-with-html-tags.json');
+      loadPlayer().then(() => {
+        cy.get('[data-testid="infoPluginButton"]').click({force: true});
+        cy.get('[data-testid="entryDescription"]').should($div => {
+          expect($div.html()).to.eq(result);
+        });
       });
     });
   });
 
-  describe('should test entry broadcast and creation date', () => {
+  describe('entry broadcast and creation date', () => {
     it('should test live entry', () => {
       mockKalturaBe('live.json');
       loadPlayer().then(() => {
@@ -109,35 +124,61 @@ describe('Info plugin', () => {
         });
       });
     });
-  });
-
-  it('should render entry author', () => {
-    mockKalturaBe();
-    loadPlayer().then(() => {
-      cy.get('[data-testid="infoPluginButton"]').click({force: true});
-      cy.get('[data-testid="creator"]').should($div => {
-        expect($div.text()).to.eq('By Test User');
+    it('should not render entry creation date if showCreatedAt is false', () => {
+      mockKalturaBe();
+      loadPlayer({showCreatedAt: false}).then(() => {
+        cy.get('[data-testid="infoPluginButton"]').click({force: true});
+        cy.get('[data-testid="createdAt"]').should('not.exist');
       });
     });
   });
 
-  it('should render entry plays', () => {
-    mockKalturaBe();
-    loadPlayer().then(() => {
-      cy.get('[data-testid="infoPluginButton"]').click({force: true});
-      cy.get('[data-testid="plays"]').should($div => {
-        expect($div.text()).to.eq('19 plays');
+  describe('entry creator / owner', () => {
+    it('should render entry creator by default', () => {
+      mockKalturaBe();
+      loadPlayer().then(() => {
+        cy.get('[data-testid="infoPluginButton"]').click({force: true});
+        cy.get('[data-testid="creator"]').should($div => {
+          expect($div.text()).to.eq('By Test Creator');
+        });
+      });
+    });
+
+    it('should render entry owner if creator id is false', () => {
+      mockKalturaBe();
+      loadPlayer({useCreatorId: false}).then(() => {
+        cy.get('[data-testid="infoPluginButton"]').click({force: true});
+        cy.get('[data-testid="creator"]').should($div => {
+          expect($div.text()).to.eq('By Test Owner');
+        });
+      });
+    });
+
+    it('should not render entry owner if showUser is false', () => {
+      mockKalturaBe();
+      loadPlayer({showUser: false}).then(() => {
+        cy.get('[data-testid="infoPluginButton"]').click({force: true});
+        cy.get('[data-testid="creator"]').should('not.exist');
       });
     });
   });
 
-  it('should sanitize and render description with html tags inside', () => {
-    const result = `line one<br>line two<br>line three<br>Praesent sapien massa, convallis a <u>pellentesque nec, egest</u>as non nisi. Mauris blandit aliquet elit, eget <a target="_blank" href="http://google.com">tincidunt</a> nibh pulvinar a. <b>Curabitur arcu erat, accumsan </b>id imperdiet et, <span>porttitor</span> at sem.<i> Vestibulum ante ipsum prim</i>is in faucibus;<br><blockquote><ul><li>one</li><li>two</li></ul></blockquote>Last line<br><br>`;
-    mockKalturaBe('vod-with-html-tags.json');
-    loadPlayer().then(() => {
-      cy.get('[data-testid="infoPluginButton"]').click({force: true});
-      cy.get('[data-testid="entryDescription"]').should($div => {
-        expect($div.html()).to.eq(result);
+  describe('entry plays', () => {
+    it('should render entry plays', () => {
+      mockKalturaBe();
+      loadPlayer().then(() => {
+        cy.get('[data-testid="infoPluginButton"]').click({force: true});
+        cy.get('[data-testid="plays"]').should($div => {
+          expect($div.text()).to.eq('19 plays');
+        });
+      });
+    });
+
+    it('should not render entry plays if showPlays is false', () => {
+      mockKalturaBe();
+      loadPlayer({showPlays: false}).then(() => {
+        cy.get('[data-testid="infoPluginButton"]').click({force: true});
+        cy.get('[data-testid="plays"]').should('not.exist');
       });
     });
   });

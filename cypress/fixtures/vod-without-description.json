@@ -8,11 +8,11 @@
   {
     "objects": [
       {
-        "dataUrl": "https:\/\/cdnapisec.kaltura.com\/p\/27017\/sp\/2701700\/playManifest\/entryId\/1_ahuv8q4v\/format\/url\/protocol\/https",
+        "dataUrl": "https://cdnapisec.kaltura.com/p/27017/sp/2701700/playManifest/entryId/1_ahuv8q4v/format/url/protocol/https",
         "plays": 19,
         "tags": "",
         "createdAt": 1657024455,
-        "downloadUrl": "https:\/\/cdnapisec.kaltura.com\/p\/27017\/sp\/2701700\/playManifest\/entryId\/1_ahuv8q4v\/format\/download\/protocol\/https\/flavorParamIds\/0",
+        "downloadUrl": "https://cdnapisec.kaltura.com/p/27017/sp/2701700/playManifest/entryId/1_ahuv8q4v/format/download/protocol/https/flavorParamIds/0",
         "mediaType": 1,
         "flavorParamsIds": "0,1,2,3,4,5,6,582941,583327",
         "duration": 741,
@@ -20,7 +20,8 @@
         "id": "0_wifqaipd",
         "name": "MPEG Dash with MultiAudio New Transcoding",
         "views": 101,
-        "creatorId": "Test User",
+        "creatorId": "Test Creator",
+        "userId": "Test Owner",
         "updatedAt": "1692180001",
         "status": 2,
         "type": 1,
