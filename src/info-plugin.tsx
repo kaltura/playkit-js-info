@@ -43,7 +43,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
     if (this._player.isLive()) {
       return <Text id="info.live">Live now</Text>;
     }
-    const createdAt: any = new Date((this._player.sources.metadata.createdAt || 0) * 1000);
+    const createdAt: any = new Date((this._player.sources.metadata?.createdAt || 0) * 1000);
     const now: any = new Date();
     const millisecondsPerDay = 24 * 60 * 60 * 1000; // Number of milliseconds in a day
 
@@ -77,7 +77,7 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
   };
 
   private _getPlays = (): string => {
-    const plays = this._player.sources.metadata.plays;
+    const plays = this._player.sources.metadata?.plays;
     if (!Number.isInteger(plays)) {
       return '';
     }
@@ -100,9 +100,9 @@ export class PlaykitJsInfoPlugin extends KalturaPlayer.core.BasePlugin {
         get: () => (
           <Info
             onClick={this._closeInfo}
-            entryName={this._player.sources.metadata.name || ''}
-            description={this._player.sources.metadata.description || ''}
-            creator={this.config.showUser ? this._player.sources.metadata.userId || '' : ''}
+            entryName={this._player.sources.metadata?.name || ''}
+            description={this._player.sources.metadata?.description || ''}
+            creator={this.config.showUser ? this._player.sources.metadata?.userId || '' : ''}
             createdAt={this.config.showCreatedAt ? this._getCreationDate() : (null as any)}
             plays={this.config.showPlays ? this._getPlays() : ''}
             //@ts-ignore
