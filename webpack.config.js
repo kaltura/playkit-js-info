@@ -41,6 +41,7 @@ module.exports = {
           {
             loader: 'style-loader',
             options: {
+              singletonStyleTag: true,
               attributes: {
                 id: `${packageData.name}`
               },
@@ -74,6 +75,7 @@ module.exports = {
   },
   externals: {
     '@playkit-js/kaltura-player-js': 'root KalturaPlayer',
+    '@playkit-js/playkit-js': 'root KalturaPlayer.core'
     preact: 'root KalturaPlayer.ui.preact'
   }
 };
