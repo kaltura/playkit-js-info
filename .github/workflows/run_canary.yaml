@@ -5,7 +5,7 @@ run-name: Canary
 on:
   push:
     branches:
-      - test-style-loader-fix
+      - master
 
 jobs:
   test:
