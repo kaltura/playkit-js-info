@@ -75,7 +75,7 @@ module.exports = {
   },
   externals: {
     '@playkit-js/kaltura-player-js': 'root KalturaPlayer',
-    '@playkit-js/playkit-js': 'root KalturaPlayer.core'
+    '@playkit-js/playkit-js': 'root KalturaPlayer.core',
     preact: 'root KalturaPlayer.ui.preact'
   }
 };
