@@ -1,0 +1,107 @@
+{
+  "repositoryName": "playkit-js-info",
+  "packageName": "@playkit-js/info",
+  "coreResponsibility": {
+    "description": "A UI plugin for the Kaltura Player that displays media entry information (name, description, creator, creation date, play count) in an overlay panel accessible via an info icon in the player upper bar.",
+    "type": "UI Plugin"
+  },
+  "domainAndLogicOwnership": {
+    "featureOwnership": [
+      "Info overlay panel UI component",
+      "Media entry metadata display (name, description)",
+      "Creator/owner attribution display",
+      "Creation date display with relative time formatting (Today, X days ago, X months ago, More than a year ago)",
+      "Live indicator for live entries",
+      "Play count display with K-formatting for thousands",
+      "Upper bar info icon button",
+      "Keyboard accessibility (A11Y) for info overlay",
+      "HTML sanitization for entry descriptions",
+      "Internationalization (i18n) support for 16 languages"
+    ],
+    "dataHandling": [
+      "Entry metadata from player.sources.metadata (name, description, createdAt, plays, creatorId, userId)",
+      "Player state (paused/playing) for pause-on-open behavior",
+      "Plugin configuration state (useCreatorId, showUser, showCreatedAt, showPlays)",
+      "Overlay visibility state",
+      "Player size state for responsive rendering"
+    ]
+  },
+  "integrationPoints": {
+    "upstream": [
+      {
+        "name": "@playkit-js/kaltura-player-js",
+        "description": "Core Kaltura player that provides entry metadata, UI framework (Preact), plugin lifecycle, and player state"
+      },
+      {
+        "name": "@playkit-js/ui-managers",
+        "description": "Provides UpperBarManager service for registering the info icon button in the player upper bar"
+      },
+      {
+        "name": "@playkit-js/common",
+        "description": "Shared components including OverlayPortal and A11yWrapper for accessible UI components"
+      }
+    ],
+    "downstream": [
+      {
+        "name": "Kaltura Player UI",
+        "description": "The info overlay is rendered within the player's GuiArea using the player's component system"
+      }
+    ],
+    "externalApis": [
+      {
+        "name": "sanitize-html",
+        "description": "Third-party library for sanitizing HTML content in entry descriptions to prevent XSS"
+      }
+    ]
+  },
+  "technicalStack": {
+    "primaryLanguages": ["TypeScript", "TSX", "SCSS"],
+    "frameworks": ["Preact", "Kaltura Player UI SDK"],
+    "buildTools": ["Webpack", "ts-loader", "sass-loader"],
+    "testingFrameworks": ["Cypress"],
+    "entryPoints": [
+      {
+        "file": "src/index.ts",
+        "description": "Plugin registration entry point - registers PlaykitJsInfoPlugin with the Kaltura player"
+      },
+      {
+        "file": "src/info-plugin.tsx",
+        "description": "Main plugin class - contains core logic for info overlay, icon management, and event handling"
+      },
+      {
+        "file": "src/components/info/index.tsx",
+        "description": "Info overlay component - renders entry metadata in an overlay panel"
+      },
+      {
+        "file": "src/types/info-config.ts",
+        "description": "Plugin configuration interface definition"
+      }
+    ]
+  },
+  "triageKeywords": [
+    "info plugin",
+    "info overlay",
+    "info icon",
+    "info button",
+    "entry name",
+    "entry description",
+    "entry metadata",
+    "video info",
+    "media info",
+    "creator display",
+    "play count",
+    "plays display",
+    "creation date",
+    "playkit-js-info",
+    "upperBarManager info"
+  ],
+  "events": {
+    "dispatched": ["info_screen_open"]
+  },
+  "configurationOptions": {
+    "useCreatorId": "boolean - Whether to display creatorId (true) or userId (false) as the creator. Default: true",
+    "showUser": "boolean - Whether to show user/creator data. Default: true",
+    "showCreatedAt": "boolean - Whether to show creation date. Default: true",
+    "showPlays": "boolean - Whether to show play count. Default: true"
+  }
+}
